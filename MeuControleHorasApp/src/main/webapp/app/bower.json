@@ -1,10 +1,10 @@
 {
-  "name": "appControleHoras",
-  "homepage": "https://github.com/edneyRoldao/AppControleHoras",
+  "name": "meucontrolehorasapp",
+  "homepage": "https://github.com/edneyRoldao/MeuControleHorasApp",
   "authors": [
     "edneyRoldao <edneyroldao@gmail.com>"
   ],
-  "description": "angularJS project",
+  "description": "this app will be used to register work time",
   "main": "",
   "keywords": [
     "controleHoras"
