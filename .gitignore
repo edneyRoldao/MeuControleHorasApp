@@ -22,4 +22,6 @@ local.properties
 .DS_Store
 .DS_Store?
 MeuControleHorasApp/src/main/webapp/app/lib/public/*
-*oracleDesenvConfig.properties
+*database.properties
+MeuControleHorasApp/MeuControleHorasApp.iml
+.idea
