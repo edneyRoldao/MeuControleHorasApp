@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	
-</head>
-<body>
-	<h1> Test </h1>
-</body>
+<html ng-app="meuControleHorasApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Meu Controle de Horas</title>
+
+		<!-- Styles import -->
+		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap-theme.css">
+
+		<!-- Scripts import -->
+		<script src="app/lib/public/angular/angular.js"></script>
+		<script src="app/lib/public/angular-messages/angular-messages.js"></script>
+		<script src="app/lib/public/angular-route/angular-route.js"></script>
+		<script src="app/js/meuControleHorasApp.js"></script>
+		<script src="app/js/config/ngRouteConfig.js"></script>
+		<script src="app/js/controllers/homeController.js"></script>
+
+	</head>
+	<body>
+		<div ng-view></div>
+	</body>
 </html>
