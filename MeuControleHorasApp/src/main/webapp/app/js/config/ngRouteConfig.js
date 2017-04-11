@@ -5,6 +5,11 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
         controller: "homeController"
     });
 
+    $routeProvider.when("/login", {
+        templateUrl: "app/view/login.html",
+        controller: "loginController"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
