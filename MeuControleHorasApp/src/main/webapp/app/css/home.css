@@ -1,0 +1,11 @@
+.jumbotronHome{
+    background-color: #00b3ee;
+    text-align: center;
+}
+
+.logo {
+    color: #ffffff;
+    font-family: 'American Typewriter', sans-serif;
+    font-size: 30px;
+    font-weight: 1000;
+}

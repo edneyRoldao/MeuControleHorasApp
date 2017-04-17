@@ -1,25 +1,137 @@
 <!DOCTYPE html>
-<html ng-app="meuControleHorasApp">
+<html lang="pt-br" ng-app="meuControleHorasApp">
 	<head>
-		<meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Meu Controle de Horas</title>
 
-		<!-- Styles import -->
+		<!-- Styles imports -->
 		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap-theme.css">
-		<link rel="stylesheet" type="text/css" href="app/css/meuControleHoras.css">
+		<link rel="stylesheet" type="text/css" href="app/css/loginForm.css">
+		<link rel="stylesheet" type="text/css" href="app/lib/public/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="app/css/home.css">
+		<link rel="stylesheet" type="text/css" href="app/css/landing-page.css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+			  rel="stylesheet" type="text/css">
 
-		<!-- Scripts import -->
+		<!-- config files and public libs imports -->
 		<script src="app/lib/public/angular/angular.js"></script>
+		<script src="app/js/meuControleHorasApp.js"></script>
 		<script src="app/lib/public/angular-messages/angular-messages.js"></script>
 		<script src="app/lib/public/angular-route/angular-route.js"></script>
-		<script src="app/js/meuControleHorasApp.js"></script>
 		<script src="app/js/config/ngRouteConfig.js"></script>
+
+		<!-- Controllers imports -->
 		<script src="app/js/controllers/homeController.js"></script>
 		<script src="app/js/controllers/loginController.js"></script>
 
 	</head>
 	<body>
-		<div ng-view></div>
-	</body>
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+			<div class="container topnav">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand topnav" href="#">Meu Controle de Horas</a>
+				</div>
+				<!-- navbar-collapse - Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li> <a href="#">Entrar</a> </li>
+						<li> <a href="#">Cadastre-se</a> </li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container -->
+		</nav>	<!-- /. Navigation -->
+
+		<!-- Header -->
+		<div class="intro-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="intro-message">
+							<h1>Profissionais PJ</h1>
+							<h3>Tenha o controle total sobre suas horas de trabalho</h3>
+							<hr class="intro-divider">
+							<ul class="list-inline intro-social-buttons">
+								<li>
+									<a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg">
+										<i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg">
+										<i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.container -->
+		</div><!-- /.intro-header -->
+
+        <div class="content-section-b">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Registre seus horários<br>com apenas 1 click</h2>
+                        <p class="lead">
+                            Marque seus horários de entrada e saída com maior flexibilidade.<br><br>
+                            Você pode digitar o horário, selecionar ou apenas com um click registrar a hora atual<br><br>
+                            Cálculo automático das horas trabalhadas
+                        </p>
+                    </div>
+                    <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                        <img class="img-responsive" src="app/img/clockHome.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section-a">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Gere Relatórios nos formatos:<br>Excel e PDF</h2>
+                        <p class="lead">
+                            Mantenha um histórico das horas trabalhadas de todos os meses.<br><br>
+                            Verifique os horas úteis de cada mês.<br><br>
+                            Adicione metas mensais de horas e acompanhe o resultado dia-a-dia.<br><br>
+                        </p>
+                    </div>
+                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                        <img class="img-responsive" src="app/img/ipad.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="footer" style="margin-top: 20px">
+			<p style="text-align: center">
+				© 2017 - Developed by EDN TI Solutions &#160;&#160;
+				<img src="app/img/avatar.jpg" width="20px" height="20px" />
+			</p>
+		</div>
+
+        <!-- jQuery -->
+        <script src="app/lib/public/jquery/dist/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="app/lib/public/bootstrap/dist/js/bootstrap.js"></script>
+    </body>
 </html>

@@ -1,7 +1,8 @@
-angular.module("meuControleHorasApp").controller("homeController", function($scope) {
+// EdneyRoldao - 04/04/2017
+function indexController() {
+    lowScope = this;
+    lowScope.name = "edney";
+    console.log(lowScope);
+}
 
-    $scope.vetor = [
-        "SP", "RJ", "SC"
-    ];
-
-});
+angular.module("meuControleHorasApp").controller("homeController", indexController);

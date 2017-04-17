@@ -2,10 +2,7 @@ package com.ednTISolutions.controleHoras.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CH_USER")
@@ -14,13 +11,14 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "CD_USER")
+	@GeneratedValue
+	@Column(name = "CD_USER", precision = 5)
 	private Integer id;
 
-	@Column(name = "LOGIN_USER")
+	@Column(name = "LOGIN_USER", length = 150, unique = true, nullable = false)
 	private String login;
 
-	@Column(name = "PASSWORD_USER")
+	@Column(name = "PASSWORD_USER", length = 20, nullable = false)
 	private String password;
 
 	public User() {

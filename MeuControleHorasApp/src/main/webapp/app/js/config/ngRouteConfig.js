@@ -2,14 +2,8 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
 
     $routeProvider.when("/home", {
         templateUrl: "app/view/home.html",
-        controller: "homeController"
-    });
-
-    $routeProvider.when("/login", {
-        templateUrl: "app/view/login.html",
-        controller: "loginController"
+        controller: "homeController as ctrl"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
-
 });

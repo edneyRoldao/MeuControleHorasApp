@@ -1,5 +1,10 @@
 angular.module("meuControleHorasApp").controller("loginController", function($scope) {
 
-    $scope.vetor = "Test login controller";
+    $scope.user = {};
+
+    $scope.userLogin = function() {
+        console.log($scope.user);
+    };
+
 
 });
