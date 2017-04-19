@@ -1,8 +1,7 @@
 // EdneyRoldao - 04/04/2017
-function indexController() {
-    lowScope = this;
-    lowScope.name = "edney";
-    console.log(lowScope);
+function HomeController() {
+    var homeCtrl = this;
+    homeCtrl.name = "edney";
 }
 
-angular.module("meuControleHorasApp").controller("homeController", indexController);
+angular.module("meuControleHorasApp").controller("HomeController", HomeController);

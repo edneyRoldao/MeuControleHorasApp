@@ -1,28 +1,49 @@
-<div class="container formUser">
-    <div class="panel panel-default panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title" style="text-align: center;font-weight: bold;">
-                <span class="glyphicon glyphicon-user"></span>
-                Login
-            </h3>
-        </div>
-        <div class="panel-body">
-            <div class="cadastro-form">
-                <form ng-submit="userLogin()">
-                    <div class="row" style="margin-bottom: 15px;margin-top: 15px">
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" placeholder="Infome o login"/>
+<link rel="stylesheet" type="text/css" href="app/css/loginForm.css">
+
+<div class="container">
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default" style="margin-top: 100px">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    LOGIN
+                </div>
+            </div>
+
+            <div class="panel-body" >
+                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                    <span ng-show="false" class="panel-title" style="color: red; font-weight: bold">
+                        erros e-mail - usar ng-message
+                    </span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" placeholder="e-mail de login">
+                    </div>
+                    <span ng-show="false" class="panel-title" style="color: red; font-weight: bold">
+                        erros senha - usar ng-message
+                    </span>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Senha">
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-sm-12 controls">
+                            <button type="submit" href="#" class="btn btn-primary btn-block">
+                                <i class="glyphicon glyphicon-log-in">
+                                </i>
+                                &#160;&#160; Entrar
+                            </button>
                         </div>
                     </div>
-                    <div class="row" style="margin-bottom: 15px;">
-                        <div class="col-xs-12">
-                            <input type="password" class="form-control" placeholder="Infome a senha"/>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-top: 15px">
-                        <input type="submit" class="btn btn-primary" value="Entrar"/>
-                    </div>
+                    <span ng-show="false" class="panel-title" style="color: red; font-weight: bold">
+                            Senha inválida ou usuário não cadastrado !
+                    </span>
                 </form>
+                <hr>
+                <a href="#/redefinirSenha" class="forget" data-toggle="modal" data-target=".forget-modal">
+                    Esqueceu sua senha ?
+                </a>
             </div>
         </div>
     </div>

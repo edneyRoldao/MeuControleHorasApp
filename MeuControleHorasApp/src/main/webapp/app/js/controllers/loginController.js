@@ -1,10 +1,7 @@
-angular.module("meuControleHorasApp").controller("loginController", function($scope) {
+// EdneyRoldao - 18/04/17
+function LoginController() {
+    var loginCrtl = this;
+    loginCrtl.test = "test";
+}
 
-    $scope.user = {};
-
-    $scope.userLogin = function() {
-        console.log($scope.user);
-    };
-
-
-});
+angular.module("meuControleHorasApp").controller("LoginController", LoginController);
