@@ -1,0 +1,189 @@
+<link rel="stylesheet" type="text/css" href="app/css/loginForm.css">
+
+<div class="container" style="width: 900px">
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default" style="margin-top: 70px">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    CADASTRO DE USUÁRIO
+                </div>
+            </div>
+
+            <div class="panel-body" >
+                <form name="newUserCtrl.newUserForm" class="form-horizontal">
+
+                    <!-- Input name -->
+                    <div ng-class="{
+                                    'form-group has-feedback':             !newUserCtrl.newUserForm.name.$dirty,
+                                    'form-group has-success has-feedback':  newUserCtrl.newUserForm.name.$dirty             &&
+                                                                           !newUserCtrl.newUserForm.name.$error.minlength   &&
+                                                                           !newUserCtrl.newUserForm.name.$error.required    &&
+                                                                           !newUserCtrl.newUserForm.name.$error.maxlength,
+                                    'form-group has-warning has-feedback': newUserCtrl.newUserForm.name.$error.minlength    ||
+                                                                           newUserCtrl.newUserForm.name.$error.maxlength,
+                                    'form-group has-error has-feedback':   newUserCtrl.newUserForm.name.$error.required     &&
+                                                                           newUserCtrl.newUserForm.name.$dirty
+                                }">
+                        <div class="col-sm-12">
+                            <input type="text"
+                                   ng-model="newUserCtrl.user.name"
+                                   name="name"
+                                   validate-name-field
+                                   ng-required="true"
+                                   ng-minlength="3"
+                                   ng-maxlength="30"
+                                   placeholder="informe um nome de usuário"
+                                   class="form-control">
+
+                            <!-- Validation messages -->
+                            <span ng-class="{
+                                    'form-control-feedback':                                  !newUserCtrl.newUserForm.name.$dirty,
+                                    'glyphicon glyphicon-ok form-control-feedback':            newUserCtrl.newUserForm.name.$dirty              &&
+                                                                                              !newUserCtrl.newUserForm.name.$error.minlength    &&
+                                                                                              !newUserCtrl.newUserForm.name.$error.required     &&
+                                                                                              !newUserCtrl.newUserForm.name.$error.maxlength,
+                                    'glyphicon glyphicon-warning-sign form-control-feedback': newUserCtrl.newUserForm.name.$error.minlength     ||
+                                                                                              newUserCtrl.newUserForm.name.$error.maxlength,
+                                    'glyphicon glyphicon-remove form-control-feedback':       newUserCtrl.newUserForm.name.$error.required      &&
+                                                                                              newUserCtrl.newUserForm.name.$dirty
+                                }">
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.name.$error.minlength &&
+                                           newUserCtrl.newUserForm.name.$dirty"
+                                  style="color: #eb9316">
+                                &#160;&#160; O campo nome deve conter no mínimo 3 caracteres !
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.name.$error.maxlength"
+                                  style="color: #eb9316">
+                                &#160;&#160; O campo nome deve conter no máximo 30 caracteres !
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.name.$error.required && newUserCtrl.newUserForm.name.$dirty"
+                                  style="color: red">
+                                &#160;&#160; O campo nome é obrigatório !
+                            </span><!-- /. Validation messages -->
+
+                        </div>
+                    </div><!-- /. Input name -->
+
+                    <!-- Input e-mail -->
+                    <div ng-class="{
+                                    'form-group has-feedback':             !newUserCtrl.newUserForm.email.$dirty,
+                                    'form-group has-success has-feedback':  newUserCtrl.newUserForm.email.$dirty             &&
+                                                                           !newUserCtrl.newUserForm.email.$error.required    &&
+                                                                           !newUserCtrl.newUserForm.email.$error.maxlength   &&
+                                                                           !newUserCtrl.newUserForm.email.$error.pattern,
+                                    'form-group has-warning has-feedback': newUserCtrl.newUserForm.email.$error.maxlength    ||
+                                                                           newUserCtrl.newUserForm.email.$error.pattern,
+                                    'form-group has-error has-feedback':   newUserCtrl.newUserForm.email.$error.required     &&
+                                                                           newUserCtrl.newUserForm.email.$dirty
+                                }">
+                        <div class="col-sm-12">
+                            <input type="text"
+                                   ng-model="newUserCtrl.user.email"
+                                   name="email"
+                                   ng-pattern="/\w+@\w+\.(\w{2,3}|\w{3}.\w{2})$/"
+                                   ng-required="true"
+                                   ng-maxlength="50"
+                                   placeholder="informe um e-mail para o login"
+                                   class="form-control">
+
+                            <!-- Validation messages -->
+                            <span ng-class="{
+                                    'form-control-feedback':                                  !newUserCtrl.newUserForm.email.$dirty,
+                                    'glyphicon glyphicon-ok form-control-feedback':            newUserCtrl.newUserForm.email.$dirty              &&
+                                                                                              !newUserCtrl.newUserForm.email.$error.required     &&
+                                                                                              !newUserCtrl.newUserForm.email.$error.maxlength    &&
+                                                                                              !newUserCtrl.newUserForm.email.$error.pattern,
+                                    'glyphicon glyphicon-warning-sign form-control-feedback': newUserCtrl.newUserForm.email.$error.maxlength     ||
+                                                                                              newUserCtrl.newUserForm.email.$error.pattern,
+                                    'glyphicon glyphicon-remove form-control-feedback':       newUserCtrl.newUserForm.email.$error.required      &&
+                                                                                              newUserCtrl.newUserForm.email.$dirty
+                                }">
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.email.$error.pattern && newUserCtrl.newUserForm.email.$dirty"
+                                  style="color: #eb9316">
+                                &#160;&#160; O formato do e-mail está incorreto !
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.email.$error.maxlength && !newUserCtrl.newUserForm.email.$error.pattern"
+                                  style="color: #eb9316">
+                                &#160;&#160; O campo e-mail deve conter no máximo 50 caracteres !
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.email.$error.required && newUserCtrl.newUserForm.email.$dirty"
+                                  style="color: red">
+                                &#160;&#160; O campo e-mail é obrigatório !
+                            </span><!-- /. Validation messages -->
+                        </div>
+                    </div><!-- /. Input e-mail -->
+
+                    <!-- Input password -->
+                    <div ng-class="{
+                                    'form-group has-feedback':             !newUserCtrl.newUserForm.email.$dirty,
+                                    'form-group has-success has-feedback':  newUserCtrl.newUserForm.email.$dirty             &&
+                                                                           !newUserCtrl.newUserForm.email.$error.required    &&
+                                                                           !newUserCtrl.newUserForm.email.$error.maxlength   &&
+                                                                           !newUserCtrl.newUserForm.email.$error.pattern,
+                                    'form-group has-warning has-feedback': newUserCtrl.newUserForm.email.$error.maxlength    ||
+                                                                           newUserCtrl.newUserForm.email.$error.pattern,
+                                    'form-group has-error has-feedback':   newUserCtrl.newUserForm.email.$error.required     &&
+                                                                           newUserCtrl.newUserForm.email.$dirty
+                                }">
+                        <div class="col-sm-12">
+                            <input type="text"
+                                   ng-model="newUserCtrl.user.email"
+                                   name="email"
+                                   ng-pattern="/\w+@\w+\.(\w{2,3}|\w{3}.\w{2})$/"
+                                   ng-required="true"
+                                   ng-maxlength="50"
+                                   placeholder="informe um e-mail para o login"
+                                   class="form-control">
+
+                            <!-- Validation messages -->
+                            <span ng-class="{
+                                    'form-control-feedback':                                  !newUserCtrl.newUserForm.email.$dirty,
+                                    'glyphicon glyphicon-ok form-control-feedback':            newUserCtrl.newUserForm.email.$dirty              &&
+                                                                                              !newUserCtrl.newUserForm.email.$error.required     &&
+                                                                                              !newUserCtrl.newUserForm.email.$error.maxlength    &&
+                                                                                              !newUserCtrl.newUserForm.email.$error.pattern,
+                                    'glyphicon glyphicon-warning-sign form-control-feedback': newUserCtrl.newUserForm.email.$error.maxlength     ||
+                                                                                              newUserCtrl.newUserForm.email.$error.pattern,
+                                    'glyphicon glyphicon-remove form-control-feedback':       newUserCtrl.newUserForm.email.$error.required      &&
+                                                                                              newUserCtrl.newUserForm.email.$dirty
+                                }">
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.email.$error.pattern && newUserCtrl.newUserForm.email.$dirty"
+                                  style="color: #eb9316">
+                                &#160;&#160; O formato do e-mail está incorreto !
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.email.$error.maxlength && !newUserCtrl.newUserForm.email.$error.pattern"
+                                  style="color: #eb9316">
+                                &#160;&#160; O campo e-mail deve conter no máximo 50 caracteres !
+                            </span>
+                            <span ng-show="newUserCtrl.newUserForm.email.$error.required && newUserCtrl.newUserForm.email.$dirty"
+                                  style="color: red">
+                                &#160;&#160; O campo e-mail é obrigatório !
+                            </span><!-- /. Validation messages -->
+                        </div>
+                    </div><!-- /. Input password -->
+
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-sm-12 controls">
+                            <button type="submit" ng-disabled="newUserCtrl.newUserForm.$invalid" class="btn btn-success btn-block">
+                                <i class="glyphicon glyphicon-log-in">
+                                </i>
+                                &#160;&#160; Cadastrar
+                            </button>
+                        </div>
+                    </div>
+
+                    <span class="panel-title" style="color: red; font-weight: bold">
+                        &#160;&#160; e-mail já cadastrado !
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

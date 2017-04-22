@@ -2,6 +2,11 @@ body {
     background-color: white;
 }
 
+.login {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 #loginbox {
     margin-top: 30px;
 }

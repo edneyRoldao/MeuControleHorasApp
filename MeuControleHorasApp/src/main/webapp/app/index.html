@@ -13,17 +13,24 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
 			  rel="stylesheet" type="text/css">
 
-		<!-- config files and public libs imports -->
+		<!-- public modules, libs and stuff imports -->
+		<script src="app/lib/public/jquery/dist/jquery.js"></script>
+		<script src="app/lib/public/bootstrap/dist/js/bootstrap.js"></script>
 		<script src="app/lib/public/angular/angular.js"></script>
-		<script src="app/js/meuControleHorasApp.js"></script>
 		<script src="app/lib/public/angular-messages/angular-messages.js"></script>
 		<script src="app/lib/public/angular-route/angular-route.js"></script>
+
+        <!-- config files, private modules and stuff -->
+		<script src="app/js/meuControleHorasApp.js"></script>
 		<script src="app/js/config/ngRouteConfig.js"></script>
 
 		<!-- Controllers imports -->
 		<script src="app/js/controllers/homeController.js"></script>
 		<script src="app/js/controllers/loginController.js"></script>
 		<script src="app/js/controllers/newUserController.js"></script>
+
+        <!-- Directives imports -->
+		<script src="app/js/directives/validateNameFieldDirective.js"></script>
 
 	</head>
 	<body>
@@ -50,7 +57,7 @@
             </div><!-- /.container -->
         </nav>	<!-- /. Navigation -->
 
-        <!-- SPA -->
+        <!-- SPA it's being applied from here -->
         <div ng-view></div>
 
         <!-- footer -->
@@ -60,6 +67,5 @@
                 <img src="app/img/avatar.jpg" width="20px" height="20px" />
             </p>
         </div><!-- /. footer -->
-
     </body>
 </html>

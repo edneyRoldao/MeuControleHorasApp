@@ -11,7 +11,7 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
     });
 
     $routeProvider.when("/cadastro", {
-        templateUrl: "app/view/newUser.html",
+        templateUrl: "app/view/new_user.html",
         controller: "NewUserController as newUserCtrl"
     });
 
