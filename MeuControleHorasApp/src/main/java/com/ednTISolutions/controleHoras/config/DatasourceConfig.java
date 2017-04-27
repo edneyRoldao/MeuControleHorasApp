@@ -1,5 +1,7 @@
 package com.ednTISolutions.controleHoras.config;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -7,10 +9,14 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -65,6 +71,25 @@ public class DatasourceConfig {
 		props.setProperty("hibernate.connection.driver_class", env.getProperty("hibernate.connection.driver_class"));
 		
 		return props;
+	}
+
+	@Bean
+	@Lazy(false)
+	public ResourceDatabasePopulator populateDatabase() throws SQLException {
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(new ClassPathResource("database_update.sql"));
+
+		Connection con = null;
+
+		try {
+			con = DataSourceUtils.getConnection(dataSource());
+			populator.populate(con);
+		} finally {
+			if(con != null)
+				DataSourceUtils.releaseConnection(con, dataSource());
+		}
+
+		return populator;
 	}
 
 }

@@ -1,4 +1,6 @@
-function UserAPIService($http) {
+function UserAPIService($http, constantsApp) {
+
+    var URL = constantsApp.appContextUrl;
 
     var _getUser = function(email) {
         return $http.get("/usuario/" + email);
@@ -9,7 +11,7 @@ function UserAPIService($http) {
     };
 
     var _getAllUsers = function() {
-        return $http.get("/MeuControleHoras/usuarios");
+        return $http.get(URL + "usuarios");
     };
 
     return {
@@ -19,4 +21,4 @@ function UserAPIService($http) {
     };
 }
 
-angular.module("meuControleHorasApp").service("UserAPIService", UserAPIService);
+angular.module("meuControleHorasApp").factory("UserAPIService", UserAPIService);
