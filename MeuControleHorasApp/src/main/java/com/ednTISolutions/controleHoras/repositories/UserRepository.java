@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ednTISolutions.controleHoras.models.User;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<User, Long>{
 
-    User findByLogin(String login);
+    User findByUsername(String username);
 
 }

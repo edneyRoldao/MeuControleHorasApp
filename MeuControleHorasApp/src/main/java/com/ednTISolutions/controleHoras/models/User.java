@@ -1,50 +1,48 @@
 package com.ednTISolutions.controleHoras.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "SCH_USER")
+@Table(name = "TB_USER")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
-	@Column(name = "CD_USER", precision = 5)
-	private Integer id;
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	@Column(name = "LOGIN_USER", length = 150, unique = true, nullable = false)
-	private String login;
+	@Column(name = "USERNAME", unique = true, nullable = false)
+	private String username;
 
-	@Column(name = "PASSWORD_USER", length = 20, nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
-	public User() {
-	}
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable
+		(name = "TB_USER_ROLE",
+		 joinColumns		= {@JoinColumn(name = "ID_USER", referencedColumnName = "ID")},
+		 inverseJoinColumns	= {@JoinColumn(name = "ID_ROLE", referencedColumnName = "ID")})
+	private List<Role> roles;
 
-	public User(Integer id, String login, String password) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.password = password;
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -55,46 +53,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password + "]";
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
-
 }

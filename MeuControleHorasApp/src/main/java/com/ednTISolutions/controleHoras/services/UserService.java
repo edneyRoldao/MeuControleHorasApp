@@ -16,12 +16,8 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 
-	public User getUser(String login) {
-		return repository.findByLogin(login);
+	public User getUser(String usermane) {
+		return repository.findByUsername(usermane);
 	}
-	
-	public List<User> list() {
-		return repository.findAll();
-	}
-	
+
 }

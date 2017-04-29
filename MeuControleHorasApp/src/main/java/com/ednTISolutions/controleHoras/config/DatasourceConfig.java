@@ -30,7 +30,7 @@ public class DatasourceConfig {
 
 	@Autowired
 	private Environment env;
-	
+
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -38,10 +38,10 @@ public class DatasourceConfig {
 		dataSource.setUrl(env.getProperty("jdbc.url"));
 		dataSource.setUsername(env.getProperty("jdbc.username"));
 		dataSource.setPassword(env.getProperty("jdbc.password"));
-		
+
 		return dataSource;
 	}
-	
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -77,7 +77,7 @@ public class DatasourceConfig {
 	@Lazy(false)
 	public ResourceDatabasePopulator populateDatabase() throws SQLException {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("database_update.sql"));
+		populator.addScript(new ClassPathResource("popula-database.sql"));
 
 		Connection con = null;
 
