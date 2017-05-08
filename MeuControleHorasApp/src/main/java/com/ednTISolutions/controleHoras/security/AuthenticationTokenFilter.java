@@ -1,6 +1,6 @@
 package com.ednTISolutions.controleHoras.security;
 
-import com.ednTISolutions.controleHoras.util.TokenUtil;
+import com.ednTISolutions.controleHoras.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

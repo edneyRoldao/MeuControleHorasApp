@@ -1,8 +1,8 @@
-package com.ednTISolutions.controleHoras.util;
+package com.ednTISolutions.controleHoras.utils;
 
 import com.ednTISolutions.controleHoras.models.Role;
 import com.ednTISolutions.controleHoras.models.User;
-import com.ednTISolutions.controleHoras.security.UserDetailImpl;
+import com.ednTISolutions.controleHoras.security.JwtUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 /**
  * Created by edneyroldao on 30/04/17.
  */
-public class UserDetailFactory {
+public class UserDetailUtil {
 
-    private UserDetailFactory() {}
+    private UserDetailUtil() {}
 
-    public static UserDetailImpl create(User user) {
-        UserDetailImpl userDetail = new UserDetailImpl(
+    public static JwtUserDetails create(User user) {
+        JwtUserDetails userDetail = new JwtUserDetails(
                 user.getId(),
                 user.getUsername(),
                 user.getPassword(),
-                null,
+                user.getEmail(),
                 null,
                 getGrantedAuthorities(user.getRoles())
         );

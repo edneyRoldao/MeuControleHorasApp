@@ -1,4 +1,4 @@
-package com.ednTISolutions.controleHoras.models;
+package com.ednTISolutions.controleHoras.enums;
 
 /**
  * Created by edneyroldao on 28/04/17.

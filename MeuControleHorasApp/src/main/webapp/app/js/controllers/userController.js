@@ -1,22 +1,19 @@
 // EdneyRoldao - 18/04/17
 function NewUserController(UserAPIService) {
-    var ctrl = this;
+    var _ctrl = this;
 
-    ctrl.users = [];
+    _ctrl.createUser = function(user) {
 
-    var getAllUsers = function() {
+        delete user.passRepeat;
+        console.log(user);
 
-        UserAPIService.getAllUsers()
-            .success(function (data) {
-                console.log(data);
-                ctrl.users = data;
-            })
-            .error(function (status, data) {
-
-            });
+        UserAPIService.createUser(user).success(function(data) {
+            console.log(data);
+        }).error(function(status, data) {
+            console.log(status);
+            console.log(data);
+        });
     };
-
-    ctrl.getUsers = getAllUsers;
 
 }
 

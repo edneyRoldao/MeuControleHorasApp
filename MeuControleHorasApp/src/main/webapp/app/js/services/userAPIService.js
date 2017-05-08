@@ -1,23 +1,17 @@
 function UserAPIService($http, constantsApp) {
-
     var URL = constantsApp.appContextUrl;
 
-    var _getUser = function(email) {
-        return $http.get("/usuario/" + email);
+    var _getUser = function(username) {
+        return $http.get("/usuario/" + username);
     };
 
     var _createUser = function(user) {
-        return $http.post("/usuario/cadastro", user);
-    };
-
-    var _getAllUsers = function() {
-        return $http.get(URL + "usuarios");
+        return $http.post(URL + "/usuario", user);
     };
 
     return {
         getUser: _getUser,
-        createUser: _createUser,
-        getAllUsers: _getAllUsers
+        createUser: _createUser
     };
 }
 

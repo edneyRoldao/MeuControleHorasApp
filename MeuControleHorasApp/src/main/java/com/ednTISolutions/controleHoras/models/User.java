@@ -1,9 +1,8 @@
 package com.ednTISolutions.controleHoras.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "TB_USER")
@@ -21,6 +20,9 @@ public class User implements Serializable {
 
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
+
+	@Column(name = "EMAIL", nullable = false, unique = true)
+	private String email;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
@@ -51,6 +53,14 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public List<Role> getRoles() {

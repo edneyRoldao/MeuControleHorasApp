@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by edneyroldao on 30/04/17.
  */
-public class UserDetailImpl implements UserDetails {
+public class JwtUserDetails implements UserDetails {
 
     private Long id;
     private String username;
@@ -23,11 +23,11 @@ public class UserDetailImpl implements UserDetails {
     private Boolean credentialsNonExpired = true;
     private Boolean enabled = true;
 
-    public UserDetailImpl() {
+    public JwtUserDetails() {
         super();
     }
 
-    public UserDetailImpl(Long id,
+    public JwtUserDetails(Long id,
                           String username,
                           String password,
                           String email,

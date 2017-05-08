@@ -1,6 +1,6 @@
-package com.ednTISolutions.controleHoras.util;
+package com.ednTISolutions.controleHoras.utils;
 
-import com.ednTISolutions.controleHoras.security.UserDetailImpl;
+import com.ednTISolutions.controleHoras.security.JwtUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -128,7 +128,7 @@ public class TokenUtil implements Serializable {
     }
 
     public Boolean validateToken(String token, UserDetails userDetail) {
-        UserDetailImpl user = (UserDetailImpl) userDetail;
+        JwtUserDetails user = (JwtUserDetails) userDetail;
         final String username = getUsernameFromToken(token);
         final Date dateCreated = getCreatedDateFromToken(token);
         //final Date dateExpiration = getExpirationDateFromToken(token);
@@ -192,7 +192,8 @@ public class TokenUtil implements Serializable {
 
     private Date getDefaultExpirationMinutesTime() {
         String minutes = env.getProperty("expiration.minutes");
-        Long expirationAsNumber = Long.getLong(minutes);
+        Long expirationAsNumber = Long.parseLong(minutes);
+
         return new Date(1000 * 60 * expirationAsNumber);
     }
 

@@ -8,7 +8,7 @@
             </div>
 
             <div class="panel-body" >
-                <form name="userCtrl.newUserForm" class="form-horizontal" ng-submit="userCtrl.createUser()">
+                <form name="userCtrl.newUserForm" class="form-horizontal">
 
                     <!-- Input name -->
                     <div ng-class="{
@@ -24,7 +24,7 @@
                                 }">
                         <div class="col-sm-12">
                             <input type="text"
-                                   ng-model="userCtrl.user.name"
+                                   ng-model="userCtrl.user.username"
                                    name="name"
                                    validate-name-field
                                    ng-required="true"
@@ -212,7 +212,7 @@
                     <!-- insert btn -->
                     <div class="form-group">
                         <div class="col-sm-12 controls">
-                            <button type="submit" ng-disabled="userCtrl.newUserForm.$invalid" class="btn btn-success btn-block">
+                            <button ng-click="userCtrl.createUser(userCtrl.user)" ng-disabled="userCtrl.newUserForm.$invalid" class="btn btn-success btn-block">
                                 <i class="glyphicon glyphicon-log-in">
                                 </i>
                                 &#160;&#160; Cadastrar

@@ -1,5 +1,7 @@
 package com.ednTISolutions.controleHoras.models;
 
+import com.ednTISolutions.controleHoras.enums.RoleType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
