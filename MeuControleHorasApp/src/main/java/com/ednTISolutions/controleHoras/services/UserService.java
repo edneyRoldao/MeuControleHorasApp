@@ -24,8 +24,10 @@ public class UserService {
 	private RoleRepository roleRepository;
 
 	public User createUser(User user) {
-
+		
+		// Manage error when the use already exists.
 		User newUser = repository.findByEmail(user.getEmail());
+		if(newUser != null) return null;
 
 		String password = user.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

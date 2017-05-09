@@ -3,7 +3,7 @@ function AuthService($http, constantsApp) {
     var URL = constantsApp.appContextUrl;
 
     var _createAuthToken = function(user) {
-        return $http.post(URL + "/auth", user);
+        return $http.post(URL + "auth", user);
     };
 
     var _refreshAuthToken = function () {

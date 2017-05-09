@@ -2,7 +2,6 @@ package com.ednTISolutions.controleHoras.config;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -46,7 +45,6 @@ public class DatasourceConfig {
 		factory.setJpaVendorAdapter(adapter);
 		factory.setPackagesToScan("com.ednTISolutions.controleHoras.models");
 		factory.setDataSource(dataSource());
-		factory.setJpaProperties(hibernateProperties());
 		
 		return factory;
 	}
@@ -75,13 +73,6 @@ public class DatasourceConfig {
 		}
 
 		return populator;
-	}
-	
-	private Properties hibernateProperties() {
-		Properties props = new Properties();
-		props.setProperty("hibernate.show_sql", "true");
-		props.setProperty("hibernate.hbm2ddl.auto", "create");
-		return props;
 	}
 
 }
