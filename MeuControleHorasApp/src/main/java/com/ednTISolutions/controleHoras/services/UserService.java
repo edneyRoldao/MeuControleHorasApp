@@ -24,6 +24,9 @@ public class UserService {
 	private RoleRepository roleRepository;
 
 	public User createUser(User user) {
+
+		User newUser = repository.findByEmail(user.getEmail());
+
 		String password = user.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(password));
@@ -34,9 +37,5 @@ public class UserService {
 
 	    return repository.save(user);
     }
-
-	public User getUser(String usermane) {
-		return repository.findByUsername(usermane);
-	}
 
 }
