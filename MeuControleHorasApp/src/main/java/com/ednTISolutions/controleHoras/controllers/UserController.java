@@ -5,7 +5,9 @@ import com.ednTISolutions.controleHoras.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/usuario")
@@ -14,14 +16,11 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
-	@PostMapping
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public ResponseEntity createAndUpdateUser(@RequestBody User user) {
+	public ResponseEntity<User> createAndUpdateUser(@RequestBody User user) {
 		User newUser = service.createUser(user);
 		
 		if(newUser == null) {
-			return new ResponseEntity("Already exists an user assigned for the e-mail: " + user.getEmail(), 
-					HttpStatus.CONFLICT);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		
 		return ResponseEntity.ok(newUser);

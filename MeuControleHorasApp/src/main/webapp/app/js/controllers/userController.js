@@ -3,15 +3,12 @@ function NewUserController(UserAPIService) {
     var _ctrl = this;
 
     _ctrl.createUser = function(user) {
-
         delete user.passRepeat;
-        console.log(user);
 
         UserAPIService.createUser(user).success(function(data) {
             console.log(data);
-        }).error(function(status, data) {
+        }).error(function(data, status) {
             console.log(status);
-            console.log(data);
         });
     };
 
