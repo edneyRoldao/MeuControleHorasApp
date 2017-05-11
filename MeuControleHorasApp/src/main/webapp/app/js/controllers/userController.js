@@ -4,7 +4,6 @@ function NewUserController(UserAPIService, $location) {
     _ctrl.userAlreadyExists = false;
 
     _ctrl.createUser = function(user) {
-        delete user.passRepeat;
         _ctrl.userAlreadyExists = false;        	
 
         UserAPIService.createUser(user).success(function(data) {
@@ -13,8 +12,8 @@ function NewUserController(UserAPIService, $location) {
 
         	// Success message
             swal({
-                title: "Sucesso !",
-                text: "cadastro realizado",
+                title: "OK",
+                text: "cadastro realizado com sucesso!",
                 type: "success",
                 timer: 3000,
                 showConfirmButton: false

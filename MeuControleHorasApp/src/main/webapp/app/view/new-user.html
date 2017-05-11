@@ -36,7 +36,7 @@
                                    ng-required="true"
                                    ng-minlength="3"
                                    ng-maxlength="30"
-                                   placeholder="informe um nome de usuário"
+                                   placeholder="nome"
                                    class="form-control">
 
                             <!-- Validation messages -->
@@ -88,7 +88,7 @@
                                    ng-pattern="/\w+@\w+\.(\w{2,3}|\w{3}.\w{2})$/"
                                    ng-required="true"
                                    ng-maxlength="50"
-                                   placeholder="informe um e-mail para o login"
+                                   placeholder="e-mail"
                                    class="form-control">
 
                             <!-- Validation messages -->
@@ -138,7 +138,7 @@
                                    ng-required="true"
                                    ng-minlength="4"
                                    ng-maxlength="10"
-                                   placeholder="informe uma senha entre 4 e 10 dígitos"
+                                   placeholder="senha"
                                    class="form-control">
 
                             <!-- Validation messages -->
@@ -187,7 +187,7 @@
                                    ng-model="userCtrl.user.passRepeat"
                                    name="passRepeat"
                                    ng-required="true"
-                                   placeholder="Digite a senha novamente"
+                                   placeholder="redigite a senha"
                                    class="form-control">
 
                             <!-- Validation messages -->
@@ -206,21 +206,17 @@
                                   style="color: #eb9316">
                                 &#160;&#160; As senhas não conferem !
                             </span>
-                            <span ng-show="userCtrl.newUserForm.passRepeat.$error.required &&
-                                  userCtrl.newUserForm.passRepeat.$dirty"
-                                  style="color: red">
-                                &#160;&#160; O campo senha é obrigatório !
-                            </span><!-- /. Validation messages -->
-
                         </div>
                     </div><!-- /. Input passRepeat -->
 
                     <!-- insert btn -->
                     <div class="form-group">
                         <div class="col-sm-12 controls">
-                            <button ng-click="userCtrl.createUser(userCtrl.user)" ng-disabled="userCtrl.newUserForm.$invalid" class="btn btn-success btn-block">
-                                <i class="glyphicon glyphicon-log-in">
-                                </i>
+                            <button ng-click="userCtrl.createUser(userCtrl.user)" 
+                            		ng-disabled="userCtrl.newUserForm.$invalid || 
+                           						 userCtrl.user.passRepeat != userCtrl.user.password" 
+                            		class="btn btn-success btn-block">
+                                <i class="glyphicon glyphicon-floppy-save"></i>
                                 &#160;&#160; Cadastrar
                             </button>
                         </div>
