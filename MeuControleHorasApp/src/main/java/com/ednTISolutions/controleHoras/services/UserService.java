@@ -22,6 +22,13 @@ public class UserService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	public boolean isNotUserActivated(String username) {
+		User user = repository.findByEmail(username);
+		boolean isActivated = (user == null) ? false : user.getActivated();
+		
+		return !isActivated;
+	}
 
 	public User createUser(User user) {
 		
@@ -37,6 +44,9 @@ public class UserService {
 		roles.add(roleRepository.findByType(RoleType.ROLE_USER));
 		user.setRoles(roles);
 
+		// Waiting for confirmation from e-mail
+		user.setActivated(false);
+		
 	    return repository.save(user);
     }
 

@@ -9,7 +9,7 @@ function NewUserController(UserAPIService, $location) {
         	delete _ctrl.user;
 
         	// Success message
-            swal("Estamos quase l&aacute; !", "Te enviamos um e-mail de ativa&ccedil;&atilde;o da sua conta !", "success");
+            swal("Estamos quase l\u00e1 !", "Te enviamos um e-mail de ativa\u00e7\u00e3o da sua conta !", "success");
 
             // Redirect
             $location.path("/login");
@@ -23,7 +23,7 @@ function NewUserController(UserAPIService, $location) {
             // error message
             swal({
                 title: "Opa !",
-                text: "j&aacute; existe um usu&aacute;rio com este e-mail cadastrado !",
+                text: "j\u00e1 existe um usu\u00e1rio com este e-mail cadastrado !",
                 type: "warning",
                 confirmButtonColor: "#D33",
                 confirmButtonText: "OK",

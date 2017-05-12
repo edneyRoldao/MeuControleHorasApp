@@ -11,18 +11,20 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "USERNAME", nullable = false)
+	@Column(nullable = false)
 	private String username;
 
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(nullable = false)
 	private String password;
 
-	@Column(name = "EMAIL", nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	private String email;
+	
+	@Column(nullable = false)
+	private Boolean activated;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
@@ -61,6 +63,14 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Boolean getActivated() {
+		return activated;
+	}
+
+	public void setActivated(Boolean activated) {
+		this.activated = activated;
 	}
 
 	public List<Role> getRoles() {
