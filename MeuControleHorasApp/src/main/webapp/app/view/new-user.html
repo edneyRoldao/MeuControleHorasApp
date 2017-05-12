@@ -10,12 +10,6 @@
             <div class="panel-body" >
                 <form name="userCtrl.newUserForm" class="form-horizontal">
 
-                    <!-- Auth validation -->
-                    <div ng-show="userCtrl.userAlreadyExists" class="alert alert-danger" style="font-size: 15px; font-weight: bold; text-align: center">
-                        &#160;&#160; e-mail já cadastrado !
-                    </div>
-
-
                     <!-- Input name -->
                     <div ng-class="{
                                     'form-group has-feedback':             !userCtrl.newUserForm.name.$dirty,

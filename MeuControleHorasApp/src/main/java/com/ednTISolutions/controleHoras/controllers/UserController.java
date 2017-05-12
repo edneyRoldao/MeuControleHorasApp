@@ -22,7 +22,7 @@ public class UserController {
 		User newUser = service.createUser(user);
 		
 		if(newUser == null)
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
 		
 		return ResponseEntity.ok(newUser);
 	}

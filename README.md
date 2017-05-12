@@ -8,7 +8,7 @@ Technologies used:<br/>
 	- SpringSecurity<br/>
 	- SpringData<br/><br/>
 	
-SweetAlert API reference: http://t4t5.github.io/sweetalert/ <br/>
+SweetAlert API reference: https://limonte.github.io/sweetalert2/ - https://github.com/limonte/sweetalert2 <br/>
 
 
 If there's any doubt about project, message me - edneyroldao@gmail.com
