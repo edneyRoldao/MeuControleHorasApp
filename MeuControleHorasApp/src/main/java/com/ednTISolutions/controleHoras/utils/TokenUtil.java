@@ -1,5 +1,6 @@
 package com.ednTISolutions.controleHoras.utils;
 
+import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.security.JwtUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by edneyroldao on 30/04/17.
@@ -49,6 +51,19 @@ public class TokenUtil implements Serializable {
         }
 
         return username;
+    }
+
+    public User getNewUserFromToken(String token) {
+     User user = new User();
+
+     String userInfo = getUsernameFromToken(token);
+     String[] userToken = userInfo.split(";");
+
+     user.setUsername(userToken[0]);
+     user.setEmail(userToken[1]);
+     user.setPassword(userToken[2]);
+
+     return user;
     }
 
     public Date getCreatedDateFromToken(String token) {
@@ -100,7 +115,26 @@ public class TokenUtil implements Serializable {
         claims.put(CLAIM_KEY_AUDIENCE, AUDIENCE_WEB);
         claims.put(CLAIM_KEY_CREATED, new Date());
 
-        String tokenGenerated = generateToken(claims);
+        String tokenGenerated = generateToken(claims, new Date(TimeUnit.MINUTES.toMillis(30)));
+
+        return tokenGenerated;
+    }
+
+    public String generateTokenFromNewUser(User user) {
+        Map<String, Object> claims = new HashMap<>();
+
+        StringBuilder sb = new StringBuilder(user.getUsername());
+        sb.append(";");
+        sb.append(user.getEmail());
+        sb.append(";");
+        sb.append(user.getPassword());
+
+        claims.put(CLAIM_KEY_USERNAME, sb.toString());
+        claims.put(CLAIM_KEY_AUDIENCE, AUDIENCE_WEB);
+        claims.put(CLAIM_KEY_CREATED, new Date());
+
+        Date dateExp = new Date(TimeUnit.HOURS.toMillis(2));
+        String tokenGenerated = generateToken(claims, dateExp);
 
         return tokenGenerated;
     }
@@ -117,7 +151,7 @@ public class TokenUtil implements Serializable {
 
             final Claims claims = getClaimsFromToken(token);
             claims.put(CLAIM_KEY_CREATED, new Date());
-            refreshedToken = generateToken(claims);
+            refreshedToken = generateToken(claims, new Date(TimeUnit.MINUTES.toMillis(30)));
 
         } catch (Exception e ) {
             refreshedToken = null;
@@ -137,10 +171,10 @@ public class TokenUtil implements Serializable {
                 && (isCreatedAfterLastPasswordReset(dateCreated, user.getLastPasswordReset())));
     }
 
-    private String generateToken(Map<String, Object> claims) {
+    private String generateToken(Map<String, Object> claims, Date date) {
         String token  = Jwts.builder()
                             .setClaims(claims)
-                            .setExpiration(getDefaultExpirationMinutesTime())
+                            .setExpiration(date)
                             .signWith(SignatureAlgorithm.HS512, getJWTSecret())
                             .compact();
         return token;
@@ -188,12 +222,4 @@ public class TokenUtil implements Serializable {
     private String getJWTSecret() {
         return env.getProperty("secret");
     }
-
-    private Date getDefaultExpirationMinutesTime() {
-        String minutes = env.getProperty("expiration.minutes");
-        Long expirationAsNumber = Long.parseLong(minutes);
-
-        return new Date(1000 * 60 * expirationAsNumber);
-    }
-
 }

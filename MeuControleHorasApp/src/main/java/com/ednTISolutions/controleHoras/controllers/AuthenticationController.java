@@ -3,10 +3,8 @@ package com.ednTISolutions.controleHoras.controllers;
 import com.ednTISolutions.controleHoras.security.AuthenticationRequest;
 import com.ednTISolutions.controleHoras.security.AuthenticationResponse;
 import com.ednTISolutions.controleHoras.security.JwtUserDetails;
-import com.ednTISolutions.controleHoras.services.UserService;
 import com.ednTISolutions.controleHoras.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,16 +32,9 @@ public class AuthenticationController {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
-    @Autowired
-    private UserService userService;
 
     @PostMapping
     public ResponseEntity<?> createAuthToken(@RequestBody AuthenticationRequest authReq)throws AuthenticationException {
-    	
-    	if(userService.isNotUserActivated(authReq.getUsername()))
-    		return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
-    	
         UsernamePasswordAuthenticationToken user;
         user = new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword());
         Authentication auth = authenticationManager.authenticate(user);

@@ -6,6 +6,8 @@ import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.RoleRepository;
 import com.ednTISolutions.controleHoras.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,19 +24,17 @@ public class UserService {
 
 	@Autowired
 	private RoleRepository roleRepository;
-	
-	public boolean isNotUserActivated(String username) {
-		User user = repository.findByEmail(username);
-		boolean isActivated = (user == null) ? false : user.getActivated();
-		
-		return !isActivated;
-	}
+
+	@Autowired
+	private MailSender mailSender;
+
 
 	public User createUser(User user) {
 		
 		// Manage error when the use already exists.
 		User newUser = repository.findByEmail(user.getEmail());
-		if(newUser != null) return null;
+		if(newUser != null)
+		    return null;
 
 		String password = user.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -44,10 +44,33 @@ public class UserService {
 		roles.add(roleRepository.findByType(RoleType.ROLE_USER));
 		user.setRoles(roles);
 
-		// Waiting for confirmation from e-mail
-		user.setActivated(false);
-		
 	    return repository.save(user);
+    }
+
+    public boolean isUserCreatedBefore(String userEmail) {
+	    return repository.findByUsername(userEmail) != null;
+    }
+
+    public String createURLNewUser(String token) {
+        return "http://localhost:8083/MeuControleHoras/usuario/" + token;
+    }
+
+    public boolean sendEmailToNewUser(User user, String url) {
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Para confirmar seu cadastro e começar a usar meuControleHoras App, \n click no link abaixo:");
+        sb.append("\n");
+        sb.append(url);
+
+        message.setFrom("meucontrolehoras@gmail.com");
+        message.setTo(user.getEmail());
+        message.setSubject("Confirmação de cadastro de usuário");
+        message.setText(sb.toString());
+
+        mailSender.send(message);
+
+        return true;
     }
 
 }

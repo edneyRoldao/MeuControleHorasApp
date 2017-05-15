@@ -22,9 +22,6 @@ public class User implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String email;
-	
-	@Column(nullable = false)
-	private Boolean activated;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
@@ -64,14 +61,6 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public Boolean getActivated() {
-		return activated;
-	}
-
-	public void setActivated(Boolean activated) {
-		this.activated = activated;
-	}
 
 	public List<Role> getRoles() {
 		return roles;
@@ -79,5 +68,40 @@ public class User implements Serializable {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", roles=" + roles +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		User user = (User) o;
+
+		if (id != null ? !id.equals(user.id) : user.id != null) return false;
+		if (username != null ? !username.equals(user.username) : user.username != null) return false;
+		if (password != null ? !password.equals(user.password) : user.password != null) return false;
+		if (email != null ? !email.equals(user.email) : user.email != null) return false;
+		return roles != null ? roles.equals(user.roles) : user.roles == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (username != null ? username.hashCode() : 0);
+		result = 31 * result + (password != null ? password.hashCode() : 0);
+		result = 31 * result + (email != null ? email.hashCode() : 0);
+		result = 31 * result + (roles != null ? roles.hashCode() : 0);
+		return result;
 	}
 }
