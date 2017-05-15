@@ -10,6 +10,11 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
         controller: "AuthController as loginCtrl"
     });
 
+    $routeProvider.when("/usuario", {
+        templateUrl: "app/view/login.html",
+        controller: "AuthController as loginCtrl"
+    });
+
     $routeProvider.when("/cadastro", {
         templateUrl: "app/view/new-user.html",
         controller: "UserController as userCtrl"

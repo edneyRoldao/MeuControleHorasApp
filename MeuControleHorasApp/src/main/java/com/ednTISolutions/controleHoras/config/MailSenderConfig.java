@@ -22,11 +22,11 @@ public class MailSenderConfig {
 
     @Bean
     public MailSender mailSender() {
-
         JavaMailSenderImpl sender = new JavaMailSenderImpl();
+        
         sender.setHost(env.getProperty("host"));
         sender.setPort(Integer.parseInt(env.getProperty("port")));
-        sender.setUsername(env.getProperty("username"));
+        sender.setUsername(env.getProperty("usernameFromEmail"));
         sender.setPassword(env.getProperty("password"));
         sender.setJavaMailProperties(getProperties());
 

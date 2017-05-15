@@ -56,19 +56,28 @@ public class UserService {
     }
 
     public boolean sendEmailToNewUser(User user, String url) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        SimpleMailMessage messageObj = new SimpleMailMessage();
 
         StringBuilder sb = new StringBuilder();
         sb.append("Para confirmar seu cadastro e começar a usar meuControleHoras App, \n click no link abaixo:");
         sb.append("\n");
         sb.append(url);
 
-        message.setFrom("meucontrolehoras@gmail.com");
-        message.setTo(user.getEmail());
-        message.setSubject("Confirmação de cadastro de usuário");
-        message.setText(sb.toString());
+        messageObj.setFrom("meucontrolehoras@gmail.com");
+        messageObj.setTo(user.getEmail());
+        messageObj.setSubject("Confirmação de cadastro de usuário");
+        messageObj.setText(sb.toString());
 
-        mailSender.send(message);
+        System.out.println("Sending e-mail...");
+        
+        try {
+        	mailSender.send(messageObj);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	return false;
+        }
+        
+        System.out.println("the e-mail has been sent successfully !");
 
         return true;
     }

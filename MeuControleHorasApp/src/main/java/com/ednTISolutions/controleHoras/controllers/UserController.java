@@ -19,20 +19,26 @@ public class UserController {
 	private TokenUtil tokenUtil;
 
 	@PostMapping
-	public ResponseEntity<String> createUserFirstStep(@RequestBody User user) {
+	public ResponseEntity<User> createUserFirstStep(@RequestBody User user) {
 		if(service.isUserCreatedBefore(user.getEmail()))
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("user already created !");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
 
 		String token = tokenUtil.generateTokenFromNewUser(user);
         String url = service.createURLNewUser(token);
 
 		// Send email here
+        if(!service.sendEmailToNewUser(user, url)) {
+        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);        	
+        }
 
-		return ResponseEntity.ok("e-mail sent successfully !");
+		return ResponseEntity.ok(user);
 	}
 
-	@PostMapping("/{token}")
+	@GetMapping("/{token}")
 	public ResponseEntity<User> createUserSecondStep(@PathVariable("token") String token) {
+		
+		System.out.println(token);
+		
 	    User user = tokenUtil.getNewUserFromToken(token);
         User newUser = service.createUser(user);
 
