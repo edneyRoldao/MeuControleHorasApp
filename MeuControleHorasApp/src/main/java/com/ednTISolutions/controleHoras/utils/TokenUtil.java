@@ -5,6 +5,7 @@ import com.ednTISolutions.controleHoras.security.JwtUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -28,7 +29,7 @@ public class TokenUtil implements Serializable {
 
     @Autowired
     private Environment env;
-
+    
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_AUDIENCE = "audience";
     private static final String CLAIM_KEY_CREATED = "created";
@@ -47,6 +48,7 @@ public class TokenUtil implements Serializable {
             username = claims.getSubject();
 
         } catch (Exception e) {
+        	e.printStackTrace();
             username = null;
         }
 
@@ -54,16 +56,17 @@ public class TokenUtil implements Serializable {
     }
 
     public User getNewUserFromToken(String token) {
-     User user = new User();
-
-     String userInfo = getUsernameFromToken(token);
-     String[] userToken = userInfo.split(";");
-
-     user.setUsername(userToken[0]);
-     user.setEmail(userToken[1]);
-     user.setPassword(userToken[2]);
-
-     return user;
+    	String rightToken = addDotInToken(token);
+    	
+		User user = new User();
+		String userInfo = getUsernameFromToken(rightToken);
+		String[] userToken = userInfo.split(";");
+		 
+		user.setUsername(userToken[0]);
+		user.setEmail(userToken[1]);
+		user.setPassword(userToken[2]);
+		
+		return user;
     }
 
     public Date getCreatedDateFromToken(String token) {
@@ -75,6 +78,7 @@ public class TokenUtil implements Serializable {
             dateCreated = new Date(msSeconds);
 
         } catch (Exception e) {
+        	e.printStackTrace();
             dateCreated = null;
         }
 
@@ -89,6 +93,7 @@ public class TokenUtil implements Serializable {
             expDate = claims.getExpiration();
 
         } catch (Exception e) {
+        	e.printStackTrace();
             expDate = null;
         }
 
@@ -103,6 +108,7 @@ public class TokenUtil implements Serializable {
             audience = (String) claims.get(CLAIM_KEY_AUDIENCE);
 
         } catch (Exception e) {
+        	e.printStackTrace();
             audience = null;
         }
 
@@ -115,7 +121,7 @@ public class TokenUtil implements Serializable {
         claims.put(CLAIM_KEY_AUDIENCE, AUDIENCE_WEB);
         claims.put(CLAIM_KEY_CREATED, new Date());
 
-        String tokenGenerated = generateToken(claims, new Date(TimeUnit.MINUTES.toMillis(30)));
+        String tokenGenerated = generateToken(claims, new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(30)));
 
         return tokenGenerated;
     }
@@ -133,10 +139,11 @@ public class TokenUtil implements Serializable {
         claims.put(CLAIM_KEY_AUDIENCE, AUDIENCE_WEB);
         claims.put(CLAIM_KEY_CREATED, new Date());
 
-        Date dateExp = new Date(TimeUnit.HOURS.toMillis(2));
+        Date dateExp = new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(2));
         String tokenGenerated = generateToken(claims, dateExp);
+        String changedToken = removeDotFromToken(tokenGenerated);
 
-        return tokenGenerated;
+        return changedToken;
     }
 
     public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
@@ -154,6 +161,7 @@ public class TokenUtil implements Serializable {
             refreshedToken = generateToken(claims, new Date(TimeUnit.MINUTES.toMillis(30)));
 
         } catch (Exception e ) {
+        	e.printStackTrace();
             refreshedToken = null;
         }
 
@@ -170,15 +178,16 @@ public class TokenUtil implements Serializable {
                 && (isTokenNotExpired(token))
                 && (isCreatedAfterLastPasswordReset(dateCreated, user.getLastPasswordReset())));
     }
-
+    
     private String generateToken(Map<String, Object> claims, Date date) {
         String token  = Jwts.builder()
                             .setClaims(claims)
                             .setExpiration(date)
-                            .signWith(SignatureAlgorithm.HS512, getJWTSecret())
+                            .signWith(SignatureAlgorithm.HS512, env.getProperty("secret"))
                             .compact();
         return token;
     }
+
 
     private Boolean ignoreTokenExpiration(String token) {
         String audience = getAudienceFromToken(token);
@@ -204,22 +213,26 @@ public class TokenUtil implements Serializable {
 
     private Claims getClaimsFromToken(String token) {
         Claims claims;
-        String secret = getJWTSecret();
         try {
-
             claims = Jwts.parser()
-                          .setSigningKey(secret)
-                          .parseClaimsJwt(token)
-                          .getBody();
-
+                    .setSigningKey(env.getProperty("secret"))
+                    .parseClaimsJws(token)
+                    .getBody();
         } catch (Exception e) {
+        	e.printStackTrace();
             claims = null;
         }
-
         return claims;
     }
 
-    private String getJWTSecret() {
-        return env.getProperty("secret");
+    private String removeDotFromToken(String token) {
+    	String wrongToken = token.replace(".", env.getProperty("replaceDot"));
+    	return wrongToken;
     }
+    
+    private String addDotInToken(String wrongToken) {
+    	String token = wrongToken.replace(env.getProperty("replaceDot"), ".");
+    	return token;
+    }
+
 }

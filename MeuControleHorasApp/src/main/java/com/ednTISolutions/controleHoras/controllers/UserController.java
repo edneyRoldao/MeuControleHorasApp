@@ -26,22 +26,19 @@ public class UserController {
 		String token = tokenUtil.generateTokenFromNewUser(user);
         String url = service.createURLNewUser(token);
 
-		// Send email here
-        if(!service.sendEmailToNewUser(user, url)) {
+        // Send and check an e-mail confirmation at the same time to new user 
+        if(!service.sendEmailToNewUser(user, url))
         	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);        	
-        }
 
 		return ResponseEntity.ok(user);
 	}
 
 	@GetMapping("/{token}")
 	public ResponseEntity<User> createUserSecondStep(@PathVariable("token") String token) {
-		
-		System.out.println(token);
-		
 	    User user = tokenUtil.getNewUserFromToken(token);
         User newUser = service.createUser(user);
 
+        // Check if user already exists
         if(newUser == null)
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
 
