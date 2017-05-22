@@ -1,17 +1,18 @@
+// EdneyRoldao
 function UserAPIService($http, constantsApp) {
     var URL = constantsApp.appContextUrl;
-
-    var _getUser = function(username) {
-        return $http.get("usuario/" + username);
-    };
 
     var _createUser = function(user) {
         return $http.post(URL + "usuario", user);
     };
 
+    var _activateAccount = function(serialCode) {
+        return $http.get(URL + "usuario/" + serialCode);
+    };
+
     return {
-        getUser: _getUser,
-        createUser: _createUser
+        createUser: _createUser,
+        activateAccount: _activateAccount
     };
 }
 

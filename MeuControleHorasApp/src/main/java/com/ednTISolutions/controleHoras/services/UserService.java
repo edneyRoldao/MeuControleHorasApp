@@ -2,12 +2,12 @@ package com.ednTISolutions.controleHoras.services;
 
 import com.ednTISolutions.controleHoras.enums.RoleType;
 import com.ednTISolutions.controleHoras.models.Role;
+import com.ednTISolutions.controleHoras.models.Token;
 import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.RoleRepository;
 import com.ednTISolutions.controleHoras.repositories.UserRepository;
+import com.ednTISolutions.controleHoras.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +26,16 @@ public class UserService {
 	private RoleRepository roleRepository;
 
 	@Autowired
-	private MailSender mailSender;
+	private TokenService tokenService;
+
+	@Autowired
+    private TokenUtil tokenUtil;
+
+	@Autowired
+    private MailService mailService;
 
 
 	public User createUser(User user) {
-		
 		// Manage error when the use already exists.
 		User newUser = repository.findByEmail(user.getEmail());
 		if(newUser != null)
@@ -48,38 +53,33 @@ public class UserService {
     }
 
     public boolean isUserCreatedBefore(String userEmail) {
-	    return repository.findByUsername(userEmail) != null;
+	    return repository.findByEmail(userEmail) != null;
     }
 
-    public String createURLNewUser(String token) {
-        return "http://localhost:8083/MeuControleHoras/usuario/" + token;
+    public Token saveConfirmationToken(String token) {
+	    String serial = tokenUtil.generateSerialFromToken(token);
+	    return tokenService.saveTokenObj(new Token(serial, token));
     }
 
-    public boolean sendEmailToNewUser(User user, String url) {
-        SimpleMailMessage messageObj = new SimpleMailMessage();
+    public boolean sendEmailToNewUser(User user, String serial) {
+	    String subject = "Envio de código de ativação de usuário";
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Para confirmar seu cadastro e começar a usar meuControleHoras App, \n click no link abaixo:");
-        sb.append("\n");
-        sb.append(url);
+        StringBuilder content = new StringBuilder();
+        content.append("Para confirmar seu cadastro e começar a usar meuControleHoras App, \n informe o código " +
+                       "abaixo na aplicação");
+        content.append("\n \n");
 
-        messageObj.setFrom("meucontrolehoras@gmail.com");
-        messageObj.setTo(user.getEmail());
-        messageObj.setSubject("Confirmação de cadastro de usuário");
-        messageObj.setText(sb.toString());
+        String serialFormatted = "";
 
-        System.out.println("Sending e-mail...");
-        
-        try {
-        	mailSender.send(messageObj);
-        } catch (Exception e) {
-        	e.printStackTrace();
-        	return false;
+        for(int i = 0; i < serial.length(); i++) {
+            serialFormatted += Character.toString(serial.charAt(i)) + "  ";
         }
-        
-        System.out.println("the e-mail has been sent successfully !");
 
-        return true;
+        content.append(serialFormatted);
+        content.append("\n \n");
+        content.append("http://localhost:8083/MeuControleHoras/#/activate");
+
+        return mailService.sendEmailToNewUser(user.getEmail(), subject, content.toString());
     }
 
 }

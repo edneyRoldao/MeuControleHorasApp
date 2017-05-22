@@ -9,11 +9,11 @@ function NewUserController(UserAPIService, $location) {
         	delete _ctrl.user;
 
         	// Success message
-            swal("Estamos quase l\u00e1 !", "Te enviamos um e-mail de ativa\u00e7\u00e3o da sua conta !", "success");
+            swal("Estamos quase l\u00e1 !", "Te enviamos um e-mail com o um cdigo de ativa\u00e7\u00e3o da sua conta !", "success");
 
             // Redirect
-            $location.path("/login");
-            
+            $location.path("/activate");
+
         }).error(function(data, status) {
             console.log(status);
             _ctrl.user.password = null;

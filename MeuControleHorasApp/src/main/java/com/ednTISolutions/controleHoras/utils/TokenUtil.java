@@ -16,7 +16,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by edneyroldao on 30/04/17.
@@ -178,7 +181,16 @@ public class TokenUtil implements Serializable {
                 && (isTokenNotExpired(token))
                 && (isCreatedAfterLastPasswordReset(dateCreated, user.getLastPasswordReset())));
     }
-    
+
+    public String generateSerialFromToken(String token) {
+        String serial = removeSpecialCharactersFromToken(token);
+        Random random = new Random();
+        int num = random.nextInt(serial.length() - 10);
+        serial = serial.substring(num, num + 6);
+
+        return serial;
+    }
+
     private String generateToken(Map<String, Object> claims, Date date) {
         String token  = Jwts.builder()
                             .setClaims(claims)
@@ -233,6 +245,17 @@ public class TokenUtil implements Serializable {
     private String addDotInToken(String wrongToken) {
     	String token = wrongToken.replace(env.getProperty("replaceDot"), ".");
     	return token;
+    }
+
+    private String removeSpecialCharactersFromToken(String token) {
+        String newToken = "";
+        Matcher matcher = Pattern.compile("\\w").matcher(token);
+
+        while(matcher.find()) {
+            newToken += matcher.group();
+        }
+
+        return newToken;
     }
 
 }

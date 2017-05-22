@@ -15,6 +15,11 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
         controller: "AuthController as loginCtrl"
     });
 
+    $routeProvider.when("/activate", {
+        templateUrl: "app/view/account-confirmation.html",
+        controller: "AccountActivationController as ctrl"
+    });
+
     $routeProvider.when("/cadastro", {
         templateUrl: "app/view/new-user.html",
         controller: "UserController as userCtrl"
