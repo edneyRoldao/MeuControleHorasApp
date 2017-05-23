@@ -20,6 +20,11 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
         controller: "AccountActivationController as ctrl"
     });
 
+    $routeProvider.when("/redefinirSenha", {
+        templateUrl: "app/view/password-forgotten.html",
+        controller: "RetrieveEmailController as ctrl"
+    });
+
     $routeProvider.when("/cadastro", {
         templateUrl: "app/view/new-user.html",
         controller: "UserController as userCtrl"

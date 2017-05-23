@@ -37,7 +37,7 @@ public class UserService {
 
 	public User createUser(User user) {
 		// Manage error when the use already exists.
-		User newUser = repository.findByEmail(user.getEmail());
+		User newUser = findUserByEmail(user.getEmail());
 		if(newUser != null)
 		    return null;
 
@@ -52,6 +52,10 @@ public class UserService {
 	    return repository.save(user);
     }
 
+	public User findUserByEmail(String email) {
+		return repository.findByEmail(email);
+	}
+	
     public boolean isUserCreatedBefore(String userEmail) {
 	    return repository.findByEmail(userEmail) != null;
     }
@@ -61,6 +65,23 @@ public class UserService {
 	    return tokenService.saveTokenObj(new Token(serial, token));
     }
 
+    public void saveNewPassowrd(User user) {
+		String password = user.getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(password));
+    	repository.save(user);
+    }
+    
+    public boolean sendEmailNewPassword(User user) {
+    	String subject = "envio da nova senha";
+    	StringBuilder content = new StringBuilder();
+    	content.append("Está é sua nova senha, recomendamos que você altere essa senha na edição do seu perfil.");
+    	content.append("\n\n");
+    	content.append(user.getPassword());
+    	
+    	return mailService.sendEmailToUser(user.getEmail(), subject, content.toString());
+    }
+    
     public boolean sendEmailToNewUser(User user, String serial) {
 	    String subject = "Envio de código de ativação de usuário";
 
@@ -79,7 +100,7 @@ public class UserService {
         content.append("\n \n");
         content.append("http://localhost:8083/MeuControleHoras/#/activate");
 
-        return mailService.sendEmailToNewUser(user.getEmail(), subject, content.toString());
+        return mailService.sendEmailToUser(user.getEmail(), subject, content.toString());
     }
 
 }

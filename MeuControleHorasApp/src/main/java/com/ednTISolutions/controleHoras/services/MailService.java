@@ -24,7 +24,7 @@ public class MailService implements Serializable {
     @Autowired
     private MailSender mailSender;
 
-    public boolean sendEmailToNewUser(String userMail, String subject, String content) {
+    public boolean sendEmailToUser(String userMail, String subject, String content) {
         SimpleMailMessage messageObj = new SimpleMailMessage();
 
         messageObj.setFrom(env.getProperty("usernameFromEmail"));

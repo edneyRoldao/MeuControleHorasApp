@@ -8,14 +8,19 @@ function AuthenticationController(AuthAPIService) {
 
         AuthAPIService.createAuthToken(user).success(function (data) {
 
-            console.log("token has been created successfully");
-            console.log(data);
-
         }).error(function (data, status) {
-
             console.log("there was an error");
-            console.log(data);
             console.log(status);
+            
+            // error message
+            swal({
+                title: "Opa !",
+                text: "E-mail de usu\u00e1rio ou senha inv\u00e1lidos !",
+                type: "warning",
+                confirmButtonColor: "#D33",
+                confirmButtonText: "OK",
+                confirmButtonClass: "btn btn-danger"
+            });
 
         });
     };

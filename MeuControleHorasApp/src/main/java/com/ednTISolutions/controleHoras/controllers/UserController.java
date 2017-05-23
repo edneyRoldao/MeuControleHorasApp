@@ -58,5 +58,21 @@ public class UserController {
 
 		return ResponseEntity.ok(newUser);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/redefinirSenha")
+	public ResponseEntity defineNewPassword(@RequestBody String email) {
+		User user = service.findUserByEmail(email);
+		
+		if(user == null)
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+		String newPassword = email.split("@")[0];
+		user.setPassword(newPassword);
+		service.sendEmailNewPassword(user);
+		service.saveNewPassowrd(user);
+		
+		return new ResponseEntity(HttpStatus.OK);
+	}
 
 }
