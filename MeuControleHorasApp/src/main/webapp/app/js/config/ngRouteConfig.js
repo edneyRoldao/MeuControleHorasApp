@@ -6,16 +6,16 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
     });
 
     $routeProvider.when("/login", {
-        templateUrl: "app/view/login.html",
+        templateUrl: "app/view/authentication.html",
         controller: "AuthController as loginCtrl"
     });
 
     $routeProvider.when("/usuario", {
-        templateUrl: "app/view/login.html",
+        templateUrl: "app/view/authentication.html",
         controller: "AuthController as loginCtrl"
     });
 
-    $routeProvider.when("/activate", {
+    $routeProvider.when("/ativarConta", {
         templateUrl: "app/view/account-confirmation.html",
         controller: "AccountActivationController as ctrl"
     });

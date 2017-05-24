@@ -32,7 +32,7 @@ public class UserController {
 		Token tokenObj = service.saveConfirmationToken(token);
 
         if(!service.sendEmailToNewUser(user, tokenObj.getSerial()))
-        	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);        	
+        	return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(null);
 
 		return ResponseEntity.ok(user);
 	}
@@ -49,12 +49,11 @@ public class UserController {
 	    if(user == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
+		if(service.isUserCreatedBefore(user.getEmail()))
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+
         User newUser = service.createUser(user);
         tokenService.removeTokenNewUserValidation(serial);
-
-        // Check if user already exists
-        if(newUser == null)
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
 
 		return ResponseEntity.ok(newUser);
 	}
@@ -69,7 +68,10 @@ public class UserController {
 
 		String newPassword = email.split("@")[0];
 		user.setPassword(newPassword);
-		service.sendEmailNewPassword(user);
+
+		if(!service.sendEmailNewPassword(user))
+			return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(null);
+
 		service.saveNewPassowrd(user);
 		
 		return new ResponseEntity(HttpStatus.OK);

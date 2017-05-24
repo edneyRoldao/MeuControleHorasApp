@@ -36,11 +36,6 @@ public class UserService {
 
 
 	public User createUser(User user) {
-		// Manage error when the use already exists.
-		User newUser = findUserByEmail(user.getEmail());
-		if(newUser != null)
-		    return null;
-
 		String password = user.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(password));

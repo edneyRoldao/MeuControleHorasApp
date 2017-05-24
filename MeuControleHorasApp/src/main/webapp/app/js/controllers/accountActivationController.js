@@ -5,16 +5,15 @@ function AccountActivationController(UserAPIService, $location) {
     ctrl.activeAccount = function(serialCode) {
 
         UserAPIService.activateAccount(serialCode).success(function(data) {
-            console.log("success !");
             swal("Tudo certo !", "Usu\u00e1rio cadastrado com sucesso !", "success");
             $location.path("/login");
 
         }).error(function (data, status) {
-            console.log(status);
+            console.log("STATUS ERROR: " + status);
+
             ctrl.code = null;
             ctrl.activationForm.$setPristine();
 
-            // error message
             swal({
                 title: "Falha na ativa\u00e7\u00e3o da conta!",
                 text: "O c\u00f3digo de ativa\u00e7\u00e3o \u00e9 inv\u00e1lido ou o tempo expirou !",

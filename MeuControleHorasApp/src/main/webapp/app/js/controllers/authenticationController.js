@@ -7,12 +7,12 @@ function AuthenticationController(AuthAPIService) {
         delete user.email;
 
         AuthAPIService.createAuthToken(user).success(function (data) {
+            // TO-DO
+
 
         }).error(function (data, status) {
-            console.log("there was an error");
-            console.log(status);
+            console.log("STATUS ERROR: " + status);
             
-            // error message
             swal({
                 title: "Opa !",
                 text: "E-mail de usu\u00e1rio ou senha inv\u00e1lidos !",

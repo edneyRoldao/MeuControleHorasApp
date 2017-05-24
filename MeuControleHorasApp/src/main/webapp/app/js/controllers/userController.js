@@ -8,19 +8,16 @@ function NewUserController(UserAPIService, $location) {
             _ctrl.newUserForm.$setPristine();
         	delete _ctrl.user;
 
-        	// Success message
             swal("Estamos quase l\u00e1 !", "Te enviamos um e-mail com o um cdigo de ativa\u00e7\u00e3o da sua conta !", "success");
-
-            // Redirect
-            $location.path("/activate");
+            $location.path("/ativarConta");
 
         }).error(function(data, status) {
-            console.log(status);
+            console.log("STATUS ERROR: " + status);
+
             _ctrl.user.password = null;
             _ctrl.user.passRepeat = null;
             _ctrl.newUserForm.$setPristine();
 
-            // error message
             swal({
                 title: "Opa !",
                 text: "j\u00e1 existe um usu\u00e1rio com este e-mail cadastrado !",

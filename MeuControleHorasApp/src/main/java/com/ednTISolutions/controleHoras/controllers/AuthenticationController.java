@@ -5,8 +5,10 @@ import com.ednTISolutions.controleHoras.security.AuthenticationResponse;
 import com.ednTISolutions.controleHoras.security.JwtUserDetails;
 import com.ednTISolutions.controleHoras.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -35,13 +37,21 @@ public class AuthenticationController {
 
     @PostMapping
     public ResponseEntity<?> createAuthToken(@RequestBody AuthenticationRequest authReq)throws AuthenticationException {
-        UsernamePasswordAuthenticationToken user;
-        user = new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword());
-        Authentication auth = authenticationManager.authenticate(user);
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        String token = null;
+        UserDetails userDetails = null;
+        UsernamePasswordAuthenticationToken user = null;
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(authReq.getUsername());
-        String token = tokenUtil.generateToken(userDetails);
+        try {
+            user = new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword());
+            Authentication auth = authenticationManager.authenticate(user);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            userDetails = userDetailsService.loadUserByUsername(authReq.getUsername());
+            token = tokenUtil.generateToken(userDetails);
+
+        }catch (BadCredentialsException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
 
         return ResponseEntity.ok(new AuthenticationResponse(token));
     }
@@ -57,7 +67,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(refreshedToken);
         }
 
-        return ResponseEntity.badRequest().body(null);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
 }
