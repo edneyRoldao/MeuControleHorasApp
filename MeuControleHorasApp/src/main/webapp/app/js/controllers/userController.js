@@ -14,20 +14,23 @@ function NewUserController(UserAPIService, $location) {
         }).error(function(data, status) {
             console.log("STATUS ERROR: " + status);
 
-            _ctrl.user.password = null;
-            _ctrl.user.passRepeat = null;
-            _ctrl.newUserForm.$setPristine();
+            if(status === 409) {
+                _ctrl.user.password = null;
+                _ctrl.user.passRepeat = null;
+                _ctrl.newUserForm.$setPristine();
 
-            swal({
-                title: "Opa !",
-                text: "j\u00e1 existe um usu\u00e1rio com este e-mail cadastrado !",
-                type: "warning",
-                confirmButtonColor: "#D33",
-                confirmButtonText: "OK",
-                confirmButtonClass: "btn btn-danger"
-            });
+                swal({
+                    title: "Opa !",
+                    text: "j\u00e1 existe um usu\u00e1rio com este e-mail cadastrado !",
+                    type: "warning",
+                    confirmButtonColor: "#D33",
+                    confirmButtonText: "OK",
+                    confirmButtonClass: "btn btn-danger"
+                });
 
-            $location.path("/cadastro");
+                $location.path("/cadastro");
+            }
+
         });
     };
 

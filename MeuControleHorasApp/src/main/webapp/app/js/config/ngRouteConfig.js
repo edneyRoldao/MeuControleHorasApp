@@ -30,5 +30,9 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
         controller: "UserController as userCtrl"
     });
 
+    $routeProvider.when("/erroServidor", {
+        templateUrl: "app/view/error.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 });
