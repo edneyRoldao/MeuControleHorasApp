@@ -1,5 +1,5 @@
 // EdneyRoldao - 05/05/17
-function AuthService($http, constantsApp) {
+function AuthService($http, constantsApp, $localStorage, $q) {
     var URL = constantsApp.appContextUrl;
 
     var _createAuthToken = function(user) {
