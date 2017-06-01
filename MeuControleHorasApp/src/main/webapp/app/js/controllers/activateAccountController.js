@@ -1,12 +1,12 @@
 // EdneyRoldao - 21/05/17
-function AccountActivationController(UserAPIService, $location) {
+function ActivateAccountController(userService, location) {
     var ctrl = this;
 
     ctrl.activeAccount = function(serialCode) {
 
-        UserAPIService.activateAccount(serialCode).success(function(data) {
+        userService.activateAccount(serialCode).success(function(data) {
             swal("Tudo certo !", "Usu\u00e1rio cadastrado com sucesso !", "success");
-            $location.path("/login");
+            location.path("/login");
 
         }).error(function (data, status) {
             console.log("STATUS ERROR: " + status);
@@ -23,11 +23,11 @@ function AccountActivationController(UserAPIService, $location) {
                 confirmButtonClass: "btn btn-danger"
             });
 
-            $location.path("/activate");
+            location.path("/ativarConta");
         });
-
     };
 
 }
 
-angular.module("meuControleHorasApp").controller("AccountActivationController", AccountActivationController);
+ActivateAccountController.$inject = ["UserService", "$location"];
+angular.module("meuControleHorasApp").controller("ActivateAccountController", ActivateAccountController);

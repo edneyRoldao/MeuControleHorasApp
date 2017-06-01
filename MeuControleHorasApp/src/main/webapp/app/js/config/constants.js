@@ -1,3 +1,3 @@
-angular.module("meuControleHorasApp").constant("constantsApp", {
+angular.module("meuControleHorasApp").constant("ConstantsApp", {
     appContextUrl: "/MeuControleHoras/"
 });

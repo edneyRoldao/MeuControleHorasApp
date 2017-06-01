@@ -1,14 +1,14 @@
 // Edney Roldao - 05/05/17
-function AuthenticationController(AuthAPIService) {
-    var _ctrl = this;
+function LoginController(authenticationService) {
+    var ctrl = this;
 
-    _ctrl.login = function (user) {
+    ctrl.login = function (user) {
         user.username = user.email;
         delete user.email;
 
-        AuthAPIService.createAuthToken(user).success(function (data) {
-            // TO-DO
-
+        authenticationService.createAuthToken(user).success(function (data) {
+            console.log(data.token);
+            localStorage.setItem("userToken", data.token);
 
         }).error(function (data, status) {
             console.log("STATUS ERROR: " + status);
@@ -24,7 +24,8 @@ function AuthenticationController(AuthAPIService) {
 
         });
     };
-
 }
 
-angular.module("meuControleHorasApp").controller("AuthController", AuthenticationController);
+LoginController.$inject = ["AuthenticationService"];
+
+angular.module("meuControleHorasApp").controller("LoginController", LoginController);
