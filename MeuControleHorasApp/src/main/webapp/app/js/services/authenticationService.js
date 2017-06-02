@@ -1,19 +1,13 @@
 // EdneyRoldao - 05/05/17
 function AuthenticationService(http, constantsApp) {
+    var service = {};
     var URL = constantsApp.appContextUrl;
 
-    var _createAuthToken = function(user) {
+    service.createAuthToken = function(user) {
         return http.post(URL + "auth", user);
     };
 
-    var _refreshAuthToken = function () {
-
-    };
-
-    return {
-        createAuthToken: _createAuthToken,
-        refreshAuthToken: _refreshAuthToken
-    };
+    return service;
 }
 
 AuthenticationService.$inject = ["$http", "ConstantsApp"];

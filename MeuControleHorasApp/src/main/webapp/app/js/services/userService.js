@@ -1,24 +1,21 @@
 // EdneyRoldao
 function UserService(http, constantsApp) {
+    var service = {};
     var URL = constantsApp.appContextUrl;
 
-    var _createUser = function(user) {
+    service.createUser = function(user) {
         return http.post(URL + "usuario", user);
     };
     
-    var _activateAccount = function(serialCode) {
+    service.activateAccount = function(serialCode) {
         return http.get(URL + "usuario/" + serialCode);
     };
 
-    var _retrievePassword = function(email) {
+    service.retrievePassword = function(email) {
     	return http.post(URL + "usuario/redefinirSenha", email);
     };
 
-    return {
-        createUser: _createUser,
-        activateAccount: _activateAccount,
-        retrievePassword: _retrievePassword
-    };
+    return service;
 }
 
 UserService.$inject = ["$http", "ConstantsApp"];

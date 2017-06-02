@@ -1,15 +1,24 @@
 /* EdneyRoldao - 01/06/17 */
-function TokenService(localStorage) {
+function TokenService() {
+	var service = {};
 
-    var _saveToken = function (username) {
-        console.log(localStorage);
-        console.log(username);
-    };
+    service.saveToken = function (token) {
+		localStorage.setItem("userToken", token);    
+	};
 
-    return {
-        saveToken: _saveToken
-    };
+	service.getToken = function() {
+		return localStorage,getItem("userToken");  
+	};
+
+	service.setToken = function(token) {
+		localStorage.setItem("userToken", token);
+	};
+
+	service.deleteToken = function() {
+		localStorage.removeItem("userToken");
+	};
+
+    return service;
 }
 
-TokenService.$inject = ["$localStorage"];
 angular.module("meuControleHorasApp").factory("TokenService", TokenService);
