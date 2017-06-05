@@ -38,7 +38,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{serial}")
-	public ResponseEntity<User> createUserSecondStep(@PathVariable("serial") String serial) {
+	public ResponseEntity<User> createUserLastStep(@PathVariable("serial") String serial) {
 		Token token = tokenService.retrieveTokenFromSerial(serial);
 
 		if(token == null)

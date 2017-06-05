@@ -1,6 +1,9 @@
 package com.ednTISolutions.controleHoras.config;
 
 import com.ednTISolutions.controleHoras.security.AuthenticationTokenFilter;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +30,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private final Log logger = LogFactory.getLog(this.getClass());
+	
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
@@ -57,14 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(
-                        HttpMethod.GET,
-                        "/",
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js")
+                .antMatchers(HttpMethod.GET, "/", "/**/*")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/usuario/**")
                 .permitAll()
@@ -74,6 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated();
 
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        logger.info("filter was added");
+        
         httpSecurity.headers().cacheControl();
     }
 

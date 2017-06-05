@@ -51,7 +51,6 @@ public class TokenUtil implements Serializable {
             username = claims.getSubject();
 
         } catch (Exception e) {
-        	e.printStackTrace();
             username = null;
         }
 
@@ -220,7 +219,8 @@ public class TokenUtil implements Serializable {
     }
 
     private Boolean isTokenNotExpired(String token) {
-        return !isTokenExpired(token);
+    	boolean a = !isTokenExpired(token);
+        return a;
     }
 
     private Claims getClaimsFromToken(String token) {
@@ -238,13 +238,11 @@ public class TokenUtil implements Serializable {
     }
 
     private String removeDotFromToken(String token) {
-    	String wrongToken = token.replace(".", env.getProperty("replaceDot"));
-    	return wrongToken;
+    	return token.replace(".", env.getProperty("replaceDot"));
     }
     
-    private String addDotInToken(String wrongToken) {
-    	String token = wrongToken.replace(env.getProperty("replaceDot"), ".");
-    	return token;
+    private String addDotInToken(String token) {
+    	return token.replace(env.getProperty("replaceDot"), ".");
     }
 
     private String removeSpecialCharactersFromToken(String token) {

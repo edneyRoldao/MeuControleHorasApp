@@ -20,9 +20,9 @@ public class UserDetailUtil {
     public static JwtUserDetails create(User user) {
         JwtUserDetails userDetail = new JwtUserDetails(
                 user.getId(),
-                user.getUsername(),
-                user.getPassword(),
                 user.getEmail(),
+                user.getPassword(),
+                null,
                 null,
                 getGrantedAuthorities(user.getRoles())
         );

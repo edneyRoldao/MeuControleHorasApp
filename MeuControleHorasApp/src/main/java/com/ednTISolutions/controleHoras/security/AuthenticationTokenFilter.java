@@ -1,6 +1,9 @@
 package com.ednTISolutions.controleHoras.security;
 
 import com.ednTISolutions.controleHoras.utils.TokenUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +22,8 @@ import java.io.IOException;
  */
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
+	private final Log logger = LogFactory.getLog(this.getClass());
+	
     @Autowired
     private TokenUtil tokenUtil;
 
@@ -27,9 +32,14 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
-        System.out.println("passou aqui - inicio");
         String token = req.getHeader(TokenUtil.TOKEN_HEADER);
-        String username = tokenUtil.getUsernameFromToken(token);
+        String username = null;
+        
+        if(token != null) {
+        	username = tokenUtil.getUsernameFromToken(token);
+        }
+        
+        logger.info("Checking auth details for current user: " + username);
 
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails user = this.userDetailsService.loadUserByUsername(username);
@@ -38,11 +48,10 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken auth = null;
                 auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
+            	logger.info("security context has been created");
             }
         }
 
-
-        System.out.println("passou aqui - fim");
         chain.doFilter(req, res);
     }
 }
