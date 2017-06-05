@@ -8,6 +8,9 @@ function LoginController(authenticationService) {
 
         authenticationService.createAuthToken(user).success(function (data) {
             var token = data.token;
+            
+            console.log(token);
+            
             authenticationService.login(token);
 
         }).error(function (data, status) {
