@@ -3,20 +3,23 @@ function TokenService() {
 	var service = {};
 
     service.saveToken = function (token) {
-		localStorage.setItem("userToken", token);    
+		localStorage.setItem("userToken", token);
+		console.log("token added in local storage");
 	};
 
 	service.getToken = function() {
-		return localStorage,getItem("userToken");  
+		return localStorage.getItem("userToken");
 	};
 
 	service.setToken = function(token) {
 		localStorage.setItem("userToken", token);
-	};
+        console.log("token added in local storage");
+    };
 
 	service.deleteToken = function() {
 		localStorage.removeItem("userToken");
-	};
+        console.log("userToken deleted");
+    };
 
     return service;
 }

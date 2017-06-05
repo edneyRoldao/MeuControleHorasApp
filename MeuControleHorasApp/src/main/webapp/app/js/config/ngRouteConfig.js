@@ -35,7 +35,8 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
     });
 
     $routeProvider.when("/principal", {
-        templateUrl: "app/view/dashboard.html"
+        templateUrl: "app/view/dashboard.html",
+        controller: "HomeController as ctrl"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });

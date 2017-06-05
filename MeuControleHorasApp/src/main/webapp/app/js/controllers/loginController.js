@@ -1,5 +1,5 @@
 // Edney Roldao - 05/05/17
-function LoginController(authenticationService, tokenService, location) {
+function LoginController(authenticationService) {
     var ctrl = this;
 
     ctrl.login = function (user) {
@@ -7,8 +7,8 @@ function LoginController(authenticationService, tokenService, location) {
         delete user.email;
 
         authenticationService.createAuthToken(user).success(function (data) {
-            tokenService.saveToken(data.token);
-            location.path("/principal");
+            var token = data.token;
+            authenticationService.login(token);
 
         }).error(function (data, status) {
             console.log("STATUS ERROR: " + status);
@@ -24,8 +24,8 @@ function LoginController(authenticationService, tokenService, location) {
 
         });
     };
+
 }
 
-LoginController.$inject = ["AuthenticationService", "TokenService", "$location"];
-
+LoginController.$inject = ["AuthenticationService"];
 angular.module("meuControleHorasApp").controller("LoginController", LoginController);

@@ -51,6 +51,9 @@ public class AuthenticationController {
         }catch (BadCredentialsException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }catch (AuthenticationException e2) {
+            e2.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
         return ResponseEntity.ok(new AuthenticationResponse(token));
