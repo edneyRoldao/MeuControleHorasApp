@@ -1,4 +1,4 @@
-package com.ednTISolutions.controleHoras.config;
+package com.ednTISolutions.controleHoras.security.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

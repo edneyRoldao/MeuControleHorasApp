@@ -1,22 +1,22 @@
-package com.ednTISolutions.controleHoras.security;
+package com.ednTISolutions.controleHoras.security.models;
 
 import java.io.Serializable;
 
 /**
- * Created by edneyroldao on 30/04/17.
+ * Created by stephan on 20.03.16.
  */
-public class AuthenticationRequest implements Serializable {
+public class  JwtAuthenticationRequest implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8445943548965154778L;
 
     private String username;
     private String password;
 
-    public AuthenticationRequest() {
+    public JwtAuthenticationRequest() {
         super();
     }
 
-    public AuthenticationRequest(String username, String password) {
+    public JwtAuthenticationRequest(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);
     }
@@ -36,5 +36,4 @@ public class AuthenticationRequest implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

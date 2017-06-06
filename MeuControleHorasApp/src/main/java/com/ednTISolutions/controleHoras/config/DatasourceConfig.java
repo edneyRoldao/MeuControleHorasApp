@@ -1,11 +1,5 @@
 package com.ednTISolutions.controleHoras.config;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -22,9 +16,14 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Properties;
+
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("com.ednTISolutions.controleHoras.repositories")
+@EnableJpaRepositories("com.ednTISolutions.controleHoras")
 public class DatasourceConfig {
 
 	@Bean
@@ -44,7 +43,7 @@ public class DatasourceConfig {
 		
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(adapter);
-		factory.setPackagesToScan("com.ednTISolutions.controleHoras.models");
+		factory.setPackagesToScan("com.ednTISolutions.controleHoras");
 		factory.setDataSource(dataSource());
 		factory.setJpaProperties(hibernateProperties());
 		
