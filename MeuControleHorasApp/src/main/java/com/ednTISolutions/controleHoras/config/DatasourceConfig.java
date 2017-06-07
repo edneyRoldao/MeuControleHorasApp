@@ -23,7 +23,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("com.ednTISolutions.controleHoras")
+@EnableJpaRepositories({"com.ednTISolutions.controleHoras.repositories"})
 public class DatasourceConfig {
 
 	@Bean
@@ -36,14 +36,15 @@ public class DatasourceConfig {
 	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		adapter.setDatabase(Database.HSQL);
 		adapter.setGenerateDdl(true);
 		
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(adapter);
-		factory.setPackagesToScan("com.ednTISolutions.controleHoras");
+		String models = "com.ednTISolutions.controleHoras.models";
+		String securityModels = "com.ednTISolutions.controleHoras.security.models";
+		factory.setPackagesToScan(models, securityModels);
 		factory.setDataSource(dataSource());
 		factory.setJpaProperties(hibernateProperties());
 		

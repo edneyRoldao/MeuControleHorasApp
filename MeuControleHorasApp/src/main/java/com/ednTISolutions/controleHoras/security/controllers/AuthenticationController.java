@@ -49,7 +49,6 @@ public class AuthenticationController {
             token = jwtTokenUtil.generateToken(userDetails);
 
         }catch (AuthenticationException e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 

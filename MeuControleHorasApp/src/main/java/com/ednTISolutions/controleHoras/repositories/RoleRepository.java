@@ -1,5 +1,6 @@
 package com.ednTISolutions.controleHoras.repositories;
 
+import com.ednTISolutions.controleHoras.enums.RoleType;
 import com.ednTISolutions.controleHoras.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
-    Role findByName(String role);
+    Role findByName(RoleType type);
 
 }

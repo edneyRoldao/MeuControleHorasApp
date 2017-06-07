@@ -41,8 +41,9 @@ public class UserService {
     public User createUser(User user) {
         String password = user.getPassword();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(password));
-        user.setAuthorities(roleService.addRolesByRoleType(RoleType.ROLE_USER));
+        user.setPassword(encoder.encode(password));        
+        //user.setAuthorities(roleService.addRolesByRoleType(RoleType.ROLE_USER));
+        user.setAuthorities( roleService.addAllRoles() );
         user.setEnabled(true);
         user.setLastPasswordResetDate(new Date());
 

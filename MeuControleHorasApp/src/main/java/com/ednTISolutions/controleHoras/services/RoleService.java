@@ -24,13 +24,13 @@ public class RoleService {
         return repository.findAll();
     }
 
-    public Role findByRoleName(String roleName) {
-        return repository.findByName(roleName);
+    public Role findByRoleName(RoleType type) {
+        return repository.findByName(type);
     }
 
     public List<Role> addRolesByRoleType(RoleType type) {
         List<Role> roles = new ArrayList<>();
-        roles.add(findByRoleName(type.name()));
+        roles.add(findByRoleName(type));
 
         return roles;
     }
