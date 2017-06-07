@@ -1,8 +1,8 @@
 package com.ednTISolutions.controleHoras.security.utils;
 
-import com.ednTISolutions.controleHoras.security.models.Authority;
+import com.ednTISolutions.controleHoras.models.Role;
 import com.ednTISolutions.controleHoras.security.models.JwtUser;
-import com.ednTISolutions.controleHoras.security.models.User;
+import com.ednTISolutions.controleHoras.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -19,8 +19,8 @@ public final class JwtUserFactory {
                 user.getId(),
                 user.getUsername(),
                 user.getFirstname(),
-                user.getLastname(),
-                user.getEmail(),
+                null,
+                null,
                 user.getPassword(),
                 mapToGrantedAuthorities(user.getAuthorities()),
                 user.getEnabled(),
@@ -28,7 +28,7 @@ public final class JwtUserFactory {
         );
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Authority> authorities) {
+    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Role> authorities) {
         return authorities.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName().name()))
                 .collect(Collectors.toList());

@@ -1,4 +1,6 @@
-package com.ednTISolutions.controleHoras.security.models;
+package com.ednTISolutions.controleHoras.models;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,46 +16,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USERNAME", length = 50, unique = true)
     @NotNull
-    @Size(min = 4, max = 50)
+    @Size(max = 50)
+    @Column(length = 50, unique = true)
     private String username;
 
-    @Column(name = "PASSWORD", length = 100)
     @NotNull
-    @Size(min = 4, max = 100)
     private String password;
 
-    @Column(name = "FIRSTNAME", length = 50)
     @NotNull
-    @Size(min = 4, max = 50)
+    @Column(length = 30)
+    @Size(min = 3, max = 30)
     private String firstname;
 
-    @Column(name = "LASTNAME", length = 50)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String lastname;
-
-    @Column(name = "EMAIL", length = 50)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String email;
-
-    @Column(name = "ENABLED")
     @NotNull
     private Boolean enabled;
 
-    @Column(name = "LASTPASSWORDRESETDATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
+    @DateTimeFormat
     private Date lastPasswordResetDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "USER_AUTHORITY",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
-    private List<Authority> authorities;
+    @JoinTable(name = "TB_USER_ROLE",
+               joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+               inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private List<Role> authorities;
 
     public Long getId() {
         return id;
@@ -87,22 +73,6 @@ public class User {
         this.firstname = firstname;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Boolean getEnabled() {
         return enabled;
     }
@@ -111,11 +81,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Authority> getAuthorities() {
+    public List<Role> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
+    public void setAuthorities(List<Role> authorities) {
         this.authorities = authorities;
     }
 

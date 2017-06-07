@@ -5,6 +5,7 @@ import com.ednTISolutions.controleHoras.security.models.JwtAuthenticationRespons
 import com.ednTISolutions.controleHoras.security.models.JwtUser;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,15 +14,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-public class AuthenticationRestController {
+public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -32,39 +33,41 @@ public class AuthenticationRestController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @RequestMapping(value = "auth", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+    @PostMapping("auth")
+    public ResponseEntity<?> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
+        String token = null;
 
-        // Perform the security
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getUsername(),
-                        authenticationRequest.getPassword()
-                )
-        );
-        
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try{
+            UsernamePasswordAuthenticationToken userToken;
+            userToken = new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword());
 
-        // Reload password post-security so we can generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
+            final Authentication authentication = authenticationManager.authenticate(userToken);
 
-        // Return the token
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
+            token = jwtTokenUtil.generateToken(userDetails);
+
+        }catch (AuthenticationException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(value = "refresh", method = RequestMethod.GET)
-    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
-        String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER);
+    @GetMapping("refresh")
+    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest req) {
+        String token = req.getHeader(JwtTokenUtil.TOKEN_HEADER);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
 
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             String refreshedToken = jwtTokenUtil.refreshToken(token);
             return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
-        } else {
-            return ResponseEntity.badRequest().body(null);
         }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
 }

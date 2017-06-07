@@ -1,6 +1,6 @@
-package com.ednTISolutions.controleHoras.security.repositories;
+package com.ednTISolutions.controleHoras.repositories;
 
-import com.ednTISolutions.controleHoras.security.models.User;
+import com.ednTISolutions.controleHoras.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

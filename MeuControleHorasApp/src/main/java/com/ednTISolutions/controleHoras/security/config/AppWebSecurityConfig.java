@@ -56,18 +56,10 @@ public class AppWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // we don't need CSRF because our token is invulnerable
                 .csrf().disable()
-
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-
-                // don't create session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                // allow anonymous resource requests
                 .antMatchers(
                         HttpMethod.GET,
                         "/",
@@ -75,9 +67,15 @@ public class AppWebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/favicon.ico",
                         "/**/*.html",
                         "/**/*.css",
+                        "/**/*.png",
+                        "/**/*.jpg",
+                        "/**/*.woff",
+                        "/**/*.woff2",
+                        "/**/*.ttf",
                         "/**/*.js"
                 ).permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/usuario/**").permitAll()
                 .anyRequest().authenticated();
 
         // Custom JWT based security filter

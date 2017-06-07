@@ -62,7 +62,7 @@ public class DatasourceConfig {
 	@Lazy(false)
 	public ResourceDatabasePopulator populateDatabase() throws SQLException {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("popula-database.sql"));
+		populator.addScript(new ClassPathResource("import-database.sql"));
 		Connection con = null;
 
 		try {

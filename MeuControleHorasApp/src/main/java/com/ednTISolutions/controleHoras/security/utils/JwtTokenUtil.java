@@ -1,5 +1,6 @@
 package com.ednTISolutions.controleHoras.security.utils;
 
+import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.security.models.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -22,9 +23,9 @@ public class JwtTokenUtil implements Serializable {
 
     private static final long serialVersionUID = -3301605591108950415L;
 
-    static final String CLAIM_KEY_USERNAME = "sub";
-    static final String CLAIM_KEY_AUDIENCE = "audience";
-    static final String CLAIM_KEY_CREATED = "created";
+    private static final String CLAIM_KEY_USERNAME = "sub";
+    private static final String CLAIM_KEY_AUDIENCE = "audience";
+    private static final String CLAIM_KEY_CREATED = "created";
 
     private static final String AUDIENCE_UNKNOWN = "unknown";
     private static final String AUDIENCE_WEB = "web";
@@ -80,37 +81,6 @@ public class JwtTokenUtil implements Serializable {
         return audience;
     }
 
-    private Claims getClaimsFromToken(String token) {
-        Claims claims;
-        try {
-            claims = Jwts.parser()
-                    .setSigningKey(env.getProperty("secret"))
-                    .parseClaimsJws(token)
-                    .getBody();
-        } catch (Exception e) {
-            claims = null;
-        }
-        return claims;
-    }
-
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(30));
-    }
-
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
-    }
-
-    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
-        return (lastPasswordReset != null && created.before(lastPasswordReset));
-    }
-
-    private Boolean ignoreTokenExpiration(String token) {
-        String audience = getAudienceFromToken(token);
-        return (AUDIENCE_TABLET.equals(audience) || AUDIENCE_MOBILE.equals(audience));
-    }
-
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
@@ -118,7 +88,7 @@ public class JwtTokenUtil implements Serializable {
         return generateToken(claims);
     }
 
-    String generateToken(Map<String, Object> claims) {
+    public String generateToken(Map<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
@@ -154,4 +124,87 @@ public class JwtTokenUtil implements Serializable {
                         && !isTokenExpired(token)
                         && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
     }
+
+    public String generateTokenFromNewUser(User user) {
+        Map<String, Object> claims = new HashMap<>();
+
+        StringBuilder sb = new StringBuilder(user.getUsername());
+        sb.append(";");
+        sb.append(user.getPassword());
+        sb.append(";");
+        sb.append(user.getFirstname());
+
+        claims.put(CLAIM_KEY_USERNAME, sb.toString());
+        claims.put(CLAIM_KEY_AUDIENCE, AUDIENCE_WEB);
+        claims.put(CLAIM_KEY_CREATED, new Date());
+
+        Date dateExp = new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(2));
+        String tokenGenerated = generateToken(claims, dateExp);
+        String changedToken = removeDotFromToken(tokenGenerated);
+
+        return changedToken;
+    }
+
+    public User getNewUserFromToken(String token) {
+        String rightToken = addDotInToken(token);
+
+        User user = new User();
+        String userInfo = getUsernameFromToken(rightToken);
+        String[] userToken = userInfo.split(";");
+
+        user.setUsername(userToken[0]);
+        user.setPassword(userToken[1]);
+        user.setFirstname(userToken[2]);
+
+        return user;
+    }
+
+    private Claims getClaimsFromToken(String token) {
+        Claims claims;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(env.getProperty("secret"))
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            claims = null;
+        }
+        return claims;
+    }
+
+    private Date generateExpirationDate() {
+        return new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(30));
+    }
+
+    private Boolean isTokenExpired(String token) {
+        final Date expiration = getExpirationDateFromToken(token);
+        return expiration.before(new Date());
+    }
+
+    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
+        return (lastPasswordReset != null && created.before(lastPasswordReset));
+    }
+
+    private Boolean ignoreTokenExpiration(String token) {
+        String audience = getAudienceFromToken(token);
+        return (AUDIENCE_TABLET.equals(audience) || AUDIENCE_MOBILE.equals(audience));
+    }
+
+    private String removeDotFromToken(String token) {
+        return token.replace(".", env.getProperty("replaceDot"));
+    }
+
+    private String addDotInToken(String token) {
+        return token.replace(env.getProperty("replaceDot"), ".");
+    }
+
+    private String generateToken(Map<String, Object> claims, Date date) {
+        String token  = Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(date)
+                .signWith(SignatureAlgorithm.HS512, env.getProperty("secret"))
+                .compact();
+        return token;
+    }
+
 }
