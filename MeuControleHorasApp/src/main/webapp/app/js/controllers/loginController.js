@@ -7,11 +7,7 @@ function LoginController(authenticationService) {
         delete user.email;
 
         authenticationService.createAuthToken(user).success(function (data) {
-            var token = data.token;
-            
-            console.log(token);
-            
-            authenticationService.login(token);
+            authenticationService.login(data.token);
 
         }).error(function (data, status) {
             console.log("STATUS ERROR: " + status);

@@ -15,6 +15,16 @@ function UserService(http, constantsApp) {
     	return http.post(URL + "usuario/redefinirSenha", email);
     };
 
+    service.buildUserObject = function (userFromForm) {
+        var user = {};
+
+        user.username = userFromForm.email;
+        user.password = userFromForm.password;
+        user.firstname = userFromForm.username;
+
+        return user;
+    };
+
     return service;
 }
 

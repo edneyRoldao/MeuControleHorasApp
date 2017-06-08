@@ -1,5 +1,6 @@
 package com.ednTISolutions.controleHoras.config;
 
+import com.ednTISolutions.controleHoras.security.config.AppWebSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -9,7 +10,7 @@ public class AppWebInitializer extends AbstractAnnotationConfigDispatcherServlet
 		return new Class[]
 			{
 				DatasourceConfig.class,
-				WebSecurityConfig.class,
+				AppWebSecurityConfig.class,
 				AppWebConfig.class,
 				MailSenderConfig.class
 			};

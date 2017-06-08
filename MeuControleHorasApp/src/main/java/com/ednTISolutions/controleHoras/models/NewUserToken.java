@@ -7,8 +7,8 @@ import java.io.Serializable;
  * Created by edneyroldao on 21/05/17.
  */
 @Entity
-@Table(name = "TB_TOKEN")
-public class Token implements Serializable {
+@Table(name = "TB_TMP_TOKEN")
+public class NewUserToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,9 +21,9 @@ public class Token implements Serializable {
     @Column(length = 500)
     private String token;
 
-    public Token() {}
+    public NewUserToken() {}
 
-    public Token(String serial, String token) {
+    public NewUserToken(String serial, String token) {
         this.serial = serial;
         this.token = token;
     }

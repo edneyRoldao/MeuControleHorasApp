@@ -4,7 +4,8 @@ function HomeController(authenticationService) {
 
     ctrl.testRoles = function () {
         authenticationService.testRoles().success(function (data) {
-            console.log(data)
+            console.log("SUCCESS");
+
         }).error(function (data, status) {
             console.log(status);
         });

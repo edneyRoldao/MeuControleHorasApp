@@ -4,7 +4,9 @@ function CreateUserController(userService, location) {
 
     ctrl.createUser = function(user) {
 
-        userService.createUser(user).success(function(data) {
+        var userObject = userService.buildUserObject(user);
+
+        userService.createUser(userObject).success(function(data) {
             ctrl.newUserForm.$setPristine();
         	delete ctrl.user;
 
