@@ -6,7 +6,7 @@ function LoginController(authenticationService) {
         user.username = user.email;
         delete user.email;
 
-        authenticationService.createAuthToken(user).success(function (data) {            
+        authenticationService.createAuthToken(user).success(function (data) {
             authenticationService.login(data.token);
 
         }).error(function (data, status) {
