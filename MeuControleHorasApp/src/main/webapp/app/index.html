@@ -4,35 +4,50 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Meu Controle de Horas</title>
 
-		<!-- Styles imports -->
+		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap-theme.css">
 		<link rel="stylesheet" type="text/css" href="app/lib/public/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="app/css/meu-controle-horas.css">
 		<link rel="stylesheet" type="text/css" href="app/css/landing-page.css">
+		<link rel="stylesheet" type="text/css" href="app/lib/public/sweetalert2/dist/sweetalert2.css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
 			  rel="stylesheet" type="text/css">
 
-		<!-- public modules, libs and stuff imports -->
+		<!-- LIBRARIES -->
 		<script src="app/lib/public/jquery/dist/jquery.js"></script>
 		<script src="app/lib/public/bootstrap/dist/js/bootstrap.js"></script>
 		<script src="app/lib/public/angular/angular.js"></script>
 		<script src="app/lib/public/angular-messages/angular-messages.js"></script>
 		<script src="app/lib/public/angular-route/angular-route.js"></script>
+		<script src="app/lib/public/sweetalert2/dist/sweetalert2.min.js"></script>
 
-        <!-- config files, private modules and stuff -->
+        <!-- APP CONFIG FILES -->
 		<script src="app/js/meuControleHorasApp.js"></script>
 		<script src="app/js/config/ngRouteConfig.js"></script>
+		<script src="app/js/config/constants.js"></script>
+        <script src="app/js/config/interceptorsConfig.js"></script>
 
-		<!-- Controllers imports -->
+		<!-- CONTROLLERS -->
 		<script src="app/js/controllers/homeController.js"></script>
-		<script src="app/js/controllers/userController.js"></script>
+		<script src="app/js/controllers/createUserController.js"></script>
+		<script src="app/js/controllers/loginController.js"></script>
+        <script src="app/js/controllers/activateAccountController.js"></script>
+        <script src="app/js/controllers/passwordRetrieveController.js"></script>
 
-        <!-- Services imports -->
-        <script src="app/js/services/userAPIService.js"></script>
+        <!-- SERVICES -->
+        <script src="app/js/services/userService.js"></script>
+        <script src="app/js/services/authenticationService.js"></script>
+        <script src="app/js/services/tokenService.js"></script>
 
-        <!-- Directives imports -->
+        <!-- DIRECTIVES -->
 		<script src="app/js/directives/validateNameFieldDirective.js"></script>
+        <script src="app/js/directives/removeSpecialCharacterDirective.js"></script>
+
+        <!-- INTERCEPTORS -->
+        <script src="app/js/interceptors/avoidCacheInterceptor.js"></script>
+        <script src="app/js/interceptors/errorFromServerInterceptor.js"></script>
+        <script src="app/js/interceptors/checkTokenInterceptor.js"></script>
 
 	</head>
 	<body>
@@ -65,7 +80,7 @@
         <!-- footer -->
         <div class="footer" style="margin-top: 20px">
             <p style="text-align: center">
-                © 2017 - Developed by EDN TI Solutions &#160;&#160;
+                ® 2017 - Developed by EDN TI Solutions &#160;&#160;
                 <img src="app/img/avatar.jpg" width="20px" height="20px" />
             </p>
         </div><!-- /. footer -->

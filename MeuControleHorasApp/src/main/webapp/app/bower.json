@@ -23,6 +23,7 @@
     "angular": "1.5.8",
     "angular-route": "1.5.8",
     "angular-messages": "1.5.8",
-    "font-awesome": "fontawesome#^4.7.0"
+    "font-awesome": "fontawesome#^4.7.0",
+    "sweetalert2": "^6.6.2"
   }
 }

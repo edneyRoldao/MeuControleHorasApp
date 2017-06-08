@@ -1,0 +1,12 @@
+There are some libraries that have being used on project like SweetAlert 
+that doesn't match with UTF-8.
+In many places we are using unicode instead original character.
+
+The list below contains the most commonly used words 
+in this project that needed to be converted to UTF-8.
+
+usuário 	= usu\u00e1rio
+já 			= j\u00e1
+lá			= l\u00e1
+ativação	= ativa\u00e7\u00e3o
+código      = c\u00f3digo

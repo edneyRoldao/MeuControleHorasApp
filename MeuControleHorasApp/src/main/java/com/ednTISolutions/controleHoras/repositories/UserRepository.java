@@ -1,11 +1,11 @@
 package com.ednTISolutions.controleHoras.repositories;
 
+import com.ednTISolutions.controleHoras.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ednTISolutions.controleHoras.models.User;
-
-public interface UserRepository extends JpaRepository<User, Integer>{
-
-    User findByLogin(String login);
-
+/**
+ * Created by stephan on 20.03.16.
+ */
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 }

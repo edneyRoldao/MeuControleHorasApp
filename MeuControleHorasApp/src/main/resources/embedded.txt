@@ -1,5 +1,10 @@
 package com.ednTISolutions.controleHoras.config;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -16,14 +21,9 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Properties;
-
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories({"com.ednTISolutions.controleHoras.repositories"})
+@EnableJpaRepositories("com.ednTISolutions.controleHoras.repositories")
 public class DatasourceConfig {
 
 	@Bean
@@ -36,17 +36,15 @@ public class DatasourceConfig {
 	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		adapter.setDatabase(Database.HSQL);
 		adapter.setGenerateDdl(true);
 		
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(adapter);
-		String models = "com.ednTISolutions.controleHoras.models";
-		String securityModels = "com.ednTISolutions.controleHoras.security.models";
-		factory.setPackagesToScan(models, securityModels);
+		factory.setPackagesToScan("com.ednTISolutions.controleHoras.models");
 		factory.setDataSource(dataSource());
-		factory.setJpaProperties(hibernateProperties());
 		
 		return factory;
 	}
@@ -63,7 +61,7 @@ public class DatasourceConfig {
 	@Lazy(false)
 	public ResourceDatabasePopulator populateDatabase() throws SQLException {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("import-database.sql"));
+		populator.addScript(new ClassPathResource("popula-database.sql"));
 		Connection con = null;
 
 		try {
@@ -75,13 +73,6 @@ public class DatasourceConfig {
 		}
 
 		return populator;
-	}
-	
-	private Properties hibernateProperties() {
-		Properties props = new Properties();
-		props.setProperty("hibernate.show_sql", "true");
-		props.setProperty("hibernate.hbm2ddl.auto", "create");
-		return props;
 	}
 
 }

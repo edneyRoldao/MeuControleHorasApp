@@ -23,5 +23,7 @@ local.properties
 .DS_Store?
 MeuControleHorasApp/src/main/webapp/app/lib/public/*
 *database.properties
+*mail.properties
+*jwt.properties
 MeuControleHorasApp/MeuControleHorasApp.iml
 .idea

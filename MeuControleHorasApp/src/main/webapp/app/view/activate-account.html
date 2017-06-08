@@ -1,0 +1,42 @@
+<div class="container" style="width: 550px; margin-top: 30px; margin-bottom: 80px">
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default" style="margin-top: 70px">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    ATIVAÇÃO DE USUÁRIO
+                </div>
+            </div>
+
+            <div class="panel-body" >
+                <form name="ctrl.activationForm" class="form-horizontal">
+
+                    <div style="margin-bottom: 15px">
+                        <!-- activation code -->
+                        <input ng-required="true"
+                               type="text"
+                               name="code"
+                               remove-special-character
+                               placeholder="código de ativação"
+                               ng-model="ctrl.code"
+                               class="form-control form-control-lg">
+                        <!-- /. activation code -->
+                    </div>
+
+
+                    <!-- activation btn -->
+                    <div class="form-group">
+                        <div class="col-sm-12 controls">
+                            <button ng-click="ctrl.activeAccount(ctrl.code)"
+                                    ng-disabled="ctrl.activationForm.$invalid"
+                                    class="btn btn-success btn-block">
+                                <i class="glyphicon glyphicon-check"></i>
+                                &#160;&#160; ATIVAR
+                            </button>
+                        </div>
+                    </div><!-- /. activation btn -->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,17 +1,24 @@
 package com.ednTISolutions.controleHoras.config;
 
+import com.ednTISolutions.controleHoras.security.config.AppWebSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { DatasourceConfig.class, AppWebConfig.class };
+		return new Class[]
+			{
+				DatasourceConfig.class,
+				AppWebSecurityConfig.class,
+				AppWebConfig.class,
+				MailSenderConfig.class
+			};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/" };
+		return new String[] { "/*" };
 	}
 
 	@Override

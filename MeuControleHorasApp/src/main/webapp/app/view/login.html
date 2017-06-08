@@ -8,11 +8,10 @@
             </div>
 
             <div class="panel-body" >
-                <h5 ng-show="false" class="alert alert-danger" style="text-align: center;">Senha inválida ou usuário não cadastrado !</h5>
-                <form name="userCtrl.formLogin" class="form-horizontal" ng-submit="userCtrl.login()">
+                <form name="ctrl.formLogin" class="form-horizontal">
 
                     <!-- validation masseges -->
-                    <span ng-show="userCtrl.formLogin.email.$error.pattern" class="panel-title" style="color: red;">
+                    <span ng-show="ctrl.formLogin.email.$error.pattern" class="panel-title" style="color: red;">
                         &#160; Formato de e-mail inválido
                     </span><!-- /. validation masseges -->
 
@@ -23,7 +22,7 @@
                                type="text"
                                name="email"
                                ng-pattern="/\w+@\w+\.(\w{2,3}|\w{3}.\w{2})$/"
-                               ng-model="userCtrl.user.email"
+                               ng-model="ctrl.user.email"
                                class="form-control"
                                placeholder="e-mail de login">
                     </div><!-- /. login e-mail -->
@@ -34,28 +33,29 @@
                         <input ng-required="true"
                                type="password"
                                name="password"
-                               ng-model="userCtrl.user.password"
+                               ng-model="ctrl.user.password"
                                class="form-control"
                                placeholder="Senha">
                     </div><!-- /. password -->
 
-                    <a class="btn btn-success" href="#" ng-click="userCtrl.getUsers()"></a>
-
-                    <!-- Button -->
+                    <!-- Login Button -->
                     <div class="login form-group" style="margin-top: 15px; margin-bottom: 15px">
                         <div class="col-sm-12 controls">
-                            <button ng-disabled="userCtrl.formLogin.$invalid" type="submit" href="#" class="btn btn-primary btn-block">
+                            <button ng-click="ctrl.login(ctrl.user)" ng-disabled="ctrl.formLogin.$invalid" type="submit" href="#" class="btn btn-primary btn-block">
                                 <i class="glyphicon glyphicon-log-in"></i>
                                 &#160;&#160; Entrar
                             </button>
                         </div>
-                    </div><!-- /. Button -->
-                </form>
+                    </div><!-- /. Login Button -->
 
+                </form>
                 <hr>
+
+                <!-- password forgotten button -->
                 <a href="#/redefinirSenha" class="forget" data-toggle="modal" data-target=".forget-modal">
                     Esqueceu sua senha ?
-                </a>
+                </a><!-- /. password forgotten button -->
+
             </div>
         </div>
     </div>
