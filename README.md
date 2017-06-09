@@ -10,31 +10,34 @@ Technologies used:<br/>
 
 All API references that were used in this project
 
-SweetAlert (js api):
+- SweetAlert (js api):
 <br>https://limonte.github.io/sweetalert2/
 <br>https://github.com/limonte/sweetalert2
 
-Angular toastr alert api:
+- Angular toastr alert api:
 <br>http://foxandxss.github.io/angular-toastr/ - an awesome alert component
 
-JWT - Json Web Token for Java and Angular
-<br>https://github.com/auth0/angular-jwt - an API that provide us basic functions to manage tokens<br>
+- AngularJS UI-Grid api
+<br> http://ui-grid.info/
 
-<br>https://stormpath.com/blog/jwt-java-create-verify - java impl example<br>
+- Json Web Token documentation
+<br>https://jwt.io/introduction/
 
-<br>https://jwt.io/introduction/ - JWT document<br>
+- JWT debugger
+<br>https://jwt.io/
 
-<br>https://jwt.io/ - JWT debugger<br>
+- JWT Angular - an API that provide us basic functions to manage tokens
+<br>https://github.com/auth0/angular-jwt
 
-<br>https://github.com/szerhusenBC/jwt-spring-security-demo<br> 
-- The best sample to implement security based on token with spring security<br>
-
-<br>https://github.com/lynas/spring-security-jwt-rest-stateless<br>
-- it is a similar example shown above, but less complexity<br>
-
+- JWT Angular - example
 <br>http://jasonwatmore.com/post/2016/08/16/angular-2-jwt-authentication-example-tutorial<br>
 
-<br> http://ui-grid.info/ - AngularJS UI-Grid api<br>
+- JWT Java - A sample regarding how to implement 
+<br>https://stormpath.com/blog/jwt-java-create-verify
+
+- JWT Java - Spring security JWT implementation, This example was widely used 
+<br>https://github.com/szerhusenBC/jwt-spring-security-demo<br> 
+
 
 
 If there's any doubt about project, message me - edneyroldao@gmail.com
