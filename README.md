@@ -32,6 +32,9 @@ All API references that were used in this project
 - JWT Angular - example
 <br>http://jasonwatmore.com/post/2016/08/16/angular-2-jwt-authentication-example-tutorial<br>
 
+- JWT Angular - example
+<br>https://rafaell-lycan.com/2016/autenticacao-jwt-angular-app/<br>
+
 - JWT Java - A sample regarding how to implement 
 <br>https://stormpath.com/blog/jwt-java-create-verify
 
