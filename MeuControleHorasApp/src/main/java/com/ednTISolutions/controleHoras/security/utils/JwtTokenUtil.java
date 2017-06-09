@@ -27,7 +27,6 @@ public class JwtTokenUtil implements Serializable {
     private static final String CLAIM_KEY_AUDIENCE = "audience";
     private static final String CLAIM_KEY_CREATED = "created";
 
-    private static final String AUDIENCE_UNKNOWN = "unknown";
     private static final String AUDIENCE_WEB = "web";
     private static final String AUDIENCE_MOBILE = "mobile";
     private static final String AUDIENCE_TABLET = "tablet";
@@ -42,9 +41,12 @@ public class JwtTokenUtil implements Serializable {
         try {
             final Claims claims = getClaimsFromToken(token);
             username = claims.getSubject();
+            
         } catch (Exception e) {
+        	System.out.println("TokenUtil.getUsernameFromToken it wasn't able to retrieve claims from token");
             username = null;
         }
+        
         return username;
     }
 
@@ -53,9 +55,12 @@ public class JwtTokenUtil implements Serializable {
         try {
             final Claims claims = getClaimsFromToken(token);
             created = new Date((Long) claims.get(CLAIM_KEY_CREATED));
+            
         } catch (Exception e) {
+        	System.out.println("TokenUtil.getCreatedDateFromToken it wasn't able to retrieve claims from token");
             created = null;
         }
+        
         return created;
     }
 
@@ -64,9 +69,12 @@ public class JwtTokenUtil implements Serializable {
         try {
             final Claims claims = getClaimsFromToken(token);
             expiration = claims.getExpiration();
+            
         } catch (Exception e) {
+        	System.out.println("TokenUtil.getExpirationDateFromToken it wasn't able to retrieve claims from token");
             expiration = null;
         }
+        
         return expiration;
     }
 
@@ -75,9 +83,12 @@ public class JwtTokenUtil implements Serializable {
         try {
             final Claims claims = getClaimsFromToken(token);
             audience = (String) claims.get(CLAIM_KEY_AUDIENCE);
+            
         } catch (Exception e) {
+        	System.out.println("TokenUtil.getAudienceFromToken it wasn't able to retrieve claims from token");        	
             audience = null;
         }
+        
         return audience;
     }
 
@@ -85,6 +96,7 @@ public class JwtTokenUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
+        
         return generateToken(claims);
     }
 
@@ -98,6 +110,7 @@ public class JwtTokenUtil implements Serializable {
 
     public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
         final Date created = getCreatedDateFromToken(token);
+        
         return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
                 && (!isTokenExpired(token) || ignoreTokenExpiration(token));
     }
@@ -108,9 +121,12 @@ public class JwtTokenUtil implements Serializable {
             final Claims claims = getClaimsFromToken(token);
             claims.put(CLAIM_KEY_CREATED, new Date());
             refreshedToken = generateToken(claims);
+            
         } catch (Exception e) {
+        	System.out.println("TokenUtil.refreshToken it wasn't able to retrieve claims from token");        	
             refreshedToken = null;
         }
+        
         return refreshedToken;
     }
 
@@ -119,6 +135,7 @@ public class JwtTokenUtil implements Serializable {
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
         //final Date expiration = getExpirationDateFromToken(token);
+        
         return (
                 username.equals(user.getUsername())
                         && !isTokenExpired(token)
@@ -166,9 +183,12 @@ public class JwtTokenUtil implements Serializable {
                     .setSigningKey(env.getProperty("secret"))
                     .parseClaimsJws(token)
                     .getBody();
+            
         } catch (Exception e) {
+        	System.out.println("TokenUtil.getClaimsFromToken - There is no claim for token from parameter");
             claims = null;
         }
+        
         return claims;
     }
 
@@ -204,6 +224,7 @@ public class JwtTokenUtil implements Serializable {
                 .setExpiration(date)
                 .signWith(SignatureAlgorithm.HS512, env.getProperty("secret"))
                 .compact();
+        
         return token;
     }
 

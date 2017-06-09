@@ -1,8 +1,10 @@
 package com.ednTISolutions.controleHoras.security.controllers;
 
+import com.ednTISolutions.controleHoras.models.UserProfile;
 import com.ednTISolutions.controleHoras.security.models.JwtAuthenticationRequest;
 import com.ednTISolutions.controleHoras.security.models.JwtAuthenticationResponse;
 import com.ednTISolutions.controleHoras.security.models.JwtUser;
+import com.ednTISolutions.controleHoras.security.services.UserProfileService;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,9 +34,12 @@ public class AuthenticationController {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    @Autowired
+    private UserProfileService userProfileService;
 
     @PostMapping("auth")
-    public ResponseEntity<?> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
+    public ResponseEntity<UserProfile> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
         String token = null;
 
         try{
@@ -49,23 +54,35 @@ public class AuthenticationController {
             token = jwtTokenUtil.generateToken(userDetails);
 
         }catch (AuthenticationException e) {
+        	System.out.println("There was an error - AuthenticationException - create token method");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        UserProfile profile = userProfileService.getUserProfile(req.getUsername());
+        profile.setToken(token);
+        
+        return ResponseEntity.ok(profile);
     }
 
     @GetMapping("refresh")
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest req) {
-        String token = req.getHeader(JwtTokenUtil.TOKEN_HEADER);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
-
-        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
-            String refreshedToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
-        }
-
+    	
+    	try {
+    		String token = req.getHeader(JwtTokenUtil.TOKEN_HEADER);
+    		String username = jwtTokenUtil.getUsernameFromToken(token);
+    		JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+    		
+    		if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+    			String refreshedToken = jwtTokenUtil.refreshToken(token);
+    			return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+    		}
+			
+		} catch (AuthenticationException e) {
+			System.out.println("There was an error - AuthenticationException - refreshAuthenticationMethod");
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
+    	
+    	System.out.println("refreshAndGetAuthenticationToken - canTokenBeRefreshed return false");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 

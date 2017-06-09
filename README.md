@@ -18,11 +18,17 @@ Angular toastr alert api:
 <br>http://foxandxss.github.io/angular-toastr/ - an awesome alert component
 
 JWT - Json Web Token (java and js api):
+<br>angular-jwt - and API that provide us basic functions to manage tokens
+<br>https://github.com/auth0/angular-jwt 
 <br>https://stormpath.com/blog/jwt-java-create-verify - java impl example
 <br>https://jwt.io/introduction/
 <br>https://jwt.io/ - token debugger
-<br>https://github.com/szerhusenBC/jwt-spring-security-demo - The best sample to implement security based on token with spring security
-<br>https://github.com/lynas/spring-security-jwt-rest-stateless - it is a similar example shown above, but less complexity
+<br>https://github.com/szerhusenBC/jwt-spring-security-demo - The best sample to implement 
+security based on token with spring security
+
+<br>https://github.com/lynas/spring-security-jwt-rest-stateless - it is a similar example 
+shown above, but less complexity
+
 <br>http://jasonwatmore.com/post/2016/08/16/angular-2-jwt-authentication-example-tutorial
 
 AngularJS UI-Grid api:

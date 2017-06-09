@@ -2,6 +2,7 @@ package com.ednTISolutions.controleHoras.controllers;
 
 import com.ednTISolutions.controleHoras.models.NewUserToken;
 import com.ednTISolutions.controleHoras.models.User;
+import com.ednTISolutions.controleHoras.security.services.UserProfileService;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
 import com.ednTISolutions.controleHoras.services.NewUserTokenService;
 import com.ednTISolutions.controleHoras.services.UserService;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     private JwtTokenUtil tokenUtil;
+    
+    @Autowired
+    private UserProfileService userProfileService;
 
     @Autowired
     private NewUserTokenService tokenService;
@@ -53,6 +57,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
 
         User newUser = service.createUser(user);
+        userProfileService.createNewProfile(newUser);
         tokenService.removeTokenNewUserValidation(serial);
 
         return ResponseEntity.ok(newUser);

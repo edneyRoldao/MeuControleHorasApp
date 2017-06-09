@@ -1,1 +1,1 @@
-angular.module("meuControleHorasApp", ["ngRoute", "ngMessages"]);
+angular.module("meuControleHorasApp", ["ngRoute", "ngMessages", "angular-jwt"]);

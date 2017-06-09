@@ -36,13 +36,12 @@ public class MailService implements Serializable {
 
         try {
             mailSender.send(messageObj);
+            
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
 
         System.out.println("the e-mail has been sent successfully !");
-
         return true;
     }
 
