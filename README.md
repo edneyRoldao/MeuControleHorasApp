@@ -17,23 +17,24 @@ SweetAlert (js api):
 Angular toastr alert api:
 <br>http://foxandxss.github.io/angular-toastr/ - an awesome alert component
 
-JWT - Json Web Token (java and js api):
-<br>angular-jwt - and API that provide us basic functions to manage tokens
-<br>https://github.com/auth0/angular-jwt 
-<br>https://stormpath.com/blog/jwt-java-create-verify - java impl example
-<br>https://jwt.io/introduction/
-<br>https://jwt.io/ - token debugger
-<br>https://github.com/szerhusenBC/jwt-spring-security-demo - The best sample to implement 
-security based on token with spring security
+JWT - Json Web Token for Java and Angular
+<br>https://github.com/auth0/angular-jwt - an API that provide us basic functions to manage tokens<br>
 
-<br>https://github.com/lynas/spring-security-jwt-rest-stateless - it is a similar example 
-shown above, but less complexity
+<br>https://stormpath.com/blog/jwt-java-create-verify - java impl example<br>
 
-<br>http://jasonwatmore.com/post/2016/08/16/angular-2-jwt-authentication-example-tutorial
+<br>https://jwt.io/introduction/ - JWT document<br>
 
-AngularJS UI-Grid api:
-<br> http://ui-grid.info/
+<br>https://jwt.io/ - JWT debugger<br>
 
+<br>https://github.com/szerhusenBC/jwt-spring-security-demo<br> 
+- The best sample to implement security based on token with spring security<br>
+
+<br>https://github.com/lynas/spring-security-jwt-rest-stateless<br>
+- it is a similar example shown above, but less complexity<br>
+
+<br>http://jasonwatmore.com/post/2016/08/16/angular-2-jwt-authentication-example-tutorial<br>
+
+<br> http://ui-grid.info/ - AngularJS UI-Grid api<br>
 
 
 If there's any doubt about project, message me - edneyroldao@gmail.com
