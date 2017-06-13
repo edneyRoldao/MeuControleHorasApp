@@ -1,10 +1,10 @@
 // EdneyRoldao - 05/05/17
-function AuthenticationService(http, constantsApp, location, tokenService) {
+function AuthenticationService(http, constants, location, tokenService) {
     var service = {};
-    var URL = constantsApp.appContextUrl;
+    var URL = constants.appContextUrl;
 
     service.createAuthToken = function(user) {
-        return http.post(URL + "auth", user);
+        return tokenService.createToken(user);
     };
 
     service.testRoles = function () {

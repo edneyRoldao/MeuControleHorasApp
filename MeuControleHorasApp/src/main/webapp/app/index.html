@@ -4,6 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Meu Controle de Horas</title>
 
+		<link rel="icon" href="app/img/favicon.png" type="image/x-icon"/>
+
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap-theme.css">
@@ -46,10 +48,11 @@
         <script src="app/js/directives/removeSpecialCharacterDirective.js"></script>
 
         <!-- INTERCEPTORS -->
-        <script src="app/js/interceptors/avoidCacheInterceptor.js"></script>
-        <script src="app/js/interceptors/errorFromServerInterceptor.js"></script>
+        <script src="app/js/interceptors/cacheControlInterceptor.js"></script>
+        <script src="app/js/interceptors/httpErrorInterceptor.js"></script>
         <script src="app/js/interceptors/checkTokenInterceptor.js"></script>
-
+        <script src="app/js/interceptors/accessControlInterceptor.js"></script>        
+        
 	</head>
 	<body>
         <!-- Navigation -->

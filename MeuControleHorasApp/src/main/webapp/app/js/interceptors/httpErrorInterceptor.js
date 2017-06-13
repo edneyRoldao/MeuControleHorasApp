@@ -1,5 +1,5 @@
 /* EdneyRoldao - 12/05/17 */
-function ServerErrorInterceptor(q, location) {
+function HttpErrorInterceptor(q, location) {
     var interceptor = {};
 
     interceptor.responseError = function(rejection) {
@@ -14,5 +14,5 @@ function ServerErrorInterceptor(q, location) {
     return interceptor;
 }
 
-ServerErrorInterceptor.$inject = ["$q", "$location"];
-angular.module("meuControleHorasApp").factory("ServerErrorInterceptor", ServerErrorInterceptor);
+HttpErrorInterceptor.$inject = ["$q", "$location"];
+angular.module("meuControleHorasApp").factory("HttpErrorInterceptor", HttpErrorInterceptor);

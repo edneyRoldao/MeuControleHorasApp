@@ -1,5 +1,5 @@
 /* EdneyRoldao - 12/05/17 */
-function AvoidCacheInterceptor() {
+function CacheControlInterceptor() {
 	var interceptor = {};
 
 	interceptor.request = function(config) {
@@ -14,4 +14,4 @@ function AvoidCacheInterceptor() {
     return interceptor;
 }
 
-angular.module("meuControleHorasApp").factory("AvoidCacheInterceptor", AvoidCacheInterceptor);
+angular.module("meuControleHorasApp").factory("CacheControlInterceptor", CacheControlInterceptor);
