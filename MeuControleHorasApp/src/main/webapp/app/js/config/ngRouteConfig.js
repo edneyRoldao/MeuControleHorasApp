@@ -39,7 +39,6 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
         controller: "HomeController as ctrl",
         resolve: {
             userProfile: function(UserProfileService) {
-                console.log("Passei aqui");
                 return UserProfileService.getProfile();
             }
         }

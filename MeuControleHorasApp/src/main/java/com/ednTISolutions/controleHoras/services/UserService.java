@@ -1,6 +1,5 @@
 package com.ednTISolutions.controleHoras.services;
 
-import com.ednTISolutions.controleHoras.enums.RoleType;
 import com.ednTISolutions.controleHoras.models.NewUserTemp;
 import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.UserRepository;
@@ -20,85 +19,74 @@ import java.util.Date;
 @Transactional
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
+	@Autowired
+	private UserRepository repository;
 
-    @Autowired
-    private RoleService roleService;
+	@Autowired
+	private RoleService roleService;
 
-    @Autowired
-    private MailService mailService;
+	@Autowired
+	private MailService mailService;
 
-    @Autowired
-    private NewUserTempService tokenService;
+	@Autowired
+	private NewUserTempService tokenService;
 
-    @Autowired
-    private NewUserTempService tokenUtil;
+	public User findByUsername(String username) {
+		return repository.findByUsername(username);
+	}
 
+	public User createUser(User user) {
+		String password = user.getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(password));
+		// user.setAuthorities(roleService.addRolesByRoleType(RoleType.ROLE_USER));
+		user.setAuthorities(roleService.addAllRoles());
+		user.setEnabled(true);
+		user.setLastPasswordResetDate(new Date());
 
-    public User findByUsername(String username) {
-        return repository.findByUsername(username);
-    }
+		return repository.save(user);
+	}
 
-    public User createUser(User user) {
-        String password = user.getPassword();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(password));        
-        //user.setAuthorities(roleService.addRolesByRoleType(RoleType.ROLE_USER));
-        user.setAuthorities( roleService.addAllRoles() );
-        user.setEnabled(true);
-        user.setLastPasswordResetDate(new Date());
+	public boolean isUserCreatedBefore(String username) {
+		return repository.findByUsername(username) != null;
+	}
 
-        return repository.save(user);
-    }
+	public NewUserTemp saveConfirmationToken(String token) {
+		String serial = SerialGenerator.generateSerial(6);
+		return tokenService.saveTokenObj(new NewUserTemp(serial, token));
+	}
 
-    public boolean isUserCreatedBefore(String username) {
-        return repository.findByUsername(username) != null;
-    }
+	public void saveNewPassowrd(User user) {
+		String password = user.getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(password));
 
-    public NewUserTemp saveConfirmationToken(String token) {
-        String serial = SerialGenerator.generateSerial(6);
-        return tokenService.saveTokenObj(new NewUserTemp(serial, token));
-    }
+		repository.save(user);
+	}
 
-    public void saveNewPassowrd(User user) {
-        String password = user.getPassword();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(password));
+	public boolean sendEmailNewPassword(User user) {
+		String subject = "envio da nova senha";
+		StringBuilder content = new StringBuilder();
+		content.append("Está é sua nova senha, recomendamos que você altere essa senha na edição do seu perfil.");
+		content.append("\n\n");
+		content.append(user.getPassword());
 
-        repository.save(user);
-    }
+		return mailService.sendEmailToUser(user.getUsername(), subject, content.toString());
+	}
 
-    public boolean sendEmailNewPassword(User user) {
-        String subject = "envio da nova senha";
-        StringBuilder content = new StringBuilder();
-        content.append("Está é sua nova senha, recomendamos que você altere essa senha na edição do seu perfil.");
-        content.append("\n\n");
-        content.append(user.getPassword());
+	public boolean sendEmailToNewUser(User user, String serial) {
+		String subject = "Envio de código de ativação de usuário";
 
-        return mailService.sendEmailToUser(user.getUsername(), subject, content.toString());
-    }
+		StringBuilder content = new StringBuilder();
+		content.append("Para confirmar seu cadastro e começar a usar meuControleHoras App, \n informe o código "
+				+ "abaixo na aplicação");
+		content.append("\n \n");
 
-    public boolean sendEmailToNewUser(User user, String serial) {
-        String subject = "Envio de código de ativação de usuário";
+		content.append(serial);
+		content.append("\n \n");
+		content.append("http://localhost:8083/MeuControleHoras/#/ativarConta");
 
-        StringBuilder content = new StringBuilder();
-        content.append("Para confirmar seu cadastro e começar a usar meuControleHoras App, \n informe o código " +
-                "abaixo na aplicação");
-        content.append("\n \n");
-
-        StringBuilder serialCode = new StringBuilder();
-
-        for(int i = 0; i < serial.length(); i++) {
-            serialCode.append(Character.toString(serial.charAt(i)));
-        }
-
-        content.append(serialCode);
-        content.append("\n \n");
-        content.append("http://localhost:8083/MeuControleHoras/#/activate");
-
-        return mailService.sendEmailToUser(user.getUsername(), subject, content.toString());
-    }
-
+		return mailService.sendEmailToUser(user.getUsername(), subject, content.toString());
+	}
 
 }

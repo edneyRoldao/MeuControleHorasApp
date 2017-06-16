@@ -30,13 +30,6 @@ public class UserProfileController {
         String username = jwtTokenUtil.getUsernameFromToken(token);
         UserProfile profile = userProfileService.getUserProfile(username);
 
-        System.out.println("##################################################");
-        System.out.println("##################################################");
-        System.out.println(profile.getEmail());
-        System.out.println(profile.getName());
-        System.out.println("##################################################");
-        System.out.println("##################################################");
-
         return ResponseEntity.status(HttpStatus.OK).body(profile);
     }
 
