@@ -1,9 +1,11 @@
 package com.ednTISolutions.controleHoras.services;
 
 import com.ednTISolutions.controleHoras.enums.RoleType;
-import com.ednTISolutions.controleHoras.models.NewUserToken;
+import com.ednTISolutions.controleHoras.models.NewUserTemp;
 import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.UserRepository;
+import com.ednTISolutions.controleHoras.security.utils.SerialGenerator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,10 +30,10 @@ public class UserService {
     private MailService mailService;
 
     @Autowired
-    private NewUserTokenService tokenService;
+    private NewUserTempService tokenService;
 
     @Autowired
-    private NewUserTokenService tokenUtil;
+    private NewUserTempService tokenUtil;
 
 
     public User findByUsername(String username) {
@@ -54,9 +56,9 @@ public class UserService {
         return repository.findByUsername(username) != null;
     }
 
-    public NewUserToken saveConfirmationToken(String token) {
-        String serial = tokenUtil.generateSerialFromToken(token);
-        return tokenService.saveTokenObj(new NewUserToken(serial, token));
+    public NewUserTemp saveConfirmationToken(String token) {
+        String serial = SerialGenerator.generateSerial(6);
+        return tokenService.saveTokenObj(new NewUserTemp(serial, token));
     }
 
     public void saveNewPassowrd(User user) {

@@ -24,58 +24,58 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @PostMapping("auth")
-    public ResponseEntity<JwtAuthenticationResponse> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
-        String token;
+	@PostMapping("auth")
+	public ResponseEntity<JwtAuthenticationResponse> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
+		String token;
 
-        try{
-            UsernamePasswordAuthenticationToken userToken;
-            userToken = new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword());
+		try {
+			UsernamePasswordAuthenticationToken userToken;
+			userToken = new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword());
 
-            final Authentication authentication = authenticationManager.authenticate(userToken);
+			final Authentication authentication = authenticationManager.authenticate(userToken);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
-            token = jwtTokenUtil.generateToken(userDetails);
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
+			token = jwtTokenUtil.generateToken(userDetails);
 
-        }catch (AuthenticationException e) {
-        	System.out.println("There was an error - AuthenticationException - create token method");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
+		} catch (AuthenticationException e) {
+			System.out.println("There was an error - AuthenticationException - create token method");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+		}
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
-    }
+		return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+	}
 
-    @GetMapping("refresh")
-    public ResponseEntity<JwtAuthenticationResponse> refreshAndGetAuthenticationToken(HttpServletRequest req) {
-    	
-    	try {
-    		String token = req.getHeader(JwtTokenUtil.TOKEN_HEADER);
-    		String username = jwtTokenUtil.getUsernameFromToken(token);
-    		JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
-    		
-    		if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
-    			String refreshedToken = jwtTokenUtil.refreshToken(token);
-    			return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
-    		}
-			
+	@GetMapping("refresh")
+	public ResponseEntity<JwtAuthenticationResponse> refreshAndGetAuthenticationToken(HttpServletRequest req) {
+
+		try {
+			String token = req.getHeader(JwtTokenUtil.TOKEN_HEADER);
+			String username = jwtTokenUtil.getUsernameFromToken(token);
+			JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+
+			if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+				String refreshedToken = jwtTokenUtil.refreshToken(token);
+				return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+			}
+
 		} catch (AuthenticationException e) {
 			System.out.println("There was an error - AuthenticationException - refreshAuthenticationMethod");
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
-    	
-    	System.out.println("refreshAndGetAuthenticationToken - canTokenBeRefreshed return false");
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-    }
+
+		System.out.println("refreshAndGetAuthenticationToken - canTokenBeRefreshed return false");
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	}
 
 }

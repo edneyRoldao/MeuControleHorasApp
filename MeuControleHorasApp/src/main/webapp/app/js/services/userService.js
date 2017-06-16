@@ -1,7 +1,7 @@
-// EdneyRoldao
-function UserService(http, constantsApp) {
+/* EdneyRoldao - 01/06/17 */
+function UserService(http, constants) {
     var service = {};
-    var URL = constantsApp.appContextUrl;
+    var URL = constants.appContextUrl;
 
     service.createUser = function(user) {
         return http.post(URL + "usuario", user);

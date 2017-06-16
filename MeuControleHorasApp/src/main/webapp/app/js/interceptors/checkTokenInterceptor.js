@@ -1,7 +1,5 @@
 /* EdneyRoldao - 12/05/17 */
 function CheckTokenInterceptor(promise, location) {
-	var interceptor = {};
-
 	var _getToken = function() {
 		return localStorage.getItem("JWT_TOKEN");
 	};
@@ -10,6 +8,8 @@ function CheckTokenInterceptor(promise, location) {
 		localStorage.removeItem("JWT_TOKEN");
         console.log("userToken deleted");
 	};
+
+	var interceptor = {};
 
 	interceptor.request = function(config) {
 		config.headers = config.headers || {};

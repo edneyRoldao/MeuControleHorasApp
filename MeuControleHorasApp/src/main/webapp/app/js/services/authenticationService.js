@@ -7,10 +7,6 @@ function AuthenticationService(http, constants, location, tokenService) {
         return tokenService.createToken(user);
     };
 
-    service.testRoles = function () {
-        return http.get(URL + "protected");
-    };
-
     service.login = function (token) {
         tokenService.saveToken(token);
         location.path("/principal");

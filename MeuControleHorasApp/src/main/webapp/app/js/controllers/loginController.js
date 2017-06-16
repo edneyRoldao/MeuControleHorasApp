@@ -1,5 +1,5 @@
 // Edney Roldao - 05/05/17
-function LoginController(authenticationService, jwt) {
+function LoginController(authenticationService) {
     var ctrl = this;
 
     ctrl.login = function (user) {
@@ -7,18 +7,8 @@ function LoginController(authenticationService, jwt) {
         delete user.email;
 
         authenticationService.createAuthToken(user).success(function (data) {
+            authenticationService.login(data.token);
         	
-        	var payload = jwt.decodeToken(data.token);
-        	console.log(payload);
-        	
-        	/*
-	        	 data.company
-	        	 data.email
-	        	 data.id
-	        	 data.token
-	        	 data.name
-	        	 data.idPhoto
-        	 */
 
         }).error(function (data, status) {
             console.log("STATUS ERROR: " + status);
@@ -37,5 +27,5 @@ function LoginController(authenticationService, jwt) {
 
 }
 
-LoginController.$inject = ["AuthenticationService", "jwtHelper"];
+LoginController.$inject = ["AuthenticationService"];
 angular.module("meuControleHorasApp").controller("LoginController", LoginController);

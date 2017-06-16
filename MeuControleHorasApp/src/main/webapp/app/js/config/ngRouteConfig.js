@@ -37,9 +37,10 @@ angular.module("meuControleHorasApp").config(function($routeProvider) {
     $routeProvider.when("/principal", {
         templateUrl: "app/view/dashboard.html",
         controller: "HomeController as ctrl",
-        resolver: {
-            userProfile: function() {
-                return ;
+        resolve: {
+            userProfile: function(UserProfileService) {
+                console.log("Passei aqui");
+                return UserProfileService.getProfile();
             }
         }
     });

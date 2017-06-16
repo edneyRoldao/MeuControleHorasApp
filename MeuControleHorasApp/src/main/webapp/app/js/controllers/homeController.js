@@ -1,7 +1,13 @@
 // EdneyRoldao - 04/04/2017
-function HomeController(authenticationService) {
+function HomeController(userProfile) {
     var ctrl = this;
 
+    console.log("user profile retrieve");
+    console.log(userProfile.data);
+
+/*authenticationService*/
+
+/*
     ctrl.testRoles = function () {
         authenticationService.testRoles().success(function (data) {
             console.log("SUCCESS");
@@ -14,8 +20,8 @@ function HomeController(authenticationService) {
     ctrl.logout = function () {
         authenticationService.logout();
     };
-
+*/
 }
 
-HomeController.$inject = ["AuthenticationService"];
+//HomeController.$inject = ["AuthenticationService"];
 angular.module("meuControleHorasApp").controller("HomeController", HomeController);

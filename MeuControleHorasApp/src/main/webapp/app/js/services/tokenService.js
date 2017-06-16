@@ -1,8 +1,8 @@
 /* EdneyRoldao - 01/06/17 */
-function TokenService(constant, jwt, http) {
+function TokenService(constants, jwt, http) {
 	var service = {};
-	var tokenKey = constant.tokenKey;
-    var URL = constant.appContextUrl;
+	var tokenKey = constants.tokenKey;
+    var URL = constants.appContextUrl;
 
     service.saveToken = function (token) {
 		localStorage.setItem(tokenKey, token);
