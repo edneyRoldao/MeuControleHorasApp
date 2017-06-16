@@ -4,7 +4,7 @@ function ActivateAccountController(userService, location) {
 
     ctrl.activeAccount = function(serialCode) {
 
-        userService.activateAccount(serialCode).success(function(data) {
+        userService.activateAccount(serialCode).success(function() {
             swal("Tudo certo !", "Usu\u00e1rio cadastrado com sucesso !", "success");
             location.path("/login");
 

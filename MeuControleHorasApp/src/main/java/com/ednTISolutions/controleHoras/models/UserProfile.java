@@ -1,16 +1,9 @@
 package com.ednTISolutions.controleHoras.models;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Created by edneyroldao on 07/06/17.
@@ -35,9 +28,6 @@ public class UserProfile implements Serializable {
 	@Size(min = 3, max = 30)
 	private String name;
 
-	@Transient
-	private String token;
-
 	@Column(length = 50)
 	private String company;
 
@@ -45,13 +35,13 @@ public class UserProfile implements Serializable {
 	private String idPhoto;
 
 	public UserProfile() {
+
 	}
 
-	public UserProfile(Long id, String email, String name, String token, String company, String idPhoto) {
+	public UserProfile(Long id, String email, String name, String company, String idPhoto) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
-		this.token = token;
 		this.company = company;
 		this.idPhoto = idPhoto;
 	}
@@ -80,14 +70,6 @@ public class UserProfile implements Serializable {
 		this.name = name;
 	}
 
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 	public String getCompany() {
 		return company;
 	}
@@ -108,7 +90,6 @@ public class UserProfile implements Serializable {
 		UserProfile user = new UserProfile();
 		user.setName(name);
 		user.setEmail(email);
-		
 		return user;
 	}
 

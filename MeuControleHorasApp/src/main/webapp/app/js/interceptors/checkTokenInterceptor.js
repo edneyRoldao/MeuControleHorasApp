@@ -9,7 +9,7 @@ function CheckTokenInterceptor(promise, location) {
 	var _deleteToken = function() {
 		localStorage.removeItem("JWT_TOKEN");
         console.log("userToken deleted");
-	}
+	};
 
 	interceptor.request = function(config) {
 		config.headers = config.headers || {};

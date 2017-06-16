@@ -1,10 +1,8 @@
 package com.ednTISolutions.controleHoras.security.controllers;
 
-import com.ednTISolutions.controleHoras.models.UserProfile;
 import com.ednTISolutions.controleHoras.security.models.JwtAuthenticationRequest;
 import com.ednTISolutions.controleHoras.security.models.JwtAuthenticationResponse;
 import com.ednTISolutions.controleHoras.security.models.JwtUser;
-import com.ednTISolutions.controleHoras.security.services.UserProfileService;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,13 +32,10 @@ public class AuthenticationController {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
-    @Autowired
-    private UserProfileService userProfileService;
 
     @PostMapping("auth")
-    public ResponseEntity<UserProfile> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
-        String token = null;
+    public ResponseEntity<JwtAuthenticationResponse> createAuthToken(@RequestBody JwtAuthenticationRequest req) {
+        String token;
 
         try{
             UsernamePasswordAuthenticationToken userToken;
@@ -58,14 +53,11 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
-        UserProfile profile = userProfileService.getUserProfile(req.getUsername());
-        profile.setToken(token);
-        
-        return ResponseEntity.ok(profile);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
     @GetMapping("refresh")
-    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest req) {
+    public ResponseEntity<JwtAuthenticationResponse> refreshAndGetAuthenticationToken(HttpServletRequest req) {
     	
     	try {
     		String token = req.getHeader(JwtTokenUtil.TOKEN_HEADER);
