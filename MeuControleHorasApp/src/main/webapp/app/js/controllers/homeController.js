@@ -1,27 +1,14 @@
 // EdneyRoldao - 04/04/2017
-function HomeController(userProfile) {
+function HomeController(authenticationService, profile) {
     var ctrl = this;
 
-    console.log("user profile retrieve");
-    console.log(userProfile.data);
-
-/*authenticationService*/
-
-/*
-    ctrl.testRoles = function () {
-        authenticationService.testRoles().success(function (data) {
-            console.log("SUCCESS");
-
-        }).error(function (data, status) {
-            console.log(status);
-        });
-    };
+    console.log(profile.data);
 
     ctrl.logout = function () {
         authenticationService.logout();
     };
-*/
+
 }
 
-//HomeController.$inject = ["AuthenticationService"];
+HomeController.$inject = ["AuthenticationService", "userProfile"];
 angular.module("meuControleHorasApp").controller("HomeController", HomeController);
