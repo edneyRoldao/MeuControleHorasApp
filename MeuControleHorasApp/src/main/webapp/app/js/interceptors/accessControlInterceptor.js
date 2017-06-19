@@ -11,7 +11,7 @@ function AccessControlInterceptor(constants) {
 		});
 		
 		return config;
-	}
+	};
 	
 	return interceptor;
 }

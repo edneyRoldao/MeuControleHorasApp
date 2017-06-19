@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class SerialGenerator {
 
-	public static final String CHARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	private static final String CHARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	public static Random random = new Random();
 
 	public static String generateSerial(int size) {
