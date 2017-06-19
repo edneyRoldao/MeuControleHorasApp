@@ -6,7 +6,7 @@ function TokenService(constants, jwt, http) {
 
     service.saveToken = function (token) {
 		localStorage.setItem(tokenKey, token);
-		console.log("token added in local storage");
+		console.log("token was added in local storage");
 	};
 
 	service.setToken = function(token) {
@@ -19,7 +19,7 @@ function TokenService(constants, jwt, http) {
 
 	service.deleteToken = function() {
 		localStorage.removeItem(tokenKey);
-        console.log("userToken deleted");
+        console.log("userToken was removed");
     };
 
     service.getPayload = function(token) {
