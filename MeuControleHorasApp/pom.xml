@@ -2,7 +2,6 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
-	<!-- Maven project information -->	 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ednTISolutions</groupId>
 	<artifactId>MeuControleHorasApp</artifactId>
@@ -15,28 +14,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
-	<!-- Build config -->
 	<build>
-		<!--  war file name -->
 		<finalName>MeuControleHoras</finalName>
-
-		<!-- Here we have tomcat embedded. GOAL: tomcat7:run -->
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.2</version>
-					<configuration>
-						<port>8083</port>
-						<path>/MeuControleHoras</path>
-						<uriEncoding>UTF-8</uriEncoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
-        <!-- Maven basic config -->
 		<plugins>
   			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -52,6 +31,22 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			
+			<!-- Command: jetty:run (externally: mvn jetty:run) -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.11.v20150529</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/MeuControleHoras</contextPath>
+					</webApp>
+					<httpConnector>
+						<port>8083</port>
+					</httpConnector>
 				</configuration>
 			</plugin>
 		</plugins>	
