@@ -2,7 +2,7 @@
 function HomeController(authenticationService, profile) {
     var ctrl = this;
 
-    console.log(profile.data);
+    ctrl.profile = profile.data;
 
     ctrl.logout = function () {
         authenticationService.logout();
