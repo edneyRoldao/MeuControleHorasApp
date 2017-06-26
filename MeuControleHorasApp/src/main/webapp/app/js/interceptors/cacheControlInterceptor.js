@@ -3,7 +3,7 @@ function CacheControlInterceptor() {
 	var interceptor = {};
 
 	interceptor.request = function(config) {
-		if(config.url.indexOf("view") > -1) return config;
+		if(config.url.indexOf("views") > -1) return config;
 
         var time = new Date().getTime();
         config.url = config.url + "?timestamp=" + time;
