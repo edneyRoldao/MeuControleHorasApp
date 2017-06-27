@@ -1,7 +1,6 @@
 // EdneyRoldao - 05/05/17
-function AuthenticationService(http, constants, location, tokenService) {
+function AuthenticationService(state, tokenService) {
     var service = {};
-    var URL = constants.appContextUrl;
 
     service.createAuthToken = function(user) {
         return tokenService.createToken(user);
@@ -9,16 +8,16 @@ function AuthenticationService(http, constants, location, tokenService) {
 
     service.login = function (token) {
         tokenService.saveToken(token);
-        location.path("/principal");
+        state.go("dashboard");
     };
 
     service.logout = function () {
         tokenService.deleteToken();
-        location.path("/login");
+        state.go("home.login");
     };
 
     return service;
 }
 
-AuthenticationService.$inject = ["$http", "ConstantsApp", "$location", "TokenService"];
+AuthenticationService.$inject = ["$state", "TokenService"];
 angular.module("meuControleHorasApp").factory("AuthenticationService", AuthenticationService);

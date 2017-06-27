@@ -64,10 +64,10 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
 
     stateProvider.state("erroServidor", {
         url: "/erroServidor",
-        templateUrl: "app/views/error-page.html",
+        templateUrl: "app/views/error-page.html"
     });
 
-    stateProvider.stateProvider("dashboard", {
+    stateProvider.state("dashboard", {
         url: "/dashboard",
         views: {
             "": { templateUrl: "app/views/headers/dashboard-header.html" },

@@ -1,17 +1,18 @@
 // EdneyRoldao - 18/04/17
-function CreateUserController(userService, location) {
+function CreateUserController(userService, state) {
     var ctrl = this;
 
     ctrl.createUser = function(user) {
 
         var userObject = userService.buildUserObject(user);
 
-        userService.createUser(userObject).success(function(data) {
+        userService.createUser(userObject).success(function() {
             ctrl.newUserForm.$setPristine();
         	delete ctrl.user;
 
             swal("Estamos quase l\u00e1 !", "Te enviamos um e-mail com o um cdigo de ativa\u00e7\u00e3o da sua conta !", "success");
-            location.path("/ativarConta");
+
+            state.go("home.ativarConta");
 
         }).error(function(data, status) {
             console.log("STATUS ERROR: " + status);
@@ -30,7 +31,7 @@ function CreateUserController(userService, location) {
                     confirmButtonClass: "btn btn-danger"
                 });
 
-                location.path("/cadastro");
+                state.go("home.cadastro");
             }
 
         });
@@ -38,5 +39,5 @@ function CreateUserController(userService, location) {
 
 }
 
-CreateUserController.$inject = ["UserService", "$location"];
+CreateUserController.$inject = ["UserService", "$state"];
 angular.module("meuControleHorasApp").controller("CreateUserController", CreateUserController);
