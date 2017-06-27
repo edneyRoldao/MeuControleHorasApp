@@ -14,6 +14,9 @@ All API references that were used in this project
 <br>https://limonte.github.io/sweetalert2/
 <br>https://github.com/limonte/sweetalert2
 
+- Angular-ui-router - The most powerful way to manage routes with angularJS
+<br>https://scotch.io/tutorials/angular-routing-using-ui-router
+
 - Angular toastr alert api:
 <br>http://foxandxss.github.io/angular-toastr/ - an awesome alert component
 

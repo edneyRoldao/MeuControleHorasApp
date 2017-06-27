@@ -1,8 +1,9 @@
 function uiRouterConfig(stateProvider, urlRouterProvider) {
+
     stateProvider.state("home", {
         url: "/home",
         views: {
-            "": {templateUrl: "app/views/headers/home-header.html"},
+            "": { templateUrl: "app/views/headers/home-header.html" },
             "homeBody@home": {
                 templateUrl: "app/views/home.html",
                 controller: "HomeController as ctrl"
@@ -20,6 +21,7 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
         }
     });
 
+    // WE NEED TO CHECK IF THIS ROUTE IS THAT NECESSARY
     stateProvider.state("home.usuario", {
         url: "/usuario",
         views: {
@@ -60,16 +62,26 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
         }
     });
 
-    stateProvider.state("home.erroServidor", {
+    stateProvider.state("erroServidor", {
         url: "/erroServidor",
-        views: {
-            "homeBody@home": {
-                templateUrl: "app/views/error-page.html"
-            }
-        }
+        templateUrl: "app/views/error-page.html",
     });
 
-    
+    stateProvider.stateProvider("dashboard", {
+        url: "/dashboard",
+        views: {
+            "": { templateUrl: "app/views/headers/dashboard-header.html" },
+            "dashboardBody@dashboard": {
+                templateUrl: "app/views/dashboard.html",
+                controller: "HomeController as ctrl"
+            }
+        },
+        resolve: {
+            userProfile: function(UserProfileService) {
+                return UserProfileService.getProfile();
+            }            
+        }
+    });
 
     urlRouterProvider.otherwise('/home');
 }
