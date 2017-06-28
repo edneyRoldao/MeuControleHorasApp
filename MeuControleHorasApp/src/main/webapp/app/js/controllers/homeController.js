@@ -1,8 +1,6 @@
 // EdneyRoldao - 04/04/2017
-function HomeController(authenticationService, profile) {
+function HomeController(authenticationService) {
     var ctrl = this;
-
-    ctrl.profile = profile.data;
 
     ctrl.logout = function () {
         authenticationService.logout();
@@ -10,5 +8,5 @@ function HomeController(authenticationService, profile) {
 
 }
 
-HomeController.$inject = ["AuthenticationService", "userProfile"];
+HomeController.$inject = ["AuthenticationService"];
 angular.module("meuControleHorasApp").controller("HomeController", HomeController);

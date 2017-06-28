@@ -1,5 +1,5 @@
 /* EdneyRoldao - 12/05/17 */
-function ResponseErrorsInterceptor(promise, state) {
+function ResponseErrorsInterceptor(promise, state, constants) {
     var interceptor = {};
 
 	var _deleteToken = function() {
@@ -25,5 +25,5 @@ function ResponseErrorsInterceptor(promise, state) {
     return interceptor;
 }
 
-ResponseErrorsInterceptor.$inject = ["$q", "$state"];
+ResponseErrorsInterceptor.$inject = ["$q", "$state", "ConstantsApp"];
 angular.module("meuControleHorasApp").factory("ResponseErrorsInterceptor", ResponseErrorsInterceptor);

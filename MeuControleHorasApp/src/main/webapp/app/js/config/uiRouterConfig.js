@@ -73,7 +73,7 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
             "": { templateUrl: "app/views/headers/dashboard-header.html" },
             "dashboardBody@dashboard": {
                 templateUrl: "app/views/dashboard.html",
-                controller: "HomeController as ctrl"
+                controller: "DashboardController as ctrl"
             }
         },
         resolve: {
