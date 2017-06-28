@@ -17,6 +17,7 @@
 	<build>
 		<finalName>MeuControleHoras</finalName>
 		<plugins>
+		
   			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
@@ -25,6 +26,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -34,7 +36,6 @@
 				</configuration>
 			</plugin>
 			
-			<!-- Command: jetty:run (externally: mvn jetty:run) -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -49,6 +50,7 @@
 					</httpConnector>
 				</configuration>
 			</plugin>
+			
 		</plugins>	
 	</build>
 	
