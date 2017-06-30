@@ -42,8 +42,9 @@ All API references that were used in this project
 <br>https://stormpath.com/blog/jwt-java-create-verify
 
 - JWT Java - Spring security JWT implementation, This example was widely used 
-<br>https://github.com/szerhusenBC/jwt-spring-security-demo<br> 
+<br>https://github.com/szerhusenBC/jwt-spring-security-demo 
 
-
+- Animated and short videos that can be used as backgroud templates
+<br>https://coverr.co/
 
 If there's any doubt about project, message me - edneyroldao@gmail.com
