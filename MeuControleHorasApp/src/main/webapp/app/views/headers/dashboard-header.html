@@ -1,9 +1,12 @@
+<link href="app/lib/public/angular-ui-clock/dist/angular-clock.css" rel="stylesheet">
 <link href="app/lib/public/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="app/lib/public/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="app/css/toastr.min.css" rel="stylesheet">
 <link href="app/css/jquery.gritter.css" rel="stylesheet">
 <link href="app/css/animate.css" rel="stylesheet">
 <link href="app/css/style.css" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Syncopate:400,700" rel="stylesheet" type="text/css">
+
 
 <div id="wrapper">
 
@@ -112,7 +115,7 @@
 
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">DASHBOARD</span>
+                        <span class="m-r-sm text-muted welcome-message">Meu Controle de Horas</span>
                     </li>
 
                     <li uib-dropdown>
@@ -162,15 +165,7 @@
         <div ui-view="dashboardBody"></div>
 
         <!-- footer -->
-        <div class="footer" >
-            <div class="pull-right">
-                <strong>MeuControleHorasApplication</strong>
-            </div>
-            <div>
-                <img src="app/img/avatar.jpg" width="20px" height="20px" />
-                Developed by EDN TI Solutions &copy; 2017
-            </div>
-        </div><!--end/ footer -->
+        <div ng-include src="'app/views/components/footer-inspinia.html'"></div>
 
     </div>
 </div>

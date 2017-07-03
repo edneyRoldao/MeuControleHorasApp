@@ -7,6 +7,9 @@ function DashboardController(profile, authenticationService) {
     ctrl.logout = function () {
         authenticationService.logout();
     };
+
+    ctrl.format = "dd-MMM-yyyy HH:mm:ss a";
+
 }
 
 DashboardController.$inject = ["userProfile", "AuthenticationService"];

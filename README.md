@@ -47,4 +47,10 @@ All API references that were used in this project
 - Animated and short videos that can be used as backgroud templates
 <br>https://coverr.co/
 
+- AngularJS - Angular-ui-clock 
+<br>https://deepu.js.org/angular-clock/
+
+- Javascript - momentJS (manage time and date)
+<br>http://momentjs.com/
+
 If there's any doubt about project, message me - edneyroldao@gmail.com

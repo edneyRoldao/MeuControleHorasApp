@@ -4,14 +4,10 @@
 <link rel="stylesheet" type="text/css" href="app/lib/public/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="app/css/landing-page.css">
 <link rel="stylesheet" type="text/css" href="app/lib/public/sweetalert2/dist/sweetalert2.css">
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-      rel="stylesheet" type="text/css">
-
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
-
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -37,9 +33,4 @@
 <div ui-view="homeBody"></div>
 
 <!-- footer -->
-<div class="footer" style="margin-top: 5px">
-    <p style="text-align: center">
-        ® 2017 - Developed by EDN TI Solutions &#160;&#160;
-        <img src="app/img/avatar.jpg" width="20px" height="20px" />
-    </p>
-</div><!-- /. footer -->
+<div ng-include src="'app/views/components/footer.html'"></div>
