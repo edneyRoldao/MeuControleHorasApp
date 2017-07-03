@@ -8,7 +8,7 @@ function DashboardController(profile, authenticationService) {
         authenticationService.logout();
     };
 
-    ctrl.format = "dd-MMM-yyyy HH:mm:ss a";
+    ctrl.format = "HH:mm:ss dd/MMM/yyyy";
 
 }
 
