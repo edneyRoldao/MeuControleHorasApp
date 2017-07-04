@@ -10,6 +10,17 @@ function DashboardController(profile, authenticationService) {
 
     ctrl.format = "HH:mm:ss  - dd/MM/yy";
 
+    ctrl.picker2 = {
+        date: new Date('2015-03-01T12:30:00Z'),
+        timepickerOptions: {
+            readonlyInput: false,
+            showMeridian: false
+        }
+    };
+
+    ctrl.openCalendar = function(e, picker) {
+        ctrl[picker].open = true;
+    };
 }
 
 DashboardController.$inject = ["userProfile", "AuthenticationService"];
