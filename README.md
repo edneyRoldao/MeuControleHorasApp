@@ -53,4 +53,10 @@ All API references that were used in this project
 - Javascript - momentJS (manage time and date)
 <br>http://momentjs.com/
 
+- Angular and Bootstrap - angular-ui-bootstrap
+<br>https://angular-ui.github.io/bootstrap/
+
+- Datetime picker with ui-bootstrap samples
+<br> https://github.com/Gillardo/bootstrap-ui-datetime-picker
+
 If there's any doubt about project, message me - edneyroldao@gmail.com

@@ -4,7 +4,7 @@
         background-color: transparent;
         border: 0px solid;
         height: 20px;
-        width: 160px;
+        width: 70px;
     }
 </style>
 
@@ -21,13 +21,14 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row" style="margin-bottom: 15px">
-        <div class="col-md-3">
-            <button type="button" class="btn btn-success btn-lg">
-                MARCAR ENTRADA<br>04/07/2017
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col-md-2">
+            <button ng-click="ctrl.changeText()" class="btn btn-success  dim btn-large-dim btn-outline" type="button">
+                <i ng-show="ctrl.showText" class="fa fa-check"></i>
+                <span ng-hide="ctrl.showText" style="font-size: 15px">Marcar</span>
             </button>
         </div>
-        <div class="col-md-9" style="margin-top: 5px">
+        <div class="col-md-10" style="margin-top: 20px">
             <form class="form-horizontal">
                 <div class="col-md-3" style="width: 200px">
                     <p class="input-group">
@@ -85,10 +86,49 @@
                                close-on-selection="true"/>
                     </p>
                 </div>
-            </form>             
+            </form>
         </div>
-
     </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel blank-panel">
+                <div class="panel-heading">
+                    <div class="panel-title m-b-md"><h4>Horas Trabalhadas</h4></div>
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" data-target="#tab-1">Hoje</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" data-target="#tab-2">Total Semana</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" data-target="#tab-3">Total mês</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <strong>02:23</strong>
+                            <p>De acordo com o horário de entrada padrão, você está com 1 negativa</p>
+                        </div>
+                        <div id="tab-2" class="tab-pane">
+                            <strong>38:00</strong>
+                            <p>Média semanal positiva</p>
+                        </div>
+                        <div id="tab-3" class="tab-pane">
+                            <strong>100:00</strong>
+                            <p>5 horas negativas - para atingir a meta mensal deve-se realizar 10:11 por dia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 	<div class="row">
 	    <div class="col-lg-12">
             <div class="ibox float-e-margins">
@@ -121,15 +161,21 @@
                                 <th>Entrada</th>
                                 <th>Saída almoço</th>
                                 <th>Entrada almoço</th>
-                                <th>Sáda</th>
+                                <th>Saída</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>01/07</td>
-                                <td> <input class="testABC" type="text" ng-click="ctrl.openCalendar($event, 'picker2')"> </td>
+                                <td> <input class="testABC"
+                                            type="text"
+                                            ng-model="ctrl.picker2.date"
+                                            ng-click="ctrl.openCalendar($event, 'picker2')">
+                                </td>
                                 <td>_ _:_ _</td>
                                 <td>13:11</td>
+                                <td>16:05</td>
                                 <td>16:05</td>
                             </tr>
                             <tr>
@@ -138,6 +184,7 @@
                                 <td>12:10</td>
                                 <td>13:11</td>
                                 <td>16:05</td>
+                                <td>16:05</td>
                             </tr>
                             <tr>
                                 <td>03/07</td>
@@ -145,12 +192,14 @@
                                 <td>12:10</td>
                                 <td>13:11</td>
                                 <td>16:05</td>
+                                <td>16:05</td>
                             </tr>
                             <tr>
                                 <td>04/07</td>
                                 <td>06:30</td>
                                 <td>12:10</td>
                                 <td>13:11</td>
+                                <td>16:05</td>
                                 <td>16:05</td>
                             </tr>
                         </tbody>

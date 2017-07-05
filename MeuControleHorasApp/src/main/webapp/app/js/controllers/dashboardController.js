@@ -10,12 +10,18 @@ function DashboardController(profile, authenticationService) {
 
     ctrl.format = "HH:mm:ss  - dd/MM/yy";
 
+    ctrl.showText = false;
+
     ctrl.picker2 = {
         date: new Date('2015-03-01T12:30:00Z'),
         timepickerOptions: {
             readonlyInput: false,
             showMeridian: false
         }
+    };
+
+    ctrl.changeText = function() {
+        ctrl.showText = !ctrl.showText;
     };
 
     ctrl.openCalendar = function(e, picker) {
