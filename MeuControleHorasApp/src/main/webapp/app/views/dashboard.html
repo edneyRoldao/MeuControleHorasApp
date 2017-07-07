@@ -12,7 +12,7 @@
     <div class="col-lg-10">
         <ol class="breadcrumb">
             <li class="active" style="margin-top: 20px">
-				<ds-widget-clock theme="blue-light" show-digital digital-format="ctrl.format">></ds-widget-clock>
+				<ds-widget-clock theme="blue-light" show-digital digital-format="ctrl.formatDate">></ds-widget-clock>
             	<h3> <strong> Dashboard </strong> </h3>
             </li>
         </ol>
@@ -91,7 +91,12 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-2">
+            <div class="panel blank-panel" style="margin-right: 100px">
+                <ds-widget-clock theme="blue-light" show-digital digital-format="ctrl.formatTime">></ds-widget-clock>
+            </div>
+        </div>
+        <div class="col-lg-10">
             <div class="panel blank-panel">
                 <div class="panel-heading">
                     <div class="panel-title m-b-md"><h4>Horas Trabalhadas</h4></div>
