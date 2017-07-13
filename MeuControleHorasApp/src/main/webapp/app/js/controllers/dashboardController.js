@@ -1,6 +1,8 @@
 // EdneyRoldao - 27/06/2017
-function DashboardController(profile, authenticationService) {
+function DashboardController(profile, authenticationService, objectsFactory) {
     var ctrl = this;
+
+    ctrl.mes = objectsFactory.getMes();
 
     ctrl.profile = profile.data;
 
@@ -30,5 +32,5 @@ function DashboardController(profile, authenticationService) {
     };
 }
 
-DashboardController.$inject = ["userProfile", "AuthenticationService"];
+DashboardController.$inject = ["userProfile", "AuthenticationService", "ObjectsFactory"];
 angular.module("meuControleHorasApp").controller("DashboardController", DashboardController);
