@@ -12,7 +12,8 @@ public class AppWebInitializer extends AbstractAnnotationConfigDispatcherServlet
 				DatasourceConfig.class,
 				AppWebSecurityConfig.class,
 				AppWebConfig.class,
-				MailSenderConfig.class
+				MailSenderConfig.class,
+				MongodbConfig.class
 			};
 	}
 
