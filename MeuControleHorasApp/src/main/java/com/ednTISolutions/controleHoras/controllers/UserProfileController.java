@@ -1,8 +1,10 @@
 package com.ednTISolutions.controleHoras.controllers;
 
-import com.ednTISolutions.controleHoras.models.UserProfile;
-import com.ednTISolutions.controleHoras.security.services.UserProfileService;
+import com.ednTISolutions.controleHoras.models.User;
+import com.ednTISolutions.controleHoras.models.Profile;
+import com.ednTISolutions.controleHoras.services.ProfileService;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
+import com.ednTISolutions.controleHoras.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +23,24 @@ public class UserProfileController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserProfileService userProfileService;
+    private ProfileService userProfileService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<UserProfile> getUserProfile(HttpServletRequest request) {
+    public ResponseEntity<Profile> getUserProfile(HttpServletRequest request) {
         String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER);
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        UserProfile profile = userProfileService.getUserProfile(username);
+        User user = getUserFromToken(token);
+        Profile profile = userProfileService.getUserProfile(user);
 
         return ResponseEntity.status(HttpStatus.OK).body(profile);
+    }
+
+    private User getUserFromToken(String token) {
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        return userService.findByUsername(username);
     }
 
 }
