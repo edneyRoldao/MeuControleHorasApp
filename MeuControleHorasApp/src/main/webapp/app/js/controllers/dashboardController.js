@@ -6,6 +6,8 @@ function DashboardController(profile, authenticationService, objectsFactory) {
 
     ctrl.profile = profile.data;
 
+    console.log(ctrl.profile);
+
     ctrl.logout = function () {
         authenticationService.logout();
     };

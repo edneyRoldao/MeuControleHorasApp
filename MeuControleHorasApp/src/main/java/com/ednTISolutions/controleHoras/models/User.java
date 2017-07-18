@@ -41,8 +41,8 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TB_USER_ROLE", joinColumns = {
-		@JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
-		@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
+			@JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
 	private List<Role> authorities;
 
 	public Long getId() {
@@ -111,51 +111,76 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", firstname='" + firstname + '\'' +
-				", enabled=" + enabled +
-				", lastPasswordResetDate=" + lastPasswordResetDate +
-				", profileId=" + profileId +
-				", authorities=" + authorities +
-				'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		User user = (User) o;
-
-		if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
-		if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
-			return false;
-		if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
-			return false;
-		if (getFirstname() != null ? !getFirstname().equals(user.getFirstname()) : user.getFirstname() != null)
-			return false;
-		if (getEnabled() != null ? !getEnabled().equals(user.getEnabled()) : user.getEnabled() != null) return false;
-		if (getLastPasswordResetDate() != null ? !getLastPasswordResetDate().equals(user.getLastPasswordResetDate()) : user.getLastPasswordResetDate() != null)
-			return false;
-		if (getProfileId() != null ? !getProfileId().equals(user.getProfileId()) : user.getProfileId() != null)
-			return false;
-		return getAuthorities() != null ? getAuthorities().equals(user.getAuthorities()) : user.getAuthorities() == null;
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", enabled=" + enabled + ", lastPasswordResetDate=" + lastPasswordResetDate + ", profileId="
+				+ profileId + ", authorities=" + authorities + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getId() != null ? getId().hashCode() : 0;
-		result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
-		result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-		result = 31 * result + (getFirstname() != null ? getFirstname().hashCode() : 0);
-		result = 31 * result + (getEnabled() != null ? getEnabled().hashCode() : 0);
-		result = 31 * result + (getLastPasswordResetDate() != null ? getLastPasswordResetDate().hashCode() : 0);
-		result = 31 * result + (getProfileId() != null ? getProfileId().hashCode() : 0);
-		result = 31 * result + (getAuthorities() != null ? getAuthorities().hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((authorities == null) ? 0 : authorities.hashCode());
+		result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastPasswordResetDate == null) ? 0 : lastPasswordResetDate.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((profileId == null) ? 0 : profileId.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (authorities == null) {
+			if (other.authorities != null)
+				return false;
+		} else if (!authorities.equals(other.authorities))
+			return false;
+		if (enabled == null) {
+			if (other.enabled != null)
+				return false;
+		} else if (!enabled.equals(other.enabled))
+			return false;
+		if (firstname == null) {
+			if (other.firstname != null)
+				return false;
+		} else if (!firstname.equals(other.firstname))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastPasswordResetDate == null) {
+			if (other.lastPasswordResetDate != null)
+				return false;
+		} else if (!lastPasswordResetDate.equals(other.lastPasswordResetDate))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (profileId == null) {
+			if (other.profileId != null)
+				return false;
+		} else if (!profileId.equals(other.profileId))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
 
 }

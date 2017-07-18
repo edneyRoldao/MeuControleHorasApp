@@ -7,10 +7,10 @@ import java.math.BigInteger;
 
 public interface ProfileRepository {
 
-	void createNewProfile(User user);
-
-	Profile findProfile(String email);
+	Profile createNewProfile(User user);
 
 	Profile findProfile(BigInteger id);
+
+	Profile findProfile(String email);
 
 }

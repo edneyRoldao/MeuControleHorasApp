@@ -7,6 +7,3 @@ INSERT INTO TB_ROLE (ID, ROLE) VALUES (2, 'ROLE_ADMIN');
 INSERT INTO TB_USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 1);
 INSERT INTO TB_USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 2);
 INSERT INTO TB_USER_ROLE (USER_ID, ROLE_ID) VALUES (2, 1);
-
-INSERT INTO TB_USER_PROFILE (id, email, name, company, idPhoto) VALUES (1, 'edneyroldao@gmail.com.br', 'Edney Roldão', null, null);
-INSERT INTO TB_USER_PROFILE (id, email, name, company, idPhoto) VALUES (2, 'nadine@mail.com', 'Nadine Roldão', null, null);

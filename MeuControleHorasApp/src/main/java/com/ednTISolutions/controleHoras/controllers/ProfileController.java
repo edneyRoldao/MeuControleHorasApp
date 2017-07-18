@@ -1,6 +1,7 @@
 package com.ednTISolutions.controleHoras.controllers;
 
 import com.ednTISolutions.controleHoras.models.User;
+import com.ednTISolutions.controleHoras.exceptions.ThereIsNoUserException;
 import com.ednTISolutions.controleHoras.models.Profile;
 import com.ednTISolutions.controleHoras.services.ProfileService;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
@@ -17,30 +18,39 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("profile")
-public class UserProfileController {
+public class ProfileController {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private ProfileService userProfileService;
+    private ProfileService profileService;
 
     @Autowired
     private UserService userService;
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Profile> getUserProfile(HttpServletRequest request) {
+    public ResponseEntity<Profile> getUserProfile(HttpServletRequest request) throws ThereIsNoUserException {
+    	Profile profile = null;
+    	
         String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER);
-        User user = getUserFromToken(token);
-        Profile profile = userProfileService.getUserProfile(user);
-
-        return ResponseEntity.status(HttpStatus.OK).body(profile);
-    }
-
-    private User getUserFromToken(String token) {
         String username = jwtTokenUtil.getUsernameFromToken(token);
-        return userService.findByUsername(username);
+        User user = userService.findByUsername(username);
+        
+        if(user == null) {
+        	throw new ThereIsNoUserException("There is an unexpected error while trying to retrieve the User");
+        }
+        
+        if(user.getProfileId() != null) {
+        	profile = profileService.getProfile(user.getProfileId());
+            return ResponseEntity.status(HttpStatus.OK).body(profile);        	
+        }
+        
+        profile = profileService.createProfile(user);
+        userService.attachProfileIdFromUser(user);
+        
+        return ResponseEntity.status(HttpStatus.OK).body(profile);
     }
 
 }

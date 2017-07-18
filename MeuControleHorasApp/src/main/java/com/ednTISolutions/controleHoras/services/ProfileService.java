@@ -1,5 +1,7 @@
 package com.ednTISolutions.controleHoras.services;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +15,12 @@ public class ProfileService {
 	@Autowired
 	private ProfileRepository repository;
 
-	public Profile getUserProfile(User user) {
-        return findOrCreateProfile(user);
+	public Profile getProfile(BigInteger id) {
+        return repository.findProfile(id);
     }
-
-	private Profile findOrCreateProfile(User user) {
-        Profile profile = repository.findProfile(user.getUsername());
-
-        if(profile != null)
-            return profile;
-
-        repository.createNewProfile(user);
-
-		return repository.findProfile(user.getUsername());
-    }
+	
+	public Profile createProfile(User user) {
+		return repository.createNewProfile(user);
+	}
 
 }

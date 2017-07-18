@@ -8,7 +8,7 @@ import java.math.BigInteger;
 /**
  * Created by edneyroldao on 07/06/17.
  */
-@Document
+@Document(collection = "profiles")
 public class Profile {
 
 	@Id
@@ -31,6 +31,13 @@ public class Profile {
 		this.name = name;
 		this.company = company;
 		this.avatar = avatar;
+	}
+
+	public Profile(User user) {
+		email = user.getUsername();
+		name = user.getFirstname();
+		company = "";
+		avatar = "";
 	}
 
 	public BigInteger getId() {
