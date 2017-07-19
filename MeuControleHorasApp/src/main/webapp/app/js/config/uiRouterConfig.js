@@ -67,6 +67,7 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
         templateUrl: "app/views/error-page.html"
     });
 
+
     stateProvider.state("dashboard", {
         url: "/dashboard",
         views: {
@@ -80,6 +81,15 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
             userProfile: function(UserProfileService) {
                 return UserProfileService.getProfile();
             }            
+        }
+    });
+
+    stateProvider.state("dashboard.profile", {
+        url: "/profile",
+        views: {
+            "dashboardBody@dashboard": {
+                templateUrl: "app/views/profile.html",
+            }
         }
     });
 
