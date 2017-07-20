@@ -9,3 +9,26 @@
     font-size: 3.0em;
     color: #1da4eb;
 }
+
+/* dropzone file */
+.dropzone-body {
+	margin-top: 5px;
+	text-align: center;
+	margin-bottom: 60px;
+	border-style: dashed;
+}
+
+.dropzone-text {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.dropzone-text2 {
+	font-size: 20px;
+	font-weight: bold; 
+}
+
+.dropzone-image {
+	text-align: center;
+}
+
