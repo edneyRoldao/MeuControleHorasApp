@@ -32,3 +32,12 @@
 	text-align: center;
 }
 
+.dropzone-image > img {
+	width: 120px;
+    height: 120px;
+}
+
+.dropzone-input {
+    width: 250px;
+    height: 250px;
+}

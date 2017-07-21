@@ -22,7 +22,12 @@
                 </div>
                 <div class="ibox-content">
                     <form id="my-awesome-dropzone" class="dropzone" action="#">
-                        <div class="dropzone-body">
+                        <div class="dropzone-body"
+                             file-dropzone="[image/png, image/jpeg, image/gif]"
+                             file="ctrl.image"
+                             file-name="ctrl.imageFileName"
+                             data-max-file-size="3">
+                            <input class="dropzone-input" type="file" upload-file="ctrl.uploadme.src">
                             <i class="fa fa-cloud-download fa-5x" aria-hidden="true"></i>
                             <br><br>
                             <span class="dropzone-text">
@@ -32,8 +37,8 @@
                                 AQUI
                             </span>
                         </div>
-                        <div style="text-align: center;">
-                            <img src="app/img/avatar.jpg" width="120px" height="120px">
+                        <div class="dropzone-image">
+                            <img ng-src="{{ ctrl.uploadme.src }}">
                         </div>
                     </form>
                 </div>

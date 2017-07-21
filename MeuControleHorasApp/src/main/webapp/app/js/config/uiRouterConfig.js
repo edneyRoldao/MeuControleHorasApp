@@ -89,6 +89,7 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
         views: {
             "dashboardBody@dashboard": {
                 templateUrl: "app/views/profile.html",
+                controller: "ProfileController as ctrl"
             }
         }
     });

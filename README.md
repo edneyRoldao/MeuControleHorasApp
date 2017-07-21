@@ -59,4 +59,7 @@ All API references that were used in this project
 - Datetime picker with ui-bootstrap samples
 <br> https://github.com/Gillardo/bootstrap-ui-datetime-picker
 
+- Upload file and dropImage angularJS component
+ https://codepen.io/whusterj/pen/ijFgA
+
 If there's any doubt about project, message me - edneyroldao@gmail.com
