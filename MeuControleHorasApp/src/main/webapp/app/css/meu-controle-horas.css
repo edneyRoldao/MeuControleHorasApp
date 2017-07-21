@@ -12,6 +12,10 @@
 
 /* dropzone file */
 .dropzone-body {
+	position: absolute;
+	pointer-events: none;
+	width: 250px;
+	height: 150px;
 	margin-top: 5px;
 	text-align: center;
 	margin-bottom: 60px;
@@ -20,24 +24,29 @@
 
 .dropzone-text {
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .dropzone-text2 {
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: bold; 
 }
 
 .dropzone-image {
+	margin-top: 200px;
 	text-align: center;
+	border-radius: 50%;
 }
 
 .dropzone-image > img {
+	border-radius: 50%;
 	width: 120px;
     height: 120px;
 }
 
 .dropzone-input {
+	position: absolute;
     width: 250px;
-    height: 250px;
+    height: 150px;
+    opacity: 0;
 }
