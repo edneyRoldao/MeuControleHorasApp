@@ -15,7 +15,7 @@
             <ul class="nav" id="side-menu">
 
                 <!-- User profile -->
-                <li class="nav-header">
+                <li class="nav-header" style="text-align: center;">
                     <div uib-dropdown class="dropdown profile-element">
                         <a uib-dropdown-toggle class="dropdown-toggle">
                     	   <span> <img class="img-circle" src="app/img/profile.png"/> </span>
@@ -26,14 +26,20 @@
                  			</span>
                         </a>
                         <ul uib-dropdown-menu class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a ui-sref="dashboard.profile">Profile</a></li>
-                            <li><a href="profile.html">Settings</a></li>
+                            <li><a ui-sref="dashboard.profile">Atualizar Profile</a></li>
+                            <li><a href="profile.html">Automatizar marcações</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="login.html">Fechar</a></li>
                         </ul>
                     </div>
-                    <div class="logo-element">
-                        EDN
+                    <div uib-dropdown class="logo-element">
+                        <a uib-dropdown-toggle>EDN</a>
+                        <ul uib-dropdown-menu class="dropdown-menu animated fadeInRight m-t-xs" style="background-color: black">
+                            <li><a ui-sref="dashboard.profile">Atualizar Profile</a></li>
+                            <li><a href="profile.html">Automatizar marcações</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Fechar</a></li>
+                        </ul>
                     </div>
                 </li><!--edn/ User profile -->
 
