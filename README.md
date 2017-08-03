@@ -10,6 +10,9 @@ Technologies used:<br/>
 
 All API references that were used in this project
 
+- ANGULAR JS 1 - GUIDE (the most popular)
+<br> https://docs.angularjs.org/guide
+
 - SweetAlert (js api):
 <br>https://limonte.github.io/sweetalert2/
 <br>https://github.com/limonte/sweetalert2
@@ -60,6 +63,9 @@ All API references that were used in this project
 <br> https://github.com/Gillardo/bootstrap-ui-datetime-picker
 
 - Upload file and dropImage angularJS component
- https://codepen.io/whusterj/pen/ijFgA
+<br> https://codepen.io/whusterj/pen/ijFgA
+
+- It is a web service that provide us Brazilian adresses.
+<br> https://viacep.com.br
 
 If there's any doubt about project, message me - edneyroldao@gmail.com

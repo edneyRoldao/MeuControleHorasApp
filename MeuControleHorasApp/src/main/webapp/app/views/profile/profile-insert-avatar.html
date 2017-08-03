@@ -1,0 +1,25 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5> Imagem de Usuário </h5>
+    </div>
+    <div class="ibox-content">
+        <div id="my-awesome-dropzone" class="dropzone" action="#">
+            <input class="dropzone-input" 
+                   type="file"
+                   upload-file="ctrl.img">
+            <div class="dropzone-body col-lg-12" file-dropzone="ctrl.types">
+                <i class="fa fa-cloud-download fa-5x" aria-hidden="true"></i>
+                <br><br>
+                <span class="dropzone-text">
+                    Para adicionar uma imagem, <br> arraste ou click
+                </span>
+                <span class="dropzone-text2">
+                    AQUI
+                </span>
+            </div>
+            <div class="dropzone-image">
+                <img ng-src="{{ ctrl.img }}">
+            </div>
+        </div>
+    </div>
+</div>
