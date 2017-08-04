@@ -3,7 +3,7 @@ function ProfileController() {
 
     ctrl.profile = {};
 
-    ctrl.profile.address = "Rua Mere Marie Anais de Sion - Tucuruvi - São Paulo - SP - CEP:02343-030";
+    ctrl.profile.address = "Rua Mere Marie Anais de Sion - Tucuruvi - S\u00e3o Paulo - SP - CEP:02343-030";
 
     ctrl.img = "";
     ctrl.types = ["image/png", "image/jpeg", "image/gif"];

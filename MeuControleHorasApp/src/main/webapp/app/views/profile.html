@@ -3,10 +3,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Profile</h2>
+        <h2>Perfil de Usuário</h2>
         <ol class="breadcrumb">
             <li class="active">
-            	<h3> dashboard / <strong> Profile </strong> </h3>
+            	<h3> dashboard / <strong> Perfil de Usuário </strong> </h3>
             </li>
         </ol>
     </div>
@@ -15,10 +15,10 @@
 
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
             <div class="ibox float-e-margins">
-                <div class="ibox-title" style="height: 65px">
+                <div class="ibox-title" style="height: 65px; text-align: center;">
                     <a ng-click="ctrl.changeForm(1)" ng-class="ctrl.btnFirstForm">
                         <strong>Informações Pessoais</strong>
                     </a>
@@ -31,35 +31,35 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-1"></div>
     </div>
     <form name="profile">
         <div class="row">
-            <div class="col-lg-2"></div>
-
+            <div class="col-lg-1"></div>
+            
             <!-- form part 01 (personal information) -->
-            <div class="col-lg-8" ng-show="ctrl.showPersonalDataForm" ng-include src="'app/views/profile/profile-personal-data.html'"></div>
+            <div class="col-lg-10" ng-show="ctrl.showPersonalDataForm" ng-include src="'app/views/profile/profile-insert-avatar-novo.html'"></div>
 
             <!-- form part 02 (image from profile) -->
-            <div class="col-lg-8" ng-show="ctrl.showAvatarForm" ng-include src="'app/views/profile/profile-insert-avatar.html'"></div>
+            <div class="col-lg-10" ng-show="ctrl.showAvatarForm" ng-include src="'app/views/profile/profile-insert-avatar.html'"></div>
 
             <!-- form part 03 (job information) -->
-            <div class="col-lg-8" ng-show="ctrl.showJobDataForm" ng-include src="'app/views/profile/profile-job-data.html'"></div>
+            <div class="col-lg-10" ng-show="ctrl.showJobDataForm" ng-include src="'app/views/profile/profile-job-data.html'"></div>
 
-            <div class="col-lg-2"></div>
+            <div class="col-lg-1"></div>
         </div>
         <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="height: 65px">
                         <a ng-click="ctrl.update()" class="btn btn-primary btn-block">
-                            <strong>Atualizar Profile</strong>
+                            <strong>Atualizar Perfil</strong>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2"></div>
+            <div class="col-lg-1"></div>
         </div>    
     </form>
 </div>
