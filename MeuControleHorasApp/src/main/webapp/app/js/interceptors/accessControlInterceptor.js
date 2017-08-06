@@ -7,6 +7,12 @@ function AccessControlInterceptor(constants, state, jwt) {
 	};
 
 	interceptor.request = function(config) {
+
+	    test();
+
+
+	    if(config.url.indexOf("viacep") !== -1) return config;
+
 		config.headers = config.headers || {};
 		
 		if(_getToken()) {
@@ -29,3 +35,7 @@ function AccessControlInterceptor(constants, state, jwt) {
 
 AccessControlInterceptor.$inject = ["ConstantsApp", "$state", "jwtHelper"];
 angular.module("meuControleHorasApp").factory("AccessControlInterceptor", AccessControlInterceptor);
+
+function test() {
+    console.log("TEST TEST TEST");
+}

@@ -1,6 +1,7 @@
 var dependencies = [];
 
 dependencies.push("ui.router");
+dependencies.push("ngImgCrop");
 dependencies.push("ngMessages");
 dependencies.push("angular-jwt");
 dependencies.push("ui.bootstrap");

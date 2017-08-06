@@ -4,93 +4,80 @@
     </div>
     <div class="ibox-content">
         <div class="form-horizontal">
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="col-sm-12 control-label">Nome</label>
-                    <input type="text" placeholder="Nome de usuário" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="col-sm-12 control-label">e-mail</label>
-                    <input type="text" placeholder="e-mail de usuário" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="col-sm-12 control-label">Empresa</label>
-                    <input type="text" placeholder="name empresa onde trabalha" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="col-sm-12 control-label">Gênero</label>
-                    <div class="radio i-checks">
-                        <label> <input type="radio" value="option1" name="a"> <i></i>Feminino</label>
-                    </div>
-                    
-                    <div class="radio i-checks">
-                        <label> <input type="radio" checked="" value="option2" name="a"> <i></i>Masculino</label>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Nome</label>
+                        <input type="text" placeholder="Nome de usuário" class="form-control">
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="col-sm-12 control-label">Endereço</label>
-                    <input type="text" placeholder="informe o cep" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <input  type="text" 
-                            class="form-control"
-                            ng-disabled="true"
-                            ng-model="ctrl.profile.address">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="col-sm-12 control-label">Data de Nascimento</label>
-                    <div class="col-sm-4">
-                        <select class="form-control m-b" name="account">
-                            <option>Dia</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                        </select>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">e-mail</label>
+                        <input type="text" placeholder="e-mail de usuário" class="form-control">
                     </div>
-                    <div class="col-sm-4">
-                        <select class="form-control m-b" name="account">
-                            <option>Mês</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                        </select>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Empresa</label>
+                        <input type="text" placeholder="name empresa onde trabalha" class="form-control">
                     </div>
-                    <div class="col-sm-4">
-                        <select class="form-control m-b" name="account">
-                            <option>Ano</option>
-                            <option>2000</option>
-                            <option>1999</option>
-                            <option>1998</option>
-                            <option>1997</option>
-                            <option>1996</option>
-                        </select>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Data de Nascimento</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" ng-model="ctrl.day" ng-options="day for day in ctrl.days">
+                                <option value="">Dia</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" ng-model="ctrl.month" ng-options="month for month in ctrl.months">
+                                <option value="">Mês</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" ng-model="ctrl.year" ng-options="year for year in ctrl.years">
+                                <option value="">Ano</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Gênero</label>
+                        <div class="radio i-checks">
+                            <label> <input type="radio" value="option1" name="a"> <i></i>Feminino</label>
+                        </div>
+
+                        <div class="radio i-checks">
+                            <label> <input type="radio" checked="" value="option2" name="a"> <i></i>Masculino</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Endereço</label>
+                        <input type="text" placeholder="informe o cep" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" placeholder="Rua e Bairro" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" placeholder="Cidade e Estado" class="form-control" ng-disabled="true">
                     </div>
                 </div>
             </div>
+            <div class="col-lg-2"></div>
+            <div class="form-group"></div>
         </div>
     </div>
 </div>

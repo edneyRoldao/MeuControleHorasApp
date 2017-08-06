@@ -1,5 +1,9 @@
-function ProfileController() {
+function ProfileController(dateUtil, searchAddress) {
     var ctrl = this;
+
+    ctrl.days = dateUtil.getDaysOfMonth();
+    ctrl.months = dateUtil.getMonths();
+    ctrl.years = dateUtil.getRangeYearsValidToWork();
 
     ctrl.profile = {};
 
@@ -27,9 +31,8 @@ function ProfileController() {
     ctrl.showAvatarForm = false;
     ctrl.showJobDataForm = false;
 
-    ctrl.test = function() {
-    	console.log("test ng change");
-    };
+    ctrl.image = "";
+    ctrl.croppedImage = "";
 
     ctrl.changeForm = function(form) {
         changeCssFromButton(form);
@@ -37,6 +40,15 @@ function ProfileController() {
 
     ctrl.update = function() {
         console.log("calling update function from user profile screen");
+    };
+
+    ctrl.getAddress = function() {
+        searchAddress.searchAddressFromCEP("02343030")
+            .success(function(data) {
+                console.log(data);
+            }).error(function(err) {
+                console.log("There was an error: " + err);
+        });
     };
 
     function changeCssFromButton (form) {
@@ -76,7 +88,7 @@ function ProfileController() {
                 break;
         }
     }
-
 }
 
+ProfileController.$inject = ["DateUtilService", "SearchAddressService"];
 angular.module("meuControleHorasApp").controller("ProfileController", ProfileController);
