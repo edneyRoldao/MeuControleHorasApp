@@ -6,6 +6,7 @@ function ProfileController(dateUtil, searchAddress) {
     ctrl.years = dateUtil.getRangeYearsValidToWork();
 
     ctrl.profile = {};
+    ctrl.cep = "";
 
     ctrl.profile.address = "Rua Mere Marie Anais de Sion - Tucuruvi - S\u00e3o Paulo - SP - CEP:02343-030";
 
@@ -43,11 +44,12 @@ function ProfileController(dateUtil, searchAddress) {
     };
 
     ctrl.getAddress = function() {
-        searchAddress.searchAddressFromCEP("02343030")
+        searchAddress.searchAddressFromCEP(ctrl.cep)
             .success(function(data) {
-                console.log(data);
-            }).error(function(err) {
+                ctrl.profile.address = data;
+            }).error(function(err, status) {
                 console.log("There was an error: " + err);
+                console.log("HTTP STATUS CODE: " + status);
         });
     };
 
