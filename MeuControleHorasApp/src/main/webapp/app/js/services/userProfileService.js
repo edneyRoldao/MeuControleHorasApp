@@ -7,16 +7,34 @@ function UserProfileService(http, constants) {
         return http.get(URL + "profile");
     };
 
+    service.getInstance = getInstance;
+
 	return service;
 }
 
 UserProfileService.$inject = ["$http", "ConstantsApp"];
 angular.module("meuControleHorasApp").factory("UserProfileService", UserProfileService);
 
+// private functions
 function getInstance() {
     var profile = {};
 
-    
+    profile.name = null;
+    profile.email = null;
+    profile.birthDate = null;
+    profile.gender = null;
+    profile.avatar = null;
+    profile.company = null;
+    profile.profession = null;
+    profile.valorHora = null;
+    profile.horasPorMes = null;
+    profile.maxHorasPorMes = null;
+    profile.address = {};
+    profile.address.cep = null;
+    profile.address.logradouro = null;
+    profile.address.bairro = null;
+    profile.address.cidade = null;
+    profile.address.uf = null;
 
     return profile;
 }

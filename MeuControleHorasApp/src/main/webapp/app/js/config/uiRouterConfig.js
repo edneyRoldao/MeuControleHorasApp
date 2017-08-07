@@ -1,99 +1,117 @@
 function uiRouterConfig(stateProvider, urlRouterProvider) {
 
-    stateProvider.state("home", {
-        url: "/home",
-        views: {
-            "": { templateUrl: "app/views/headers/home-header.html" },
-            "homeBody@home": {
-                templateUrl: "app/views/home.html",
-                controller: "HomeController as ctrl"
-            }
-        }
-    });
+    /////////////////////////// STATE: home
+    var home = {};
+    home.views = {};
+    home.url = "/home";
 
-    stateProvider.state("home.login", {
-        url: "/login",
-        views: {
-            "homeBody@home": {
-                templateUrl: "app/views/login.html",
-                controller: "LoginController as ctrl"
-            }
-        }
-    });
+    home.views[""] = {
+        templateUrl: "app/views/headers/home-header.html"
+    };
+    home.views["homeBody@home"] = {
+        templateUrl: "app/views/home.html",
+        controller: "HomeController as ctrl"
+    };
 
-    // WE NEED TO CHECK IF THIS ROUTE IS THAT NECESSARY
-    stateProvider.state("home.usuario", {
-        url: "/usuario",
-        views: {
-            "homeBody@home": {
-                templateUrl: "app/views/login.html",
-                controller: "LoginController as ctrl"
-            }
-        }
-    });
-
-    stateProvider.state("home.ativarConta", {
-        url: "/ativarConta",
-        views: {
-            "homeBody@home": {
-                templateUrl: "app/views/activate-account.html",
-                controller: "ActivateAccountController as ctrl"
-            }
-        }
-    });
-
-    stateProvider.state("home.redefinirSenha", {
-        url: "/redefinirSenha",
-        views: {
-            "homeBody@home": {
-                templateUrl: "app/views/password-retrieve.html",
-                controller: "PasswordRetrieveController as ctrl"
-            }
-        }
-    });
-
-    stateProvider.state("home.cadastro", {
-        url: "/cadastro",
-        views: {
-            "homeBody@home": {
-                templateUrl: "app/views/create-user.html",
-                controller: "CreateUserController as ctrl"
-            }
-        }
-    });
-
-    stateProvider.state("erroServidor", {
-        url: "/erroServidor",
-        templateUrl: "app/views/error-page.html"
-    });
+    stateProvider.state("home", home);
 
 
-    stateProvider.state("dashboard", {
-        url: "/dashboard",
-        views: {
-            "": { templateUrl: "app/views/headers/dashboard-header.html" },
-            "dashboardBody@dashboard": {
-                templateUrl: "app/views/dashboard.html",
-                controller: "DashboardController as ctrl"
-            }
-        },
-        resolve: {
-            userProfile: function(UserProfileService) {
-                return UserProfileService.getProfile();
-            }            
-        }
-    });
+    /////////////////////////// STATE: home.login 
+    var homeLogin = {};
+    homeLogin.views = {};
+    homeLogin.url = "/login";
 
-    stateProvider.state("dashboard.profile", {
-        url: "/profile",
-        views: {
-            "dashboardBody@dashboard": {
-                templateUrl: "app/views/profile.html",
-                controller: "ProfileController as ctrl"
-            }
-        }
-    });
+    homeLogin.views["homeBody@home"] = {
+        templateUrl: "app/views/login.html",
+        controller: "LoginController as ctrl"
+    };
 
+    stateProvider.state("home.login", homeLogin);
+
+
+    /////////////////////////// STATE: home.ativarConta 
+    var homeAtivarConta = {};
+    homeAtivarConta.views = {};
+    homeAtivarConta.url = "/ativarConta";
+
+    homeAtivarConta.views["homeBody@home"] = {
+        templateUrl: "app/views/activate-account.html",
+        controller: "ActivateAccountController as ctrl"   
+    };
+
+    stateProvider.state("home.ativarConta", homeAtivarConta);
+
+
+    /////////////////////////// STATE: home.redefinirSenha 
+    var homeRedefinirSenha = {};
+    homeRedefinirSenha.views = {};
+    homeRedefinirSenha.url = "/redefinirSenha";
+
+    homeRedefinirSenha.views["homeBody@home"] = {
+        templateUrl: "app/views/password-retrieve.html",
+        controller: "PasswordRetrieveController as ctrl"
+    };
+
+    stateProvider.state("home.redefinirSenha", homeRedefinirSenha);
+
+
+    /////////////////////////// STATE: home.cadastro
+    var homeCadastro = {};
+    homeCadastro.views = {};
+    homeCadastro.url = "/cadastro";
+
+    homeCadastro.views["homeBody@home"] = {
+        templateUrl: "app/views/create-user.html",
+        controller: "CreateUserController as ctrl"
+    };
+
+    stateProvider.state("home.cadastro", homeCadastro);
+
+
+    /////////////////////////// STATE: erroServidor
+    var erroServidor = {};
+    erroServidor.url = "/erroServidor";
+    erroServidor.templateUrl = "app/views/error-page.html";
+
+    stateProvider.state("erroServidor", erroServidor);
+
+
+    /////////////////////////// STATE: dashboard
+    var dashboard = {};
+    dashboard.views = {};
+    dashboard.resolve = {};
+    dashboard.url = "/dashboard";
+
+    dashboard.resolve.userProfile = function(UserProfileService) {
+        return UserProfileService.getProfile();
+    };
+
+    dashboard.views[""] = {
+        templateUrl: "app/views/headers/dashboard-header.html",
+        controller: "DashHeaderController as ctrl"
+    };
+    dashboard.views["dashboardBody@dashboard"] = {
+        templateUrl: "app/views/dashboard.html",
+        controller: "DashboardController as ctrl"
+    };
+
+    stateProvider.state("dashboard", dashboard);
+
+
+    /////////////////////////// STATE: dashboard.profile 
+    var dashboardProfile = {};
+    dashboardProfile.views = {};
+    dashboardProfile.url = "/profile";
+
+    dashboardProfile.views["dashboardBody@dashboard"] = {
+        templateUrl: "app/views/profile.html",
+        controller: "ProfileController as ctrl"
+    };
+
+    stateProvider.state("dashboard.profile", dashboardProfile);
+
+
+    /////////////////////////// STATE: OTHERWISE 
     urlRouterProvider.otherwise('/home');
 }
 

@@ -8,8 +8,9 @@ function ProfileController(dateUtil, searchAddress) {
     ctrl.profile = {};
     ctrl.profile.address = {};
 
-    ctrl.img = "";
     ctrl.types = ["image/png", "image/jpeg", "image/gif"];
+    ctrl.image = "";
+    ctrl.profile.avatar = "";
 
     ctrl.btnFirstForm = {
         'btn btn-success': true,
@@ -29,9 +30,6 @@ function ProfileController(dateUtil, searchAddress) {
     ctrl.showPersonalDataForm = true;
     ctrl.showAvatarForm = false;
     ctrl.showJobDataForm = false;
-
-    ctrl.image = "";
-    ctrl.croppedImage = "";
 
     ctrl.changeForm = function(form) {
         changeCssFromButton(form);
