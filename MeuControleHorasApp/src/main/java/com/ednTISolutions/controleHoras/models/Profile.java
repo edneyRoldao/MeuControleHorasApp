@@ -34,8 +34,7 @@ public class Profile {
 	public Profile(User user) {
 		email = user.getUsername();
 		name = user.getFirstname();
-		company = "";
-		avatar = "";
+		address = new Address();
 	}
 
 	public Profile(BigInteger id, String name, String email, Calendar birthDate, Character gender, String avatar,
