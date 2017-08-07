@@ -12,3 +12,11 @@ function UserProfileService(http, constants) {
 
 UserProfileService.$inject = ["$http", "ConstantsApp"];
 angular.module("meuControleHorasApp").factory("UserProfileService", UserProfileService);
+
+function getInstance() {
+    var profile = {};
+
+    
+
+    return profile;
+}

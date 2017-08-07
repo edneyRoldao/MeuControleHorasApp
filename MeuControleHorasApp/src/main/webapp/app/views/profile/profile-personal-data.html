@@ -9,19 +9,13 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Nome</label>
-                        <input type="text" placeholder="Nome de usuário" class="form-control">
+                        <input type="text" ng-model="ctrl.profile.userName" placeholder="Nome de usuário" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">e-mail</label>
-                        <input type="text" placeholder="e-mail de usuário" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <label class="col-sm-12 control-label">Empresa</label>
-                        <input type="text" placeholder="name empresa onde trabalha" class="form-control">
+                        <input type="text" ng-model="ctrl.profile.email" placeholder="e-mail de usuário" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,11 +43,11 @@
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Gênero</label>
                         <div class="radio i-checks">
-                            <label> <input type="radio" value="option1" name="a"> <i></i>Feminino</label>
+                            <label> <input type="radio" value="F" ng-model="ctrl.profile.genero" name="genero"> <i></i>Feminino</label>
                         </div>
 
                         <div class="radio i-checks">
-                            <label> <input type="radio" checked="" value="option2" name="a"> <i></i>Masculino</label>
+                            <label> <input type="radio" value="M" ng-model="ctrl.profile.genero" name="genero"> <i></i>Masculino</label>
                         </div>
                     </div>
                 </div>
@@ -61,18 +55,27 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Endereço</label>
-                        <input type="text" placeholder="informe o cep" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="text" placeholder="Rua e Bairro" class="form-control" ng-disabled="true">
+                        <input type="text" ng-model="ctrl.profile.address.cep" placeholder="informe o cep" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <input type="text" placeholder="Cidade e Estado" class="form-control" ng-disabled="true">
+                        <input type="text" ng-model="ctrl.profile.address.logradouro" placeholder="Logradouro" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.bairro" placeholder="Bairro" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.cidade" placeholder="Cidade" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.uf" placeholder="UF" class="form-control" ng-disabled="true">
                     </div>
                 </div>
             </div>
