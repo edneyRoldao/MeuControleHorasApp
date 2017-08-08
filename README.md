@@ -10,9 +10,15 @@ Technologies used:<br/>
 
 All API references that were used in this project
 
+- ANGULAR JS 1 - GUIDE (the most popular)
+<br> https://docs.angularjs.org/guide
+
 - SweetAlert (js api):
 <br>https://limonte.github.io/sweetalert2/
 <br>https://github.com/limonte/sweetalert2
+
+- Angular-ui-router - The most powerful way to manage routes with angularJS
+<br>https://scotch.io/tutorials/angular-routing-using-ui-router
 
 - Angular toastr alert api:
 <br>http://foxandxss.github.io/angular-toastr/ - an awesome alert component
@@ -39,8 +45,27 @@ All API references that were used in this project
 <br>https://stormpath.com/blog/jwt-java-create-verify
 
 - JWT Java - Spring security JWT implementation, This example was widely used 
-<br>https://github.com/szerhusenBC/jwt-spring-security-demo<br> 
+<br>https://github.com/szerhusenBC/jwt-spring-security-demo 
 
+- Animated and short videos that can be used as backgroud templates
+<br>https://coverr.co/
 
+- AngularJS - Angular-ui-clock 
+<br>https://deepu.js.org/angular-clock/
+
+- Javascript - momentJS (manage time and date)
+<br>http://momentjs.com/
+
+- Angular and Bootstrap - angular-ui-bootstrap
+<br>https://angular-ui.github.io/bootstrap/
+
+- Datetime picker with ui-bootstrap samples
+<br> https://github.com/Gillardo/bootstrap-ui-datetime-picker
+
+- Upload file and dropImage angularJS component
+<br> https://codepen.io/whusterj/pen/ijFgA
+
+- It is a web service that provide us Brazilian adresses.
+<br> https://viacep.com.br
 
 If there's any doubt about project, message me - edneyroldao@gmail.com

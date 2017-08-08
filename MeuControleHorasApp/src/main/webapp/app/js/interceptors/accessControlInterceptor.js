@@ -1,17 +1,14 @@
 /* EdneyRoldao - 13/06/2017 */
-function AccessControlInterceptor(constants, location, jwt) {
+function AccessControlInterceptor(constants, state, jwt) {
 	var interceptor = {};
 	
 	var _getToken = function() {
 		return localStorage.getItem(constants.tokenKey);
 	};
 
-	var _deleteToken = function() {
-		localStorage.removeItem(constants.tokenKey);
-        console.log("userToken deleted");
-	};
-
 	interceptor.request = function(config) {
+        if(isExternalRequest(config.url)) return config;
+
 		config.headers = config.headers || {};
 		
 		if(_getToken()) {
@@ -22,7 +19,7 @@ function AccessControlInterceptor(constants, location, jwt) {
 
 		for(var i = 0; i < urlList.length; i++) {
 			if(config.url == urlList[i] && (!_getToken() || jwt.isTokenExpired(_getToken()))) {
-				location.path("/login");
+				state.go("home.login");
 			}
 		}
 		
@@ -32,5 +29,15 @@ function AccessControlInterceptor(constants, location, jwt) {
 	return interceptor;
 }
 
-AccessControlInterceptor.$inject = ["ConstantsApp", "$location", "jwtHelper"];
+AccessControlInterceptor.$inject = ["ConstantsApp", "$state", "jwtHelper"];
 angular.module("meuControleHorasApp").factory("AccessControlInterceptor", AccessControlInterceptor);
+
+// Private functions
+function isExternalRequest(url) {
+	var isExternal = false;
+
+    if(url.indexOf("viacep") !== -1)
+        isExternal = true;
+
+    return isExternal;
+}

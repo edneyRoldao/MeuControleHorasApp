@@ -1,5 +1,5 @@
 /* EdneyRoldao - 12/05/17 */
-function ResponseErrorsInterceptor(promise, location) {
+function ResponseErrorsInterceptor(promise, state, constants) {
     var interceptor = {};
 
 	var _deleteToken = function() {
@@ -11,12 +11,12 @@ function ResponseErrorsInterceptor(promise, location) {
     	var status = rejection.status;
 
         if(status === 500) {
-            location.path("/erroServidor");
+            state.go("erroServidor");
         }
 
 		if(rejection.status === 401 || rejection.status === 403) {
 			_deleteToken();
-			location.path("/login");
+			state.go("home.login");
 		}
         
         return promise.reject(rejection);
@@ -25,5 +25,5 @@ function ResponseErrorsInterceptor(promise, location) {
     return interceptor;
 }
 
-ResponseErrorsInterceptor.$inject = ["$q", "$location"];
+ResponseErrorsInterceptor.$inject = ["$q", "$state", "ConstantsApp"];
 angular.module("meuControleHorasApp").factory("ResponseErrorsInterceptor", ResponseErrorsInterceptor);

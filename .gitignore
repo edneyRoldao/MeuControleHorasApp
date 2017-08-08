@@ -25,5 +25,6 @@ MeuControleHorasApp/src/main/webapp/app/lib/public/*
 *database.properties
 *mail.properties
 *jwt.properties
+*mongoDB.properties
 MeuControleHorasApp/MeuControleHorasApp.iml
 .idea

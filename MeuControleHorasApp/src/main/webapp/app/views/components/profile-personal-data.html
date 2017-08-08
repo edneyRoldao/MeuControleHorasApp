@@ -1,0 +1,86 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5> Dados Pessoais </h5>
+    </div>
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Nome</label>
+                        <input type="text" ng-model="ctrl.profile.name" placeholder="Nome de usuário" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">e-mail</label>
+                        <input type="text" ng-model="ctrl.profile.email" placeholder="e-mail de usuário" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Data de Nascimento</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" ng-model="ctrl.day" ng-options="day for day in ctrl.days">
+                                <option value="">Dia</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" ng-model="ctrl.month" ng-options="month for month in ctrl.months">
+                                <option value="">Mês</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" ng-model="ctrl.year" ng-options="year for year in ctrl.years">
+                                <option value="">Ano</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Gênero</label>
+                        <div class="radio i-checks">
+                            <label> <input type="radio" value="F" ng-model="ctrl.profile.gender" name="genero"> <i></i>Feminino</label>
+                        </div>
+
+                        <div class="radio i-checks">
+                            <label> <input type="radio" value="M" ng-model="ctrl.profile.genero" name="genero"> <i></i>Masculino</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="col-sm-12 control-label">Endereço</label>
+                        <input type="text" ng-model="ctrl.profile.address.cep" placeholder="informe o cep" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.logradouro" placeholder="Logradouro" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.bairro" placeholder="Bairro" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.cidade" placeholder="Cidade" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" ng-model="ctrl.profile.address.uf" placeholder="UF" class="form-control" ng-disabled="true">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="form-group"></div>
+        </div>
+    </div>
+</div>

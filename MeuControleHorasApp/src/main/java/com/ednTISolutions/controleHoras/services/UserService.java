@@ -89,4 +89,8 @@ public class UserService {
 		return mailService.sendEmailToUser(user.getUsername(), subject, content.toString());
 	}
 
+	public void attachProfileIdFromUser(User user) {
+		repository.save(user);
+	}
+
 }

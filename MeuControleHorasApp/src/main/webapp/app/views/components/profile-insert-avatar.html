@@ -1,0 +1,49 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5> Imagem de Usuário </h5>
+    </div>
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title  back-change">
+                            <h5>Editor de Imagem <small>você pode recortar e dar zoom na imagem</small></h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div id="my-awesome-dropzone" class="dropzone" action="#">
+                                        <input class="dropzone-input"
+                                               type="file"
+                                               upload-file="ctrl.image">
+                                        <div class="dropzone-body col-lg-12" file-dropzone="ctrl.types">
+                                            <i class="fa fa-cloud-download fa-5x" aria-hidden="true"></i>
+                                            <br><br>
+                                            <span class="dropzone-text">
+                                                <strong>ARRASTE</strong>
+                                                <br>sua<br>
+                                                <strong>IMAGEM</strong>
+                                                <br>ou<br>
+                                                <strong>CLICK AQUI</strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="image-crop cropArea">
+                                        <img-crop image="ctrl.image" result-image="ctrl.profile.avatar"></img-crop>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>Resultado da Edição</h4>
+                                    <img ng-src="{{ctrl.profile.avatar}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

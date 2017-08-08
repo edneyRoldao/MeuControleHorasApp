@@ -1,0 +1,36 @@
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="app/lib/public/bootstrap/dist/css/bootstrap-theme.css">
+<link rel="stylesheet" type="text/css" href="app/lib/public/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="app/css/landing-page.css">
+<link rel="stylesheet" type="text/css" href="app/lib/public/sweetalert2/dist/sweetalert2.css">
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand topnav" ui-sref="home">Meu Controle de Horas</a>
+        </div>
+
+        <!-- navbar-collapse - Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li> <a ui-sref="home.login">Entrar</a> </li>
+                <li> <a ui-sref="home.cadastro">Cadastre-se</a> </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /. Navigation -->
+
+<!-- BODY (content) -->
+<div ui-view="homeBody"></div>
+
+<!-- footer -->
+<div ng-include src="'app/views/components/footer.html'"></div>

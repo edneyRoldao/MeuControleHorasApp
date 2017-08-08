@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class User {
 
 	@DateTimeFormat
 	private Date lastPasswordResetDate;
+
+	@Column(unique = true)
+	private BigInteger profileId;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TB_USER_ROLE", joinColumns = {
@@ -81,14 +85,6 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public List<Role> getAuthorities() {
-		return authorities;
-	}
-
-	public void setAuthorities(List<Role> authorities) {
-		this.authorities = authorities;
-	}
-
 	public Date getLastPasswordResetDate() {
 		return lastPasswordResetDate;
 	}
@@ -97,11 +93,27 @@ public class User {
 		this.lastPasswordResetDate = lastPasswordResetDate;
 	}
 
+	public BigInteger getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(BigInteger profileId) {
+		this.profileId = profileId;
+	}
+
+	public List<Role> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<Role> authorities) {
+		this.authorities = authorities;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", enabled=" + enabled + ", lastPasswordResetDate=" + lastPasswordResetDate + ", authorities="
-				+ authorities + "]";
+				+ ", enabled=" + enabled + ", lastPasswordResetDate=" + lastPasswordResetDate + ", profileId="
+				+ profileId + ", authorities=" + authorities + "]";
 	}
 
 	@Override
@@ -114,6 +126,7 @@ public class User {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastPasswordResetDate == null) ? 0 : lastPasswordResetDate.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((profileId == null) ? 0 : profileId.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -156,6 +169,11 @@ public class User {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (profileId == null) {
+			if (other.profileId != null)
+				return false;
+		} else if (!profileId.equals(other.profileId))
 			return false;
 		if (username == null) {
 			if (other.username != null)
