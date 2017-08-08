@@ -1,4 +1,4 @@
-function ProfileController(dateUtil, searchAddress) {
+function ProfileController(dateUtil, searchAddress, toastAlert) {
     var ctrl = this;
 
     ctrl.days = dateUtil.getDaysOfMonth();
@@ -36,7 +36,7 @@ function ProfileController(dateUtil, searchAddress) {
     };
 
     ctrl.update = function() {
-        console.log("calling update function from user profile screen");
+        toastAlert.success("Hello", "Solar System");
     };
 
     ctrl.getAddress = function() {
@@ -88,5 +88,5 @@ function ProfileController(dateUtil, searchAddress) {
     }
 }
 
-ProfileController.$inject = ["DateUtilService", "SearchAddressService"];
+ProfileController.$inject = ["DateUtilService", "SearchAddressService", "toastr"];
 angular.module("meuControleHorasApp").controller("ProfileController", ProfileController);

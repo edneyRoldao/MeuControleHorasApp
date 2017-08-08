@@ -13,4 +13,6 @@ public interface ProfileRepository {
 
 	Profile findProfile(String email);
 
+	void removeCollection();
+
 }

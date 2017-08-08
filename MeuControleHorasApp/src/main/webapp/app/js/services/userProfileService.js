@@ -7,6 +7,10 @@ function UserProfileService(http, constants) {
         return http.get(URL + "profile");
     };
 
+    service.updateProfile = function(profile) {
+        return http.post(URL + "profile", profile);
+    };
+
     service.getInstance = getInstance;
 
 	return service;

@@ -1,17 +1,16 @@
 package com.ednTISolutions.controleHoras.repositories.impl;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
-
 import com.ednTISolutions.controleHoras.models.Profile;
 import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.ProfileRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
 /**
  * Created by edneyroldao on 18/07/17.
@@ -26,14 +25,11 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	public Profile createNewProfile(User user) {
 		Profile profile = findProfile(user.getUsername());
 		
-		if(profile != null)
-			return profile;
+		if(profile != null) return profile;
 		
-		profile = new Profile(user);
-		mongoOp.insert(profile);
-		profile = findProfile(user.getUsername());
-		
-		return profile;
+		mongoOp.insert(new Profile(user));
+
+		return findProfile(user.getUsername());
 	}
 
 	@Override
@@ -44,6 +40,11 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	@Override
 	public Profile findProfile(String email) {
 		return mongoOp.findOne(query(where("email").is(email)), Profile.class);
+	}
+
+	@Override
+	public void removeCollection() {
+		mongoOp.dropCollection(Profile.class);
 	}
 
 }
