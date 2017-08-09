@@ -1,0 +1,195 @@
+<link href="../../lib/public/angular-ui-clock/dist/angular-clock.css" rel="stylesheet">
+<link href="../../lib/public/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../lib/public/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="../../css/toastr.min.css" rel="stylesheet">
+<link href="../../css/jquery.gritter.css" rel="stylesheet">
+<link href="../../css/cropper.min.css" rel="stylesheet">
+<link href="../../css/animate.css" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Syncopate:400,700" rel="stylesheet" type="text/css">
+<link href="../../css/inspinia.css" rel="stylesheet">
+<link href="../../lib/private/ui-cropper/ng-img-crop.css" rel="stylesheet">
+
+<div id="wrapper">
+
+	<!-- Left menu -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+
+                <!-- User profile -->
+                <li class="nav-header" style="text-align: center;">
+                    <div uib-dropdown class="dropdown profile-element">
+                        <a uib-dropdown-toggle class="dropdown-toggle">
+                    	   <span> <img class="img-circle" ng-src="{{ctrl.profile.avatar}}"/> </span>
+                        	<span class="clear"> 
+	                        	<span class="block m-t-xs">
+	                        		<strong class="font-bold">{{ctrl.profile.name}}</strong>
+	                         	</span>
+                 			</span>
+                        </a>
+                        <ul uib-dropdown-menu class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a ui-sref="dashboard.profile">Atualizar Profile</a></li>
+                            <li><a ui-sref="">Automatizar marcações</a></li>
+                            <li class="divider"></li>
+                            <li><a ui-sref="">Fechar</a></li>
+                        </ul>
+                    </div>
+                    <div uib-dropdown class="logo-element">
+                        <a uib-dropdown-toggle>EDN</a>
+                        <ul uib-dropdown-menu class="dropdown-menu animated fadeInRight m-t-xs" style="background-color: black">
+                            <li><a ui-sref="dashboard.profile">Atualizar Profile</a></li>
+                            <li><a ui-sref="">Automatizar marcações</a></li>
+                            <li class="divider"></li>
+                            <li><a ui-sref="">Fechar</a></li>
+                        </ul>
+                    </div>
+                </li><!--edn/ User profile -->
+
+                <!-- MENU - first item -->
+                <li>
+                    <a href="#">
+                    	<i class="fa fa-th-large"></i>
+                    	<span class="nav-label">Personalizar Horário</span>
+                    	<span class="fa arrow"></span>
+                	</a>
+                    <ul class="nav nav-second-level">
+                        <li ><a href="">Metas Mensais</a></li>
+                        <li ><a href="">Definir Hora Almoço</a></li>
+                        <li ><a href="">Definir Hora Entrada</a></li>
+                        <li ><a href="">Definir Hora Saída</a></li>
+                        <li ><a href="">Criar robo Horários</a></li>
+                    </ul>
+                </li><!--edn/ MENU - first item -->
+
+                <!-- MENU - second item -->
+                <li>
+                    <a href="#">
+                    	<i class="fa fa-diamond"></i>
+                    	<span class="nav-label">Consultas</span>
+                    	<span class="fa arrow"></span>
+                	</a>
+                    <ul class="nav nav-second-level">
+                        <li ><a href="">Horários Junho</a></li>
+                        <li ><a href="">Horários Maio</a></li>
+                        <li ><a href="">Horários Abril</a></li>
+                        <li ><a href="">Outros Meses</a></li>
+                        <li ><a href="">Outros anos</a></li>
+                    </ul>
+                </li><!--edn/ MENU - first item -->
+
+                <!-- MENU - third item -->
+                <li>
+                    <a href="#">
+                    	<i class="fa fa-flask"></i>
+                    	<span class="nav-label">Relatórios</span>
+                    	<span class="fa arrow"></span>
+                	</a>
+                    <ul class="nav nav-second-level">
+                        <li ><a href="">PDF</a></li>
+                        <li ><a href="">EXCEL</a></li>
+                        <li ><a href="">TXT</a></li>
+                        <li ><a href="">WORD</a></li>
+                    </ul>
+                </li><!--edn/ MENU - third item -->
+
+            </ul>
+        </div>
+        <div style="margin-top: 55px"></div>
+        <ds-widget-clock show-analog theme="blue-light"></ds-widget-clock>
+    </nav><!--end/ Left menu -->
+
+    <div id="page-wrapper" class="gray-bg">
+
+        <!-- top menu -->
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+                <!-- search field -->
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-success " ui-sref="">
+                    	<i class="fa fa-bars"></i>
+                	</a>
+                    <form role="search" class="navbar-form-custom">
+                        <div class="form-group">
+                            <input type="text" placeholder="Pesquisa..." class="form-control">
+                        </div>
+                    </form>
+                </div><!--end/ search field -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">Meu Controle de Horas</span>
+                    </li>
+
+                    <li uib-dropdown>
+                        <a class="dropdown-toggle count-info" uib-dropdown-toggle>
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">!</span>
+                        </a>
+                        <ul uib-dropdown-menu class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> Horas não marcadas
+                                        <span class="pull-right text-muted small">5 períodos</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> Média de Horas
+                                        <span class="pull-right text-muted small">3 horas </span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>Ver todos os alertas</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> Sair
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div><!--end/ top menu -->
+
+        <!-- MAIN CONTENT -->
+        <div ui-view="dashboardBody"></div>
+
+        <!-- footer -->
+        <div ng-include src="'views/components/footer-inspinia.html'"></div>
+
+    </div>
+</div>
+
+<script src="../../lib/public/jquery/dist/jquery.js"></script>
+<script src="../../lib/public/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../lib/private/others/jquery.metisMenu.js"></script>
+<script src="../../lib/private/others/jquery.slimscroll.min.js"></script>
+<script src="../../lib/private/flot/jquery.flot.js"></script>
+<script src="../../lib/private/flot/jquery.flot.tooltip.min.js"></script>
+<script src="../../lib/private/flot/jquery.flot.spline.js"></script>
+<script src="../../lib/private/flot/jquery.flot.resize.js"></script>
+<script src="../../lib/private/flot/jquery.flot.pie.js"></script>
+<script src="../../lib/private/others/jquery.peity.min.js"></script>
+<script src="../../lib/private/others/peity-demo.js"></script>
+<script src="../../lib/private/others/inspinia.js"></script>
+<script src="../../lib/public/PACE/pace.min.js"></script>
+<script src="../../lib/public/jquery-ui/jquery-ui.min.js"></script>
+<script src="../../lib/private/others/jquery.gritter.min.js"></script>
+<script src="../../lib/private/others/jquery.sparkline.min.js"></script>
+<script src="../../lib/private/others/sparkline-demo.js"></script>
+<script src="../../lib/private/others/Chart.min.js"></script>
+<script src="../../lib/private/others/toastr.min.js"></script>
+<script src="../../lib/private/others/dropzone.js"></script>
