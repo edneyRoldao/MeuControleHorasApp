@@ -1,6 +1,16 @@
 function ProfileController(dateUtil, searchAddress, toastAlert) {
     var ctrl = this;
 
+    ctrl.count = 0;
+
+    ctrl.newValue = null;
+
+    ctrl.callService = function() {
+        console.log("check changes: " + ctrl.count++);
+    };
+
+
+
     ctrl.days = dateUtil.getDaysOfMonth();
     ctrl.months = dateUtil.getMonths();
     ctrl.years = dateUtil.getRangeYearsValidToWork();
@@ -36,6 +46,7 @@ function ProfileController(dateUtil, searchAddress, toastAlert) {
     };
 
     ctrl.update = function() {
+        console.log(ctrl.profile);
         toastAlert.success("Hello", "Solar System");
     };
 

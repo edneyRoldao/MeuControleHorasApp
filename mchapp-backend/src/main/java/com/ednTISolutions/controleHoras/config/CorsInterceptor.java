@@ -6,16 +6,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class CorsInterceptor extends HandlerInterceptorAdapter{
+
+	private static final String ORIGIN_NAME = "Access-Control-Allow-Origin";
+	private static final String METHODS_NAME = "Access-Control-Allow-Methods";
+	private static final String HEADERS_NAME = "Access-Control-Allow-Headers";
 		 
 	 @Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
-		 res.setHeader("Access-Control-Allow-Credentials", "true");
-		 res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Origin, Accept, Authorization, X-Requested-With, X-Auth-Token, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-		 res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, HEAD, OPTIONS");
-		 res.setHeader("Access-Control-Allow-Origin", "*");
-		 res.setHeader("Access-Control-Max-Age", "1800");
-		 
-		return super.preHandle(req, res, handler);
+		res.setHeader(ORIGIN_NAME, "http://localhost:3030");
+		res.setHeader(METHODS_NAME, "GET, OPTIONS, POST, PUT, DELETE");
+		res.setHeader(HEADERS_NAME, "Origin, X-Requested-With, X-Auth-Token, Content-Type, Accept");
+
+		return true;
 	}
 
 }

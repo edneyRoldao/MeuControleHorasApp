@@ -7,9 +7,6 @@ function AccessControlInterceptor(constants, state, jwt) {
 	};
 
 	interceptor.request = function(config) {
-
-		console.log(config.url);
-
         if(isExternalRequest(config.url)) return config;
 
 		config.headers = config.headers || {};
