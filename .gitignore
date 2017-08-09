@@ -21,7 +21,7 @@ local.properties
 .tmp
 .DS_Store
 .DS_Store?
-MeuControleHorasApp/src/main/webapp/app/lib/public/*
+mchapp-frontend/app/lib/public/*
 *database.properties
 *mail.properties
 *jwt.properties
