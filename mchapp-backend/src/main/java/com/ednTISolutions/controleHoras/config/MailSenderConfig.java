@@ -17,31 +17,32 @@ import java.util.Properties;
 @PropertySource("classpath:mail.properties")
 public class MailSenderConfig {
 
-    @Autowired
-    private Environment env;
+	@Autowired
+	private Environment env;
 
-    @Bean
-    public MailSender mailSender() {
-        JavaMailSenderImpl sender = new JavaMailSenderImpl();
-        
-        sender.setHost(env.getProperty("host"));
-        sender.setPort(Integer.parseInt(env.getProperty("port")));
-        sender.setUsername(env.getProperty("usernameFromEmail"));
-        sender.setPassword(env.getProperty("password"));
-        sender.setJavaMailProperties(getProperties());
+	@Bean
+	public MailSender mailSender() {
+		JavaMailSenderImpl sender = new JavaMailSenderImpl();
 
-        return sender;
-    }
+		sender.setHost(env.getProperty("mch.mail.host"));
+		sender.setPort(Integer.parseInt(env.getProperty("mch.mail.port")));
+		sender.setProtocol(env.getProperty("mch.mail.protocol"));
+		sender.setUsername(env.getProperty("mch.mail.username"));
+		sender.setPassword(env.getProperty("mch.mail.password"));
+		sender.setJavaMailProperties(getProperties());
 
-    private Properties getProperties() {
-        Properties prop = new Properties();
+		return sender;
+	}
 
-        prop.put("mail.debug", true);
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.starttls.enable", true);
-        prop.put("mail.transport.protocol", "smtp");
+	private Properties getProperties() {
+		Properties prop = new Properties();
 
-        return prop;
-    }
+		prop.put("mail.debug", true);
+		prop.put("mail.smtp.auth", true);
+		prop.put("mail.smtp.starttls.enable", true);
+		prop.put("mail.smtp.quitwait", true);
+
+		return prop;
+	}
 
 }

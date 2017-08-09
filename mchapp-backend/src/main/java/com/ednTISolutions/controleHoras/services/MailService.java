@@ -27,11 +27,11 @@ public class MailService implements Serializable {
     public boolean sendEmailToUser(String userMail, String subject, String content) {
         SimpleMailMessage messageObj = new SimpleMailMessage();
 
-        messageObj.setFrom(env.getProperty("usernameFromEmail"));
+        messageObj.setFrom(env.getProperty("username"));
         messageObj.setTo(userMail);
         messageObj.setSubject(subject);
         messageObj.setText(content);
-
+        
         System.out.println("Sending e-mail...");
 
         try {

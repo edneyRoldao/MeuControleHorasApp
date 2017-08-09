@@ -10,9 +10,9 @@ public class AppWebInitializer extends AbstractAnnotationConfigDispatcherServlet
 		return new Class[]
 			{
 				DatasourceConfig.class,
+				MailSenderConfig.class,
 				AppWebSecurityConfig.class,
 				AppWebConfig.class,
-				MailSenderConfig.class,
 				MongodbConfig.class
 			};
 	}
