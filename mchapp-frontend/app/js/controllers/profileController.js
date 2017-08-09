@@ -1,20 +1,13 @@
-function ProfileController(dateUtil, searchAddress, toastAlert) {
+function ProfileController(dateUtil, searchAddress, toastAlert, profile) {
     var ctrl = this;
 
-    ctrl.count = 0;
-
-    ctrl.newValue = null;
-
-    ctrl.callService = function() {
-        console.log("check changes: " + ctrl.count++);
-    };
-
-
+    ctrl.profile = profile.data;
 
     ctrl.days = dateUtil.getDaysOfMonth();
     ctrl.months = dateUtil.getMonths();
     ctrl.years = dateUtil.getRangeYearsValidToWork();
 
+    ctrl.cep = "";
     ctrl.profile = {};
     ctrl.profile.address = {};
 
@@ -46,18 +39,28 @@ function ProfileController(dateUtil, searchAddress, toastAlert) {
     };
 
     ctrl.update = function() {
-        console.log(ctrl.profile);
-        toastAlert.success("Hello", "Solar System");
+        toastAlert.success("test", "test");
     };
 
-    ctrl.getAddress = function() {
-        searchAddress.searchAddressFromCEP(ctrl.profile.address.cep)
-            .success(function(data) {
-                ctrl.profile.address = data;
-            }).error(function(err, status) {
-                console.log("There was an error: " + err);
-                console.log("HTTP STATUS CODE: " + status);
-        });
+    ctrl.searchAddress = function() {
+        if(ctrl.cep) {
+            searchAddress.searchAddressFromCEP(ctrl.cep)
+                .success(function(data) {
+
+                    if(data.erro) {
+                        ctrl.profile.address = "";
+                        toastAlert.warning("este cep n\u00e3o existe !", "Erro", {
+                            closeButton: true
+                        });
+                    }else {
+                        ctrl.profile.address = data;
+                    }
+
+                }).error(function(err, status) {
+                    console.log("There was an error: " + err);
+                    console.log("HTTP STATUS CODE: " + status);
+            });            
+        }
     };
 
     function changeCssFromButton (form) {
@@ -99,5 +102,5 @@ function ProfileController(dateUtil, searchAddress, toastAlert) {
     }
 }
 
-ProfileController.$inject = ["DateUtilService", "SearchAddressService", "toastr"];
+ProfileController.$inject = ["DateUtilService", "SearchAddressService", "toastr", "userProfile"];
 angular.module("meuControleHorasApp").controller("ProfileController", ProfileController);

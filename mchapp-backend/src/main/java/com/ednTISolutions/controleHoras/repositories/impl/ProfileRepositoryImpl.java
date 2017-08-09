@@ -1,16 +1,17 @@
 package com.ednTISolutions.controleHoras.repositories.impl;
 
-import com.ednTISolutions.controleHoras.models.Profile;
-import com.ednTISolutions.controleHoras.models.User;
-import com.ednTISolutions.controleHoras.repositories.ProfileRepository;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
-
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
+import com.ednTISolutions.controleHoras.models.Profile;
+import com.ednTISolutions.controleHoras.models.User;
+import com.ednTISolutions.controleHoras.repositories.ProfileRepository;
 
 /**
  * Created by edneyroldao on 18/07/17.
@@ -24,8 +25,10 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	@Override
 	public Profile createNewProfile(User user) {
 		Profile profile = findProfile(user.getUsername());
-		
-		if(profile != null) return profile;
+
+		if(profile != null) {
+			return profile;			
+		}
 		
 		mongoOp.insert(new Profile(user));
 

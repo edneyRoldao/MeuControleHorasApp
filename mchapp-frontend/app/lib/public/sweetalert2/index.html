@@ -2,25 +2,22 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
   <title>SweetAlert2 - a beautiful, responsive, customizable and accessible (WAI-ARIA) replacement for JavaScript's popup boxes</title>
 
   <link rel="icon" href="./assets/favicon.png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courgette">
   <link rel="stylesheet" href="./assets/example.css">
   <link rel="stylesheet" href="./assets/buttons.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.2/animate.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
   <!-- This is what you need -->
-  <script src="./dist/sweetalert2.min.js"></script>
+  <script src="./dist/sweetalert2.js"></script>
   <link rel="stylesheet" href="./dist/sweetalert2.min.css">
 
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
@@ -39,23 +36,18 @@
       <script src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=limontegithubiosweetalert2" id="_carbonads_js" async></script>
     </div>
     <a class="top-right-button download">Download</a>
-    <a href="https://cdnjs.com/libraries/limonte-sweetalert2" class="top-right-button cdn" target="_blank" rel="noopener">CDN</a>
-    <div class="top-right-button donate">
+    <a href="https://www.jsdelivr.com/projects/sweetalert2" class="top-right-button cdn">CDN</a>
+    <a href="https://www.paypal.me/limonte/5" class="top-right-button donate">
       <img src="https://www.paypalobjects.com/webstatic/icon/pp32.png" width="32" height="32" alt="PayPal logo">
       <span>Donate</span>
-      <ul class="currencies hidden">
-        <li><a href="https://www.paypal.me/limonte/5usd">in US Dollars</a></li>
-        <li><a href="https://www.paypal.me/limonte/5eur">in Euros</a></li>
-        <li><a href="https://www.paypal.me/limonte/10">in other currencies</a></li>
-      </ul>
-    </div>
+    </a>
   </header>
 
   <p>Here’s a comparison of a standard error message. The first one uses the built-in <strong>alert</strong>-function, while the second is using <strong>SweetAlert2</strong>.</p>
 
   <div class="showcase normal">
     <h4>Normal alert</h4>
-    <button aria-label="Show error message - normal alert">Show error message</button>
+    <button>Show error message</button>
 
     <pre><span class="func">alert</span>(<span class="str">'Oops! Something went wrong!'</span>)</pre>
 
@@ -64,7 +56,7 @@
 
   <div class="showcase sweet">
     <h4>Sweet<span>Alert</span>2</h4>
-    <button aria-label="Show error message - SweetAlert2">Show error message</button>
+    <button>Show error message</button>
 
     <pre>
 swal(
@@ -85,7 +77,7 @@ swal(
     <li class="message">
       <div class="ui">
         <p>A basic message</p>
-        <button aria-label="Try me! Example: A basic message">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>swal(<span class="str">'Any fool can use a computer'</span>)</pre>
     </li>
@@ -93,7 +85,7 @@ swal(
     <li class="title-text">
       <div class="ui">
         <p>A title with a text under</p>
-        <button aria-label="Try me! Example: A title with a text under">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal(
@@ -106,7 +98,7 @@ swal(
     <li class="success">
       <div class="ui">
         <p>A success message!</p>
-        <button aria-label="Try me! Example: A success message!">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal(
@@ -119,7 +111,7 @@ swal(
     <li class="timer">
       <div class="ui">
         <p>A message with auto close timer</p>
-        <button aria-label="Try me! Example: A message with auto close timer">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -140,7 +132,7 @@ swal({
     <li class="html">
       <div class="ui">
         <p>Custom HTML description and buttons</p>
-        <button aria-label="Try me! Example: Custom HTML description and buttons">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -161,8 +153,8 @@ swal({
 
     <li class="html-jquery">
       <div class="ui">
-        <p>jQuery HTML with custom animation (<a href="https://daneden.github.io/animate.css/" target="_blank" rel="noopener">Animate.css <i class="fa fa-external-link"></i></a>)</p>
-        <button aria-label="Try me! Example: jQuery HTML with custom animation">Try me!</button>
+        <p>jQuery HTML with custom animation (<a href="https://daneden.github.io/animate.css/" target="_blank">Animate.css <i class="fa fa-external-link"></i></a>)</p>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -178,7 +170,7 @@ swal({
     <li class="warning confirm">
       <div class="ui">
         <p>A warning message, with a function attached to the "Confirm"-button...</p>
-        <button aria-label="Try me! Example: A warning message, with a function attached to the 'Confirm'-button">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -201,7 +193,7 @@ swal({
     <li class="warning cancel" id="dismiss-handle">
       <div class="ui">
         <p>... and by passing a parameter, you can execute something else for "Cancel".</p>
-        <button aria-label="Try me! Example: passing a parameter, you can execute something else for 'Cancel'">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -238,7 +230,7 @@ swal({
     <li class="custom-image">
       <div class="ui">
         <p>A message with a custom image and CSS animation disabled</p>
-        <button aria-label="Try me! Example: A message with a custom image and CSS animation disabled">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -254,7 +246,7 @@ swal({
     <li class="custom-width-padding-background">
       <div class="ui">
         <p>A message with custom width, padding and background</p>
-        <button aria-label="Try me! Example: A message with custom width, padding and background">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -268,7 +260,7 @@ swal({
     <li class="ajax-request" id="ajax-request">
       <div class="ui">
         <p>Ajax request example</p>
-        <button aria-label="Try me! Example: Ajax request">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal({
@@ -301,7 +293,7 @@ swal({
     <li class="chaining-modals" id="chaining-modals">
       <div class="ui">
         <p>Chaining modals (queue) example</p>
-        <button aria-label="Try me! Example: Chaining modals (queue)">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal.setDefaults({
@@ -340,7 +332,7 @@ swal.queue(steps).then(<span class="func"><i>function</i></span> (result) {
     <li class="dynamic-queue" id="dynamic-queue">
       <div class="ui">
         <p>Dynamic queue example</p>
-        <button aria-label="Try me! Example: Dynamic queue">Try me!</button>
+        <button>Try me!</button>
       </div>
       <pre>
 swal.queue([{
@@ -367,12 +359,14 @@ swal.queue([{
   <!-- Download & Install -->
   <div class="center-container download-section">
     <h3>Download & install</h3>
-    <pre class="center">$ npm install sweetalert2</pre>
-    <p>Or</p>
     <pre class="center">$ bower install sweetalert2</pre>
+    <p>Or</p>
+    <pre class="center">$ npm install sweetalert2</pre>
     <p>
       Or download from CDN:
-      <a href="https://cdnjs.com/libraries/limonte-sweetalert2" target="_blank" rel="noopener">cdnjs.com/limonte-sweetalert2 <i class="fa fa-external-link"></i></a>
+      <a href="https://www.jsdelivr.com/projects/sweetalert2" target="_blank">jsdelivr.com/sweetalert2 <i class="fa fa-external-link"></i></a>
+      <span class="mobile-hidden"> | </span>
+      <a href="https://cdnjs.com/libraries/limonte-sweetalert2" target="_blank">cdnjs.com/limonte-sweetalert2 <i class="fa fa-external-link"></i></a>
     </p>
   </div>
 
@@ -386,8 +380,8 @@ swal.queue([{
 <span class="comment">&lt;!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser --&gt;</span>
 &lt;<span class="tag">script</span> <span class="attr">src</span>=<span class="str">"https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"</span>&gt;&lt;/<span class="tag">script</span>&gt;</pre>
       <p>Or</p>
-<pre><span class="comment">// ES6 Modules or TypeScript</span>
-<span class="val">import</span> swal <span class="val">from</span> <span class="str">'sweetalert2'</span>
+<pre><span class="comment">// ES6 Modules</span>
+<span class="val">import</span> { default as swal } <span class="val">from</span> <span class="str">'sweetalert2'</span>
 
 <span class="comment">// CommonJS</span>
 <span class="val">const</span> swal = <span class="func">require</span>(<span class="str">'sweetalert2'</span>)</pre>
@@ -614,7 +608,7 @@ swal.queue([{
         <td><i>true</i></td>
         <td>Automatically remove whitespaces from both ends of a result string. Set this parameter to <strong>false</strong> to disable auto-trimming.</td>
       </tr>
-      <tr id="input-attributes">
+      <tr id="input-auto-trim">
         <td><b>inputAttributes</b></td>
         <td><i>{}</i></td>
         <td>HTML input attributes (e.g. <strong>min</strong>, <strong>max</strong>, <strong>autocomplete</strong>, <strong>accept</strong>), that are added to the input field. Object keys will represent attributes names, object values will represent attributes values.</td>
@@ -653,11 +647,6 @@ swal.queue([{
         <td><b>onClose</b></td>
         <td><i>null</i></td>
         <td>Function to run when modal closes, provides modal DOM element as the first argument.</td>
-      </tr>
-      <tr>
-        <td><b>useRejections</b></td>
-        <td><i>true</i></td>
-        <td>Determines whether dismissals (outside click, cancel button, close button, esc key) should reject, or resolve with an object of the format <i>{ dismiss: reason }</i>. Set it to <i>false</i> to get a cleaner control flow when using <i>await</i>, as explained in <a href="https://github.com/limonte/sweetalert2/issues/485">#485</a>.</td>
       </tr>
     </table>
 
@@ -730,7 +719,7 @@ swal(...)
           <div class="swal2-success-circular-line-right"></div>
         </div>
       </td>
-      <td><button class="type-success" aria-label="Try me! Example: success modal">Try me!</button></td>
+      <td><button class="type-success">Try me!</button></td>
     </tr>
     <tr>
       <td><strong>error</strong></td>
@@ -739,22 +728,22 @@ swal(...)
          <span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span>
         </div>
       </td>
-      <td><button class="type-error" aria-label="Try me! Example: error modal">Try me!</button></td>
+      <td><button class="type-error">Try me!</button></td>
     </tr>
     <tr>
       <td><strong>warning</strong></td>
       <td><div class="swal2-icon swal2-warning">!</div></td>
-      <td><button class="type-warning" aria-label="Try me! Example: warning modal">Try me!</button></td>
+      <td><button class="type-warning">Try me!</button></td>
     </tr>
     <tr>
       <td><strong>info</strong></td>
       <td><div class="swal2-icon swal2-info">i</div></td>
-      <td><button class="type-info" aria-label="Try me! Example: info modal">Try me!</button></td>
+      <td><button class="type-info">Try me!</button></td>
     </tr>
     <tr>
       <td><strong>question</strong></td>
       <td><div class="swal2-icon swal2-question">?</div></td>
-      <td><button class="type-question" aria-label="Try me! Example: question modal">Try me!</button></td>
+      <td><button class="type-question">Try me!</button></td>
     </tr>
   </table>
 
@@ -762,7 +751,7 @@ swal(...)
   <!-- Input Types -->
   <h3>Input Types</h3>
   <table class="modal-input-types">
-    <tr id="input-text">
+    <tr id="input-field">
       <td><strong>text</strong></td>
       <td>
         <pre>
@@ -786,7 +775,7 @@ swal({
   })
 })</pre>
       </td>
-      <td><button class="input-type-text" aria-label="Try me! Example: input type text">Try me!</button></td>
+      <td><button class="input-type-text">Try me!</button></td>
     </tr>
 
     <tr id="input-email">
@@ -803,24 +792,7 @@ swal({
   })
 })</pre>
       </td>
-      <td><button class="input-type-email" aria-label="Try me! Example: input type email">Try me!</button></td>
-    </tr>
-
-    <tr id="input-url">
-      <td><strong>url</strong></td>
-      <td>
-        <pre>
-swal({
-  title: <span class="str">'Input URL'</span>,
-  input: <span class="str">'url'</span>
-}).then(<span class="func"><i>function</i></span> (url) {
-  swal({
-    type: <span class="str">'success'</span>,
-    html: <span class="str">'Entered URL: '</span> + url
-  })
-})</pre>
-      </td>
-      <td><button class="input-type-url">Try me!</button></td>
+      <td><button class="input-type-email">Try me!</button></td>
     </tr>
 
     <tr id="input-password">
@@ -844,7 +816,7 @@ swal({
   }
 })</pre>
       </td>
-      <td><button class="input-type-password" aria-label="Try me! Example: input type password">Try me!</button></td>
+      <td><button class="input-type-password">Try me!</button></td>
     </tr>
 
     <tr id="input-textarea">
@@ -860,10 +832,10 @@ swal({
   }
 })</pre>
       </td>
-      <td><button class="input-type-textarea" aria-label="Try me! Example: input type textarea">Try me!</button></td>
+      <td><button class="input-type-textarea">Try me!</button></td>
     </tr>
 
-    <tr id="input-select">
+    <tr id="select-box">
       <td><strong>select</strong></td>
       <td>
         <pre>
@@ -894,10 +866,10 @@ swal({
 })</pre>
 
       </td>
-      <td><button class="input-type-select" aria-label="Try me! Example: input type select">Try me!</button></td>
+      <td><button class="input-type-select">Try me!</button></td>
     </tr>
 
-    <tr id="input-radio">
+    <tr id="radio-inputs">
       <td><strong>radio</strong></td>
       <td>
         <pre>
@@ -932,10 +904,10 @@ swal({
   })
 })</pre>
       </td>
-      <td><button class="input-type-radio" aria-label="Try me! Example: input type radio">Try me!</button></td>
+      <td><button class="input-type-radio">Try me!</button></td>
     </tr>
 
-    <tr id="input-checkbox">
+    <tr id="checkbox">
       <td><strong>checkbox</strong></td>
       <td>
         <pre>
@@ -964,7 +936,7 @@ swal({
 })</pre>
 
       </td>
-      <td><button class="input-type-checkbox" aria-label="Try me! Example: input type checkbox">Try me!</button></td>
+      <td><button class="input-type-checkbox">Try me!</button></td>
     </tr>
 
     <tr id="input-file">
@@ -987,7 +959,7 @@ swal({
   reader.readAsDataURL(file)
 })</pre>
       </td>
-      <td><button class="input-type-file" aria-label="Try me! Example: input type file">Try me!</button></td>
+      <td><button class="input-type-file">Try me!</button></td>
     </tr>
 
     <tr id="input-range">
@@ -1006,7 +978,7 @@ swal({
   inputValue: <span class="val">25</span>
 })</pre>
       </td>
-      <td><button class="input-type-range" aria-label="Try me! Example: input type range">Try me!</button></td>
+      <td><button class="input-type-range">Try me!</button></td>
     </tr>
   </table>
 
@@ -1041,7 +1013,7 @@ swal({
 }).catch(swal.noop)</pre>
 
         </td>
-        <td><button class="input-type-multiple" aria-label="Try me! Example: multiple inputs">Try me!</button></td>
+        <td><button class="input-type-multiple">Try me!</button></td>
       </tr>
 
     </table>
@@ -1204,14 +1176,6 @@ swal({
     swal('Oops...', 'Something went wrong!', 'error').catch(swal.noop)
   })
 
-  $('.donate').on('click', function () {
-    $('.currencies').toggleClass('hidden');
-  })
-
-  $('.currencies').on('click', function (e) {
-    e.stopPropagation()
-  })
-
   $('.examples .message button').on('click', function () {
     swal('Any fool can use a computer').catch(swal.noop)
   })
@@ -1351,18 +1315,6 @@ swal({
       swal({
         type: 'success',
         html: 'Entered email: <strong>' + email + '</strong>'
-      })
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-url').on('click', function () {
-    swal({
-      title: 'Input URL',
-      input: 'url'
-    }).then(function (url) {
-      swal({
-        type: 'success',
-        html: 'Entered URL: <strong>' + url + '</strong>'
       })
     }).catch(swal.noop)
   })

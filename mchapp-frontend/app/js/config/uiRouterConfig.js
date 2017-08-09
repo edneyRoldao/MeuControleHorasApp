@@ -101,7 +101,12 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
     /////////////////////////// STATE: dashboard.profile 
     var dashboardProfile = {};
     dashboardProfile.views = {};
+    dashboard.resolve = {};
     dashboardProfile.url = "/profile";
+
+    dashboard.resolve.userProfile = function(UserProfileService) {
+        return UserProfileService.getProfile();
+    };
 
     dashboardProfile.views["dashboardBody@dashboard"] = {
         templateUrl: "views/profile.html",

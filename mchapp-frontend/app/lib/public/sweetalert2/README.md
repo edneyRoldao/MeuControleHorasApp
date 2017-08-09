@@ -6,7 +6,7 @@ SweetAlert2
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/limonte/sweetalert2.svg)](http://isitmaintained.com/project/limonte/sweetalert2 "Average time to resolve an issue")
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sweetalert2/Lobby)
-[![PayPal Donate](https://img.shields.io/badge/donate-PayPal.me-ff69b4.svg)](https://www.paypal.me/limonte/5eur)
+[![PayPal Donate](https://img.shields.io/badge/donate-PayPal.me-ff69b4.svg)](https://www.paypal.me/limonte/5)
 
 A beautiful, responsive, customizable, accessible (WAI-ARIA) replacement for JavaScript's popup boxes. Zero dependencies.
 
@@ -36,7 +36,7 @@ Or:
 bower install --save sweetalert2
 ```
 
-Or download from CDN: [cdnjs.com/limonte-sweetalert2](https://cdnjs.com/libraries/limonte-sweetalert2)
+Or download from CDN: [jsdelivr.com](https://www.jsdelivr.com/projects/sweetalert2) | [cdnjs.com](https://cdnjs.com/libraries/limonte-sweetalert2)
 
 
 Usage
@@ -188,7 +188,6 @@ Configuration
 | `progressStepsDistance` | `'40px'`             | Distance between progress steps. |
 | `onOpen`                | `null`               | Function to run when modal opens, provides modal DOM element as the first argument. |
 | `onClose`               | `null`               | Function to run when modal closes, provides modal DOM element as the first argument. |
-| `useRejections`         | `true`               | Determines whether dismissals (outside click, cancel button, close button, esc key) should reject, or resolve with an object of the format `{ dismiss: reason }`. Set it to `false` to get a cleaner control flow when using `await`, as explained in [#485](https://github.com/limonte/sweetalert2/issues/485). |
 
 You can redefine default params by using `swal.setDefaults(customParams)` where `customParams` is an object.
 
@@ -233,11 +232,14 @@ Methods
 Browser compatibility
 ---------------------
 
-| IE11* | Edge | Chrome | Firefox | Safari | Opera | Android Browser* | UC Browser* |
-|-------|------|--------|---------|--------|-------|------------------|-------------|
-|  ✅   |   ✅  |   ✅   |     ✅   |   ✅   |    ✅   |        ✅        |      ✅      |
+SweetAlert2 works in most major browsers (yes, even IE). Some details:
 
-\* ES6 Promise polyfill should be included, see [usage example](#usage).
+- **IE: 11**, Promise polyfill should be included (see [usage example](#usage)).
+- **Microsoft Edge: 12+**
+- **Safari: 4+**
+- **Firefox: 4+**
+- **Chrome 14+**
+- **Opera: 15+**
 
 Note that SweetAlert2 **does not** and **will not** provide support or functionality of any kind on IE10 and lower.
 
@@ -275,4 +277,4 @@ Donations
 
 If you liked this plugin, you can donate to support it:
 
-- https://www.paypal.me/limonte/5eur
+- https://www.paypal.me/limonte/5

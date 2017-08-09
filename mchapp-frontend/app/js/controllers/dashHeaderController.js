@@ -2,7 +2,6 @@
 function DashHeaderController(profile) {
 	var ctrl = this;
 	ctrl.profile = profile.data;
-    console.log(ctrl.profile);
 }
 
 DashHeaderController.$inject = ["userProfile"];

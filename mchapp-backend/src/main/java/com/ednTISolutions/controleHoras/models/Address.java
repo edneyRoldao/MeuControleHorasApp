@@ -9,6 +9,11 @@ public class Address {
 	private String uf;
 
 	public Address() {
+		cep = "";
+		logradouro = "";
+		bairro = "";
+		cidade = "";
+		uf = "";
 	}
 
 	public Address(String cep, String logradouro, String bairro, String cidade, String uf) {

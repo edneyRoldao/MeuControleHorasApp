@@ -55,6 +55,6 @@
     "commit": "2292153f1c766ad79e3ccc73c3fde23765f4fb01"
   },
   "_source": "https://github.com/deepu105/angular-clock.git",
-  "_target": "^0.5.1",
+  "_target": "0.5.1",
   "_originalSource": "angular-ui-clock"
 }

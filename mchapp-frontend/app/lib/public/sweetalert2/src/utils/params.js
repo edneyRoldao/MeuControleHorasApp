@@ -44,6 +44,5 @@ export default {
   currentProgressStep: null,
   progressStepsDistance: '40px',
   onOpen: null,
-  onClose: null,
-  useRejections: true
+  onClose: null
 }

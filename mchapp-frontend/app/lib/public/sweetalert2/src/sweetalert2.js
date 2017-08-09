@@ -40,7 +40,7 @@ const setParameters = (params) => {
   if (params.titleText) {
     title.innerText = params.titleText
   } else {
-    title.innerHTML = params.title.split('\n').join('<br />')
+    title.innerHTML = params.title.split('\n').join('<br>')
   }
 
   // Content
@@ -342,8 +342,7 @@ const sweetAlert = (...args) => {
       if (params.input === 'url' && params.inputValidator === null) {
         params.inputValidator = (url) => {
           return new Promise((resolve, reject) => {
-            // taken from https://stackoverflow.com/a/3809435/1331425
-            const urlRegex = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/
+            const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
             if (urlRegex.test(url)) {
               resolve()
             } else {
@@ -369,11 +368,7 @@ const sweetAlert = (...args) => {
     if (params.timer) {
       modal.timeout = setTimeout(() => {
         sweetAlert.closeModal(params.onClose)
-        if (params.useRejections) {
-          reject('timer')
-        } else {
-          resolve({dismiss: 'timer'})
-        }
+        reject('timer')
       }, params.timer)
     }
 
@@ -448,11 +443,7 @@ const sweetAlert = (...args) => {
         )
       } else {
         sweetAlert.closeModal(params.onClose)
-        if (params.useRejections) {
-          resolve(value)
-        } else {
-          resolve({value: value})
-        }
+        resolve(value)
       }
     }
 
@@ -528,11 +519,7 @@ const sweetAlert = (...args) => {
           } else if (targetedCancel && sweetAlert.isVisible()) {
             sweetAlert.disableButtons()
             sweetAlert.closeModal(params.onClose)
-            if (params.useRejections) {
-              reject('cancel')
-            } else {
-              resolve({dismiss: 'cancel'})
-            }
+            reject('cancel')
           }
           break
         default:
@@ -550,11 +537,7 @@ const sweetAlert = (...args) => {
     // Closing modal by close button
     dom.getCloseButton().onclick = () => {
       sweetAlert.closeModal(params.onClose)
-      if (params.useRejections) {
-        reject('close')
-      } else {
-        resolve({dismiss: 'close'})
-      }
+      reject('close')
     }
 
     // Closing modal by overlay click
@@ -564,11 +547,7 @@ const sweetAlert = (...args) => {
       }
       if (params.allowOutsideClick) {
         sweetAlert.closeModal(params.onClose)
-        if (params.useRejections) {
-          reject('overlay')
-        } else {
-          resolve({dismiss: 'overlay'})
-        }
+        reject('overlay')
       }
     }
 
@@ -665,23 +644,29 @@ const sweetAlert = (...args) => {
       // ESC
       } else if (keyCode === 27 && params.allowEscapeKey === true) {
         sweetAlert.closeModal(params.onClose)
-        if (params.useRejections) {
-          reject('esc')
-        } else {
-          resolve({dismiss: 'esc'})
-        }
+        reject('esc')
       }
     }
 
-    if (!window.onkeydown || window.onkeydown.toString() !== handleKeyDown.toString()) {
-      dom.states.previousWindowKeyDown = window.onkeydown
-      window.onkeydown = handleKeyDown
-    }
+    dom.states.previousWindowKeyDown = window.onkeydown
+    window.onkeydown = handleKeyDown
 
     // Loading state
     if (params.buttonsStyling) {
       confirmButton.style.borderLeftColor = params.confirmButtonColor
       confirmButton.style.borderRightColor = params.confirmButtonColor
+    }
+
+    /**
+     * Show spinner instead of Confirm button and disable Cancel button
+     */
+    sweetAlert.showLoading = sweetAlert.enableLoading = () => {
+      dom.show(buttonsWrapper)
+      dom.show(confirmButton, 'inline-block')
+      dom.addClass(buttonsWrapper, swalClasses.loading)
+      dom.addClass(modal, swalClasses.loading)
+      confirmButton.disabled = true
+      cancelButton.disabled = true
     }
 
     /**
@@ -1112,26 +1097,6 @@ sweetAlert.clickConfirm = () => dom.getConfirmButton().click()
  * Global function to click 'Cancel' button
  */
 sweetAlert.clickCancel = () => dom.getCancelButton().click()
-
-/**
- * Show spinner instead of Confirm button and disable Cancel button
- */
-sweetAlert.showLoading = sweetAlert.enableLoading = () => {
-  const modal = dom.getModal()
-  if (!modal) {
-    sweetAlert('')
-  }
-  const buttonsWrapper = dom.getButtonsWrapper()
-  const confirmButton = dom.getConfirmButton()
-  const cancelButton = dom.getCancelButton()
-
-  dom.show(buttonsWrapper)
-  dom.show(confirmButton, 'inline-block')
-  dom.addClass(buttonsWrapper, swalClasses.loading)
-  dom.addClass(modal, swalClasses.loading)
-  confirmButton.disabled = true
-  cancelButton.disabled = true
-}
 
 /**
  * Set default params for each popup
