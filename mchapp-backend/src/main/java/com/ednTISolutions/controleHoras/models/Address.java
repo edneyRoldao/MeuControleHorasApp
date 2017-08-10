@@ -4,6 +4,7 @@ public class Address {
 
 	private String cep;
 	private String logradouro;
+	private String numberAndComplement;
 	private String bairro;
 	private String cidade;
 	private String uf;
@@ -11,17 +12,10 @@ public class Address {
 	public Address() {
 		cep = "";
 		logradouro = "";
+		numberAndComplement = "";
 		bairro = "";
 		cidade = "";
 		uf = "";
-	}
-
-	public Address(String cep, String logradouro, String bairro, String cidade, String uf) {
-		this.cep = cep;
-		this.logradouro = logradouro;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.uf = uf;
 	}
 
 	public String getCep() {
@@ -38,6 +32,14 @@ public class Address {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+
+	public String getNumberAndComplement() {
+		return numberAndComplement;
+	}
+
+	public void setNumberAndComplement(String numberAndComplement) {
+		this.numberAndComplement = numberAndComplement;
 	}
 
 	public String getBairro() {
@@ -66,8 +68,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [cep=" + cep + ", logradouro=" + logradouro + ", bairro=" + bairro + ", cidade=" + cidade
-				+ ", uf=" + uf + "]";
+		return "Address [cep=" + cep + ", logradouro=" + logradouro + ", numberAndComplement=" + numberAndComplement
+				+ ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + "]";
 	}
 
 	@Override
@@ -78,6 +80,7 @@ public class Address {
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result + ((numberAndComplement == null) ? 0 : numberAndComplement.hashCode());
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
 	}
@@ -110,6 +113,11 @@ public class Address {
 			if (other.logradouro != null)
 				return false;
 		} else if (!logradouro.equals(other.logradouro))
+			return false;
+		if (numberAndComplement == null) {
+			if (other.numberAndComplement != null)
+				return false;
+		} else if (!numberAndComplement.equals(other.numberAndComplement))
 			return false;
 		if (uf == null) {
 			if (other.uf != null)

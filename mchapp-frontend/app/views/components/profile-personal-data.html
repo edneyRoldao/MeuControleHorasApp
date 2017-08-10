@@ -55,17 +55,26 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Endereço</label>
-                        <input type="text"
-                               cep-mask
-                               ng-change="ctrl.searchAddress()"
-                               ng-model="ctrl.cep"
-                               placeholder="informe o cep"
-                               class="form-control">
+                        <div class="col-sm-4" style="margin-left: -15px;">
+                            <input type="text"
+                                   cep-mask
+                                   ng-change="ctrl.searchAddress()"
+                                   ng-model="ctrl.cep"
+                                   placeholder="informe o cep"
+                                   class="form-control">
+                        </div>
+                        <div class="col-sm-8" style="margin-left: 15px">
+                            <input type="text" 
+                                   ng-model="ctrl.profile.address.numberAndComplement" 
+                                   placeholder="Número e Complemento" 
+                                   class="form-control" 
+                                   ng-disabled="!ctrl.profile.address.logradouro">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        {{ctrl.profile.address}}
+                        <input type="text" ng-model="ctrl.profile.address.logradouro" placeholder="Logradouro" class="form-control" ng-disabled="true">
                     </div>
                 </div>
                 <div class="form-group">
@@ -74,13 +83,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="text" ng-model="ctrl.profile.address.cidade" placeholder="Cidade" class="form-control" ng-disabled="true">
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="ctrl.profile.address.localidade" placeholder="Cidade" class="form-control" ng-disabled="true">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <input type="text" ng-model="ctrl.profile.address.uf" placeholder="UF" class="form-control" ng-disabled="true">
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="ctrl.profile.address.uf" placeholder="Estado" class="form-control" ng-disabled="true">
                     </div>
                 </div>
             </div>

@@ -45,21 +45,27 @@ function ProfileController(dateUtil, searchAddress, profile) {
         if(ctrl.cep) {
             searchAddress.searchAddressFromCEP(ctrl.cep)
                 .success(function(data) {
-
                     if(data.erro) {
-                        ctrl.profile.address = "";
+                        ctrl.profile.address = {};
 
-                        toastr.error('Without any options','Simple notification!', {
+                        toastr.warning('O CEP digitado não existe.','Atenção !', {
                             closeButton: true,
-                            progressBar: true,
-                            iconClass: "alert alert-danger fa fa-close"
+                            progressBar: true
                         });
 
                     }else {
-                        ctrl.profile.address = data;
+                        ctrl.profile.address.cep = data.cep;
+                        ctrl.profile.address.logradouro = data.logradouro;
+                        ctrl.profile.address.bairro = data.bairro;
+                        ctrl.profile.address.cidade = data.localidade;
+                        ctrl.profile.address.uf = data.uf;
                     }
 
                 }).error(function(err, status) {
+                    toastr.error('Houve uma falha no servidor de pesquisa de CEP','Erro !', {
+                        closeButton: true,
+                        progressBar: true
+                    });
                     console.log("There was an error: " + err);
                     console.log("HTTP STATUS CODE: " + status);
             });            
@@ -103,6 +109,7 @@ function ProfileController(dateUtil, searchAddress, profile) {
                 break;
         }
     }
+
 }
 
 ProfileController.$inject = ["DateUtilService", "SearchAddressService", "userProfile"];

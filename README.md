@@ -20,8 +20,11 @@ All API references that were used in this project
 - Angular-ui-router - The most powerful way to manage routes with angularJS
 <br>https://scotch.io/tutorials/angular-routing-using-ui-router
 
-- Angular toastr alert api:
-<br>http://foxandxss.github.io/angular-toastr/ - an awesome alert component
+- TOASTR alert api:
+<br>https://github.com/CodeSeven/toastr                 - github documentation
+<br>http://codeseven.github.io/toastr/demo.html         - demo
+<br>http://astronautweb.co/snippet/font-awesome/        - list of awesome icons and its code
+<br>https://johnpapa.net/fontawesome-icons-with-toastr/ - change awesome icon from alert tutorial 
 
 - AngularJS UI-Grid api
 <br> http://ui-grid.info/

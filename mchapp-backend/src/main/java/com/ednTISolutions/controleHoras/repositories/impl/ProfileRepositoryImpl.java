@@ -42,6 +42,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 	
 	@Override
 	public Profile findProfile(String email) {
+		//removeCollection();
 		return mongoOp.findOne(query(where("email").is(email)), Profile.class);
 	}
 
