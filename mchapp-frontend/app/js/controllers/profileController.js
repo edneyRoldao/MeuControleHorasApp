@@ -1,4 +1,4 @@
-function ProfileController(dateUtil, searchAddress, toastAlert, profile) {
+function ProfileController(dateUtil, searchAddress, profile) {
     var ctrl = this;
 
     ctrl.profile = profile.data;
@@ -39,7 +39,6 @@ function ProfileController(dateUtil, searchAddress, toastAlert, profile) {
     };
 
     ctrl.update = function() {
-        toastAlert.success("test", "test");
     };
 
     ctrl.searchAddress = function() {
@@ -49,9 +48,13 @@ function ProfileController(dateUtil, searchAddress, toastAlert, profile) {
 
                     if(data.erro) {
                         ctrl.profile.address = "";
-                        toastAlert.warning("este cep n\u00e3o existe !", "Erro", {
-                            closeButton: true
+
+                        toastr.error('Without any options','Simple notification!', {
+                            closeButton: true,
+                            progressBar: true,
+                            iconClass: "alert alert-danger fa fa-close"
                         });
+
                     }else {
                         ctrl.profile.address = data;
                     }
@@ -102,5 +105,5 @@ function ProfileController(dateUtil, searchAddress, toastAlert, profile) {
     }
 }
 
-ProfileController.$inject = ["DateUtilService", "SearchAddressService", "toastr", "userProfile"];
+ProfileController.$inject = ["DateUtilService", "SearchAddressService", "userProfile"];
 angular.module("meuControleHorasApp").controller("ProfileController", ProfileController);
