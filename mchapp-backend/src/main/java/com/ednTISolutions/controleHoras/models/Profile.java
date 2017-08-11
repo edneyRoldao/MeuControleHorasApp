@@ -1,11 +1,10 @@
 package com.ednTISolutions.controleHoras.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Calendar;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by edneyroldao on 07/06/17.
@@ -15,10 +14,9 @@ public class Profile {
 
 	@Id
 	private BigInteger id;
-
 	private String name;
 	private String email;
-	private Calendar birthDate;
+	private String birthDate;
 	private Character gender;
 	private String avatar;
 	private String company;
@@ -32,26 +30,17 @@ public class Profile {
 	}
 
 	public Profile(User user) {
-		email = user.getUsername();
 		name = user.getFirstname();
+		email = user.getUsername();
+		birthDate = null;
+		gender = null;
+		avatar = null;
+		company = null;
+		profession = null;
+		valorHora = null;
+		horasPorMes = null;
+		maxHorasPorMes = null;
 		address = new Address();
-	}
-
-	public Profile(BigInteger id, String name, String email, Calendar birthDate, Character gender, String avatar,
-			String company, String profession, BigDecimal valorHora, Integer horasPorMes, Integer maxHorasPorMes,
-			Address address) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.birthDate = birthDate;
-		this.gender = gender;
-		this.avatar = avatar;
-		this.company = company;
-		this.profession = profession;
-		this.valorHora = valorHora;
-		this.horasPorMes = horasPorMes;
-		this.maxHorasPorMes = maxHorasPorMes;
-		this.address = address;
 	}
 
 	public BigInteger getId() {
@@ -78,11 +67,11 @@ public class Profile {
 		this.email = email;
 	}
 
-	public Calendar getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Calendar birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 

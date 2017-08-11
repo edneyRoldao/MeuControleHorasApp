@@ -31,8 +31,18 @@
     opacity: 0;
 }
 
-.cropArea {
+.crop-area {
 	background: #E4E4E4;
 	overflow: hidden;
 	height:360px;
+}
+
+.avatar {
+	width: 100px;
+	height: 100px;
+}
+
+.img-footer {
+	width: 20px;
+	height: 20px;
 }

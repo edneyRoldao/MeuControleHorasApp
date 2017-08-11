@@ -6,15 +6,17 @@ import com.ednTISolutions.controleHoras.models.User;
 import java.math.BigInteger;
 
 public interface ProfileRepository {
+	
+	void save(User user);
 
-	Profile createNewProfile(User user);
+	void save(Profile profile);
 
-	Profile findProfile(BigInteger id);
+	Profile find(String email);
+	
+	Profile find(BigInteger id);
 
-	Profile findProfile(String email);
-
-	Profile updateProfile(Profile profile);
-
-	void removeCollection();
+	void delete(String email);
+	
+	void deleteCollection();
 
 }

@@ -20,40 +20,36 @@ import com.ednTISolutions.controleHoras.repositories.ProfileRepository;
 public class ProfileRepositoryImpl implements ProfileRepository {
 
 	@Autowired
-	private MongoOperations mongoOp;
+	private MongoOperations mongoOps;
 
 	@Override
-	public Profile createNewProfile(User user) {
-		Profile profile = findProfile(user.getUsername());
-
-		if(profile != null) {
-			return profile;			
-		}
-		
-		mongoOp.insert(new Profile(user));
-
-		return findProfile(user.getUsername());
+	public void save(User user) {
+		mongoOps.insert(new Profile(user));
 	}
 
 	@Override
-	public Profile findProfile(BigInteger id) {
-		return mongoOp.findById(id, Profile.class);
-	}
-	
-	@Override
-	public Profile findProfile(String email) {
-		return mongoOp.findOne(query(where("email").is(email)), Profile.class);
+	public void save(Profile profile) {
+		mongoOps.insert(profile);
 	}
 
 	@Override
-	public void removeCollection() {
-		mongoOp.dropCollection(Profile.class);
+	public Profile find(String email) {
+		return mongoOps.findOne(query(where("email").is(email)), Profile.class);
 	}
 
 	@Override
-	public Profile updateProfile(Profile profile) {
-        mongoOp.save(profile);
-		return findProfile(profile.getEmail());
+	public Profile find(BigInteger id) {
+		return mongoOps.findOne(query(where("id").is(id)), Profile.class);
+	}
+
+	@Override
+	public void delete(String email) {
+		mongoOps.remove(query(where("email").is(email)), Profile.class);
+	}
+
+	@Override
+	public void deleteCollection() {
+		mongoOps.dropCollection(Profile.class);
 	}
 
 }

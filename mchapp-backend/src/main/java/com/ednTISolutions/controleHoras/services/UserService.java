@@ -1,16 +1,16 @@
 package com.ednTISolutions.controleHoras.services;
 
-import com.ednTISolutions.controleHoras.models.NewUserTemp;
-import com.ednTISolutions.controleHoras.models.User;
-import com.ednTISolutions.controleHoras.repositories.UserRepository;
-import com.ednTISolutions.controleHoras.security.utils.SerialGenerator;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import com.ednTISolutions.controleHoras.models.NewUserTemp;
+import com.ednTISolutions.controleHoras.models.User;
+import com.ednTISolutions.controleHoras.repositories.UserRepository;
+import com.ednTISolutions.controleHoras.security.utils.SerialGenerator;
 
 /**
  * Created by edneyroldao on 07/06/17.
@@ -87,10 +87,6 @@ public class UserService {
 		content.append("http://localhost:8083/#/ativarConta");
 
 		return mailService.sendEmailToUser(user.getUsername(), subject, content.toString());
-	}
-
-	public void attachProfileIdFromUser(User user) {
-		repository.save(user);
 	}
 
 }

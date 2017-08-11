@@ -1,6 +1,7 @@
 package com.ednTISolutions.controleHoras.controllers;
 
 import com.ednTISolutions.controleHoras.models.User;
+import com.ednTISolutions.controleHoras.exceptions.ProfileUsernameEmptyException;
 import com.ednTISolutions.controleHoras.exceptions.ThereIsNoUserException;
 import com.ednTISolutions.controleHoras.models.Profile;
 import com.ednTISolutions.controleHoras.services.ProfileService;
@@ -30,32 +31,32 @@ public class ProfileController {
     @PutMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Profile> updateProfile(@RequestBody Profile profile) {
-        Profile updatedProfile = profileService.update(profile);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedProfile);
+        try {
+			return ResponseEntity.status(HttpStatus.OK).body(profileService.update(profile));
+		} catch (ProfileUsernameEmptyException e) {
+			e.getMessage();
+			return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+		}
     }
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Profile> getUserProfile(HttpServletRequest request) throws ThereIsNoUserException {
-    	Profile profile = null;
-    	
         String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         User user = userService.findByUsername(username);
         
         if(user == null) {
-        	throw new ThereIsNoUserException("There is an unexpected error while trying to retrieve the User");
+        	String msg = "There is an unexpected error while trying to retrieve the User";
+        	throw new ThereIsNoUserException(msg);        	
         }
         
-        if(user.getProfileId() != null) {
-        	profile = profileService.getProfile(user.getProfileId());
-            return ResponseEntity.status(HttpStatus.OK).body(profile);        	
-        }
+    	Profile profile = profileService.find(user.getUsername());
         
-        profile = profileService.createProfile(user);
-        userService.attachProfileIdFromUser(user);
+    	if(profile == null)
+    		profile = profileService.create(user);
         
-        return ResponseEntity.status(HttpStatus.OK).body(profile);
+        return ResponseEntity.status(HttpStatus.OK).body(profile);        	
     }
 
 }
