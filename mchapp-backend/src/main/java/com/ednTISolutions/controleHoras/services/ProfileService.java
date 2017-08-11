@@ -23,4 +23,8 @@ public class ProfileService {
 		return repository.createNewProfile(user);
 	}
 
+	public Profile update(Profile profile) {
+		return repository.updateProfile(profile);
+	}
+
 }
