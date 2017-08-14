@@ -22,8 +22,12 @@ function DateUtilService() {
         return years;
     };
 
-    service.isDateValid = function (day, month, year) {
+    service.isDateValid = function (year, month, day) {
         return moment([year, month, day]).isValid();
+    };
+
+    service.newDate = function (day, month, year) {
+        return moment([year, month, day]);
     };
 
     return service;

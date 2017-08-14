@@ -11,6 +11,10 @@ function UserProfileService(http, constants) {
         return http.put(URL + "profile", profile);
     };
 
+    service.getDefaultImage = function () {
+        return constants.getDefaultImage;
+    };
+
     service.getInstance = getInstance;
 
 	return service;

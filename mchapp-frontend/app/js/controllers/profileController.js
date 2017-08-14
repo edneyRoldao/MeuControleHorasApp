@@ -1,18 +1,18 @@
 function ProfileController(dateUtil, searchAddress, profile, profileService) {
     var ctrl = this;
 
+    ctrl.avatar = "";
     ctrl.profile = profile.data;
 
-    console.log(ctrl.profile);
+    if(ctrl.profile.birthDate) {
+        convertDateToNumber(ctrl.profile.birthDate);
+    }
 
     ctrl.days = dateUtil.getDaysOfMonth();
     ctrl.months = dateUtil.getMonths();
     ctrl.years = dateUtil.getRangeYearsValidToWork();
 
-    ctrl.cep = "";
-
-    ctrl.types = ["image/png", "image/jpeg", "image/gif"];
-    ctrl.image = "";
+    ctrl.types = ["image/png", "image/jpeg", "image/gif", "image/jpg"];
 
     ctrl.btnFirstForm = {
         'btn btn-success': true,
@@ -38,6 +38,25 @@ function ProfileController(dateUtil, searchAddress, profile, profileService) {
     };
 
     ctrl.update = function() {
+        if(ctrl.avatar !== profileService.getDefaultImage()) {
+            ctrl.profile.avatar = ctrl.avatar;
+        }
+
+        if(ctrl.day || ctrl.month || ctrl.year) {
+            if(dateUtil.isDateValid(ctrl.year, ctrl.month - 1, ctrl.day)) {
+                ctrl.profile.birthDate = moment([ctrl.year, ctrl.month - 1, ctrl.day]);
+
+            }else {
+                var msg = 'A data é inválida ou algum campo não foi selecionado';
+                toastr.error(msg,'Erro no campo data de Nascimento !', {
+                    closeButton: true,
+                    progressBar: true
+                });
+
+                return;
+            }
+        }
+
         profileService.updateProfile(ctrl.profile)
             .success(function(data) {
                 console.log(data);
@@ -48,8 +67,8 @@ function ProfileController(dateUtil, searchAddress, profile, profileService) {
     };
 
     ctrl.searchAddress = function() {
-        if(ctrl.cep) {
-            searchAddress.searchAddressFromCEP(ctrl.cep)
+        if(ctrl.profile.address.cep) {
+            searchAddress.searchAddressFromCEP(ctrl.profile.address.cep)
                 .success(function(data) {
                     if(data.erro) {
                         ctrl.profile.address = {};
@@ -60,7 +79,6 @@ function ProfileController(dateUtil, searchAddress, profile, profileService) {
                         });
 
                     }else {
-                        ctrl.profile.address.cep = data.cep;
                         ctrl.profile.address.logradouro = data.logradouro;
                         ctrl.profile.address.bairro = data.bairro;
                         ctrl.profile.address.cidade = data.localidade;
@@ -114,6 +132,13 @@ function ProfileController(dateUtil, searchAddress, profile, profileService) {
                 ctrl.btnSecondForm['btn btn-white'] = true;
                 break;
         }
+    }
+
+    function convertDateToNumber(date) {
+        var newDate = moment(date);
+        ctrl.day = newDate.date();
+        ctrl.month = newDate.month();
+        ctrl.year = newDate.year();
     }
 
 }
