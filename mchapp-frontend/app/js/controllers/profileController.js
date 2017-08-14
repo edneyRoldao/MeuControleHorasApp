@@ -1,4 +1,4 @@
-function ProfileController(dateUtil, searchAddress, profile, profileService) {
+function ProfileController(dateUtil, searchAddress, profile, profileService, state) {
     var ctrl = this;
 
     ctrl.avatar = "";
@@ -58,8 +58,13 @@ function ProfileController(dateUtil, searchAddress, profile, profileService) {
         }
 
         profileService.updateProfile(ctrl.profile)
-            .success(function(data) {
-                console.log(data);
+            .success(function(data) {                
+                state.go("dashboard");
+                toastr.success("Perfil atualizado com sucesso",'Sucesso !', {
+                    closeButton: true,
+                    progressBar: true
+                });
+
             }).error(function(err, status) {
                 console.log(err);
                 console.log(status);
@@ -137,11 +142,12 @@ function ProfileController(dateUtil, searchAddress, profile, profileService) {
     function convertDateToNumber(date) {
         var newDate = moment(date);
         ctrl.day = newDate.date();
-        ctrl.month = newDate.month();
+        var month = newDate.month();
+        ctrl.month = month + 1;
         ctrl.year = newDate.year();
     }
 
 }
 
-ProfileController.$inject = ["DateUtilService", "SearchAddressService", "userProfile", "UserProfileService"];
+ProfileController.$inject = ["DateUtilService", "SearchAddressService", "userProfile", "UserProfileService", "$state"];
 angular.module("meuControleHorasApp").controller("ProfileController", ProfileController);
