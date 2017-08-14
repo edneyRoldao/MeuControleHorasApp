@@ -9,35 +9,55 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Nome da Empresa</label>
-                        <input type="text" ng-model="ctrl.profile.company" placeholder="Nome da Empresa" class="form-control">
+                        <input type="text" 
+                               class="form-control"
+                               just-letters-mask
+                               placeholder="Nome da Empresa" 
+                               ng-model="ctrl.profile.company"> 
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Formação Acadêmica</label>
-                        <input type="text" ng-model="ctrl.profile.profession" placeholder="formação acadêmica" class="form-control">
+                        <input type="text" 
+                               class="form-control"
+                               just-letters-mask
+                               placeholder="formação acadêmica" 
+                               ng-model="ctrl.profile.profession"> 
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Valor recebido por hora</label>
-                        <input type="text" ng-model="ctrl.profile.valorHora" placeholder="valor/hora" class="form-control">
+                        <input type="text"
+                               ui-money-mask
+                               ng-model="ctrl.profile.valorHora" 
+                               placeholder="valor/hora" 
+                               class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Meta mensal em horas</label>
-                        <input type="text" ng-model="ctrl.profile.horasPorMes" placeholder="horas/mês" class="form-control">
+                        <input type="text"
+                               hours-mask
+                               class="form-control"
+                               placeholder="horas/mês" 
+                               ng-model="ctrl.profile.horasPorMes"> 
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Quantidade de horas Máxima</label>
-                        <input type="text" ng-model="ctrl.profile.maxHorasPorMes" placeholder="máximo horas/mês" class="form-control">
+                        <input type="text" 
+                               hours-mask 
+                               class="form-control"
+                               placeholder="máximo horas/mês" 
+                               ng-model="ctrl.profile.maxHorasPorMes">
                     </div>
                 </div>
             </div>

@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
 import com.ednTISolutions.controleHoras.models.Profile;
-import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.ProfileRepository;
 
 /**
@@ -21,11 +20,6 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
 	@Autowired
 	private MongoOperations mongoOps;
-
-	@Override
-	public void save(User user) {
-		mongoOps.insert(new Profile(user));
-	}
 
 	@Override
 	public void save(Profile profile) {

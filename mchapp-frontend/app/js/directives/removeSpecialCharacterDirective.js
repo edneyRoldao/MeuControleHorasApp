@@ -1,9 +1,7 @@
 // EdneyRoldao - 21/05/17
 function RemoveSpecialCharacter() {
     var directive = {};
-
     directive.require = "ngModel";
-
     directive.restrict = "A";
 
     directive.link = function(scope, element, attrs, ctrl) {

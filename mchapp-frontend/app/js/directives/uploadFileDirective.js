@@ -1,7 +1,6 @@
 // EdneyRoldao - 19/07/17
 function UploadFile() {
 	var directive = {};
-
 	directive.restrict = "A";
 
 	directive.scope = {

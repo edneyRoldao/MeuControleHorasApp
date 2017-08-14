@@ -1,7 +1,6 @@
 /* Edney Roldao - 09/08/17 */
 function CepMask() {
 	var directive = {};
-
 	directive.restrict = "A";
 	directive.require = "ngModel";
 

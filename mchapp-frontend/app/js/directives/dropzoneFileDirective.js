@@ -1,6 +1,5 @@
 function FileDropzone() {
   var directive = {};
-
   directive.restrict = "A";
 
   directive.scope = {

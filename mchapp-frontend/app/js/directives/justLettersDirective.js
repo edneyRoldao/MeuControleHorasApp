@@ -1,9 +1,7 @@
 // EdneyRoldao - 19/05/17
-function ValidateNameField() {
+function JustLettersMask() {
     var directive = {};
-
     directive.require = "ngModel";
-
     directive.restrict = "A";
 
     directive.link = function(scope, element, attrs, ctrl) {
@@ -23,4 +21,4 @@ function ValidateNameField() {
     return directive;
 }
 
-angular.module("meuControleHorasApp").directive("validateNameField", ValidateNameField);
+angular.module("meuControleHorasApp").directive("justLettersMask", JustLettersMask);

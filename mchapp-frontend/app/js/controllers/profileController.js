@@ -3,43 +3,47 @@ function ProfileController(dateUtil, searchAddress, profile, profileService, sta
 
     ctrl.avatar = "";
     ctrl.profile = profile.data;
+    ctrl.percentage = _howMuchFieldsAreFilled(ctrl.profile);
 
-    if(ctrl.profile.birthDate) {
-        convertDateToNumber(ctrl.profile.birthDate);
-    }
+    ctrl.types = ["image/png", "image/jpeg", "image/gif", "image/jpg"];
 
     ctrl.days = dateUtil.getDaysOfMonth();
     ctrl.months = dateUtil.getMonths();
     ctrl.years = dateUtil.getRangeYearsValidToWork();
 
-    ctrl.types = ["image/png", "image/jpeg", "image/gif", "image/jpg"];
-
-    ctrl.btnFirstForm = {
-        'btn btn-success': true,
-        'btn btn-white': false
-    };
-
-    ctrl.btnSecondForm = {
-        'btn btn-success': false,
-        'btn btn-white': true
-    };
-
-    ctrl.btnThirdForm = {
-        'btn btn-success': false,
-        'btn btn-white': true
-    };
-
     ctrl.showPersonalDataForm = true;
     ctrl.showAvatarForm = false;
     ctrl.showJobDataForm = false;
 
-    ctrl.changeForm = function(form) {
-        changeCssFromButton(form);
-    };
+    if(ctrl.profile.birthDate) {
+        _convertDateToNumber(ctrl.profile.birthDate);
+    }
 
     ctrl.update = function() {
         if(ctrl.avatar !== profileService.getDefaultImage()) {
             ctrl.profile.avatar = ctrl.avatar;
+        }
+
+        if(!ctrl.profile.name || ctrl.profile.name.length < 3) {
+            var msg = 'O campo nome não foi preenchido corretamente';
+
+            toastr.error(msg,'Erro!', {
+                closeButton: true,
+                progressBar: true
+            });
+
+            return;
+        }
+
+        if(ctrl.profile.valorHora && ctrl.profile.valorHora > 1000) {
+            var msg = 'O valor por hora excede o limite permitido';
+
+            toastr.error(msg,'Erro!', {
+                closeButton: true,
+                progressBar: true
+            });
+
+            return;
         }
 
         if(ctrl.day || ctrl.month || ctrl.year) {
@@ -66,6 +70,11 @@ function ProfileController(dateUtil, searchAddress, profile, profileService, sta
                 });
 
             }).error(function(err, status) {
+                var msg = 'Aconteceu um erro no servidor, tente novamente em alguns minutos.';
+                toastr.error(msg,'Erro !', {
+                        closeButton: true,
+                        progressBar: true
+                    });
                 console.log(err);
                 console.log(status);
         });
@@ -101,7 +110,22 @@ function ProfileController(dateUtil, searchAddress, profile, profileService, sta
         }
     };
 
-    function changeCssFromButton (form) {
+    ctrl.btnFirstForm = {
+        'btn btn-success': true,
+        'btn btn-white': false
+    };
+
+    ctrl.btnSecondForm = {
+        'btn btn-success': false,
+        'btn btn-white': true
+    };
+
+    ctrl.btnThirdForm = {
+        'btn btn-success': false,
+        'btn btn-white': true
+    };
+
+    ctrl.changeForm = function(form) {
         switch (form) {
             case 1:
                 ctrl.showPersonalDataForm = true;
@@ -137,9 +161,9 @@ function ProfileController(dateUtil, searchAddress, profile, profileService, sta
                 ctrl.btnSecondForm['btn btn-white'] = true;
                 break;
         }
-    }
+    };
 
-    function convertDateToNumber(date) {
+    function _convertDateToNumber(date) {
         var newDate = moment(date);
         ctrl.day = newDate.date();
         var month = newDate.month();
@@ -147,7 +171,37 @@ function ProfileController(dateUtil, searchAddress, profile, profileService, sta
         ctrl.year = newDate.year();
     }
 
+    function _howMuchFieldsAreFilled(profile) {
+        var fieldsNumber = 11;
+        var total = 3;
+
+        if(profile.birthDate) total++;
+        if(profile.gender) total++;
+        if(profile.company) total++;    
+        if(profile.profession) total++;    
+        if(profile.valorHora) total++;    
+        if(profile.horasPorMes) total++;    
+        if(profile.maxHorasPorMes) total++;    
+        if(profile.address && profile.address.cep) total++;
+
+        var perc = (total * 100) / fieldsNumber;
+
+        if(perc === 100) {
+            ctrl.fillFormMsg = "Informações completas !"
+        }else {
+            ctrl.fillFormMsg = 
+                "Para obter melhores experiências com o sistema, complete o formulário com seus dados";
+        }
+
+        return perc.toFixed();
+    }
+
 }
 
-ProfileController.$inject = ["DateUtilService", "SearchAddressService", "userProfile", "UserProfileService", "$state"];
+ProfileController.$inject = [];
+ProfileController.$inject.push("DateUtilService");
+ProfileController.$inject.push("SearchAddressService");
+ProfileController.$inject.push("userProfile");
+ProfileController.$inject.push("UserProfileService");
+ProfileController.$inject.push("$state");
 angular.module("meuControleHorasApp").controller("ProfileController", ProfileController);

@@ -9,13 +9,21 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">Nome</label>
-                        <input type="text" ng-model="ctrl.profile.name" placeholder="Nome de usuário" class="form-control">
+                        <input type="text" 
+                               just-letters-mask
+                               ng-model="ctrl.profile.name" 
+                               placeholder="Nome de usuário" 
+                               class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label class="col-sm-12 control-label">e-mail</label>
-                        <input type="text" ng-model="ctrl.profile.email" placeholder="e-mail de usuário" class="form-control">
+                        <input type="text"
+                               ng-disabled="true" 
+                               ng-model="ctrl.profile.email" 
+                               placeholder="e-mail de usuário" 
+                               class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
