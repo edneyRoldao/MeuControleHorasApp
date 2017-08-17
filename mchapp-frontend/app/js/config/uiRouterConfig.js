@@ -116,6 +116,19 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
     stateProvider.state("dashboard.profile", dashboardProfile);
 
 
+    /////////////////////////// STATE: dashboard.newPassword
+    var dashboardNewPassword = {};
+    dashboardNewPassword.views = {};
+    dashboardNewPassword.url = "/novaSenha";
+
+    dashboardNewPassword.views["dashboardBody@dashboard"] = {
+        templateUrl: "views/new-password.html",
+        controller: "NewPasswordController as ctrl"
+    };
+
+    stateProvider.state("dashboard.newPassword", dashboardNewPassword);
+
+
     /////////////////////////// STATE: OTHERWISE 
     urlRouterProvider.otherwise('/home');
 }
