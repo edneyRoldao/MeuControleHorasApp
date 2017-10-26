@@ -27,4 +27,5 @@ mchapp-frontend/app/lib/public/*
 *jwt.properties
 *mongoDB.properties
 */MeuControleHorasApp.iml
+mchapp-frontend.iml
 .idea
