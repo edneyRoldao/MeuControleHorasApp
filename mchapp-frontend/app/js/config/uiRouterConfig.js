@@ -119,7 +119,12 @@ function uiRouterConfig(stateProvider, urlRouterProvider) {
     /////////////////////////// STATE: dashboard.newPassword
     var dashboardNewPassword = {};
     dashboardNewPassword.views = {};
+    dashboard.resolve = {};
     dashboardNewPassword.url = "/novaSenha";
+
+    dashboard.resolve.userProfile = function(UserProfileService) {
+        return UserProfileService.getProfile();
+    };
 
     dashboardNewPassword.views["dashboardBody@dashboard"] = {
         templateUrl: "views/new-password.html",

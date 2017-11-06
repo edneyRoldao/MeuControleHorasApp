@@ -15,7 +15,7 @@ function UserProfileService(http, constants) {
         return constants.getDefaultImage;
     };
 
-    service.getInstance = getInstance;
+    service.getInstance = _getInstance;
 
 	return service;
 }
@@ -24,7 +24,7 @@ UserProfileService.$inject = ["$http", "ConstantsApp"];
 angular.module("meuControleHorasApp").factory("UserProfileService", UserProfileService);
 
 // private functions
-function getInstance() {
+function _getInstance() {
     var profile = {};
 
     profile.name = null;

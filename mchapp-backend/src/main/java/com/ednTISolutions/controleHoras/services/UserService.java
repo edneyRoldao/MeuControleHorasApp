@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ednTISolutions.controleHoras.models.NewUserTemp;
 import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.repositories.UserRepository;
+import com.ednTISolutions.controleHoras.security.utils.PasswordUtil;
 import com.ednTISolutions.controleHoras.security.utils.SerialGenerator;
 
 /**
@@ -57,10 +58,9 @@ public class UserService {
 	}
 
 	public void saveNewPassowrd(User user) {
-		String password = user.getPassword();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setPassword(encoder.encode(password));
-
+		String password = PasswordUtil.encodePassword(user.getPassword());
+		user.setPassword(password);
+		user.setLastPasswordResetDate(new Date());		
 		repository.save(user);
 	}
 

@@ -3,12 +3,14 @@ package com.ednTISolutions.controleHoras.controllers;
 import com.ednTISolutions.controleHoras.models.NewUserTemp;
 import com.ednTISolutions.controleHoras.models.User;
 import com.ednTISolutions.controleHoras.security.utils.JwtTokenUtil;
+import com.ednTISolutions.controleHoras.security.utils.PasswordUtil;
 import com.ednTISolutions.controleHoras.security.utils.SerialGenerator;
 import com.ednTISolutions.controleHoras.services.NewUserTempService;
 import com.ednTISolutions.controleHoras.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -59,13 +61,29 @@ public class UserController {
 		return ResponseEntity.ok(newUser);
 	}
 
-	@SuppressWarnings("rawtypes")
+    @PutMapping("/trocarSenha")
+    @PreAuthorize("hasRole('USER')")
+	public ResponseEntity<User> changePassword(@RequestBody User user) {
+    	User userFromDB = service.findByUsername(user.getUsername());
+    	
+		if (userFromDB == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		
+		if(PasswordUtil.arePasswordsNotEqual(user.getPassword(), userFromDB.getPassword()))
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		
+		userFromDB.setPassword(user.getNewPassword());    	    	
+		service.saveNewPassowrd(userFromDB);
+
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
 	@PostMapping("/redefinirSenha")
-	public ResponseEntity defineNewPassword(@RequestBody String username) {
+	public ResponseEntity<String> defineNewPassword(@RequestBody String username) {
 		User user = service.findByUsername(username);
 
 		if (user == null)
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
 		String newPassword = SerialGenerator.generateSerial(6);
 		user.setPassword(newPassword);
@@ -75,7 +93,7 @@ public class UserController {
 
 		service.saveNewPassowrd(user);
 
-		return new ResponseEntity(HttpStatus.OK);
+		return ResponseEntity.status(HttpStatus.OK).body("password has been saved Sucessfully");
 	}
 
 }

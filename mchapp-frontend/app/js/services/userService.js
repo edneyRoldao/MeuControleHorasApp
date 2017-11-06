@@ -15,6 +15,10 @@ function UserService(http, constants) {
     	return http.post(URL + "usuario/redefinirSenha", email);
     };
 
+    service.changePassword = function(user) {
+        return http.put(URL + "usuario/trocarSenha", user);
+    };
+
     service.buildUserObject = function (userFromForm) {
         var user = {};
 
