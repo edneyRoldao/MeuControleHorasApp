@@ -32,14 +32,6 @@ public class Profile {
 	public Profile(User user) {
 		name = user.getFirstname();
 		email = user.getUsername();
-		birthDate = null;
-		gender = null;
-		avatar = null;
-		company = null;
-		profession = null;
-		valorHora = null;
-		horasPorMes = null;
-		maxHorasPorMes = null;
 		address = new Address();
 	}
 

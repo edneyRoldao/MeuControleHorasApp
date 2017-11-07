@@ -20,7 +20,7 @@ function NewPasswordController(profile, userService, state) {
             }).error(function(err, status) {
             	var msg = "";
             	if(status === 400) {
-            		msg = 'A senha atual que foi informada não confere !';
+            		msg = 'A senha foi informada não confere com a senha atual !';
             	}else {
                 	msg = 'Aconteceu um erro no servidor, tente novamente em alguns minutos.';
             	}
