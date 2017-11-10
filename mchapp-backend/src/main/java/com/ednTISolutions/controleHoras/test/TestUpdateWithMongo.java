@@ -1,17 +1,19 @@
 package com.ednTISolutions.controleHoras.test;
 
-import java.math.BigDecimal;
-
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Query;
 
 import com.ednTISolutions.controleHoras.config.MongodbConfig;
-import com.ednTISolutions.controleHoras.models.Address;
-import com.ednTISolutions.controleHoras.models.Profile;
+import com.ednTISolutions.controleHoras.models.RegistroPonto;
 
 public class TestUpdateWithMongo {
 
@@ -21,47 +23,29 @@ public class TestUpdateWithMongo {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(MongodbConfig.class);
 		MongoOperations mongo = (MongoOperations) ctx.getBean("mongoTemplate");
 		System.out.println("Mongo operations object has been retrieved from spring context !");		
-		mongo.dropCollection("profiles");
+		mongo.dropCollection("registroPonto");
 		
-		Profile insertedProf = createProfile();
-		mongo.insert(insertedProf);
-		Profile foundProfile = mongo.findOne(query(where("email").is(insertedProf.getEmail())), Profile.class);
-		Profile updatedProfile = updateProfile(foundProfile);
-		Profile foundProfile2 = mongo.findOne(query(where("email").is(updatedProfile.getEmail())), Profile.class);
-		foundProfile2 = updatedProfile;		
-		mongo.save(foundProfile2);		
+		RegistroPonto rp1 = new RegistroPonto("edney@gmail.com");
+		rp1.getRegistros().add(LocalTime.now());
+		
+		System.out.println("teste object id antes de insert: " + rp1.getId());		
+		mongo.insert(rp1);			
+		System.out.println("teste object id depois do insert: " + rp1.getId());		
+		
+		rp1.setProfileEmail("dsfgsdf");
+		mongo.save(rp1);		
 	}
 	
-	public static Profile updateProfile(Profile p) {
-		Address a = new Address();
-		a.setBairro("Vila Cachoeira");
-		a.setCep("02343030");
-		a.setCidade("Sao Paulo");
-		a.setLogradouro("Rua mere marie");
-		a.setNumberAndComplement("472 apto 08");
-		a.setUf("SP");
-		
-		p.setAddress(a);
-		p.setAvatar("scasdfasdfasdfasdfasdfasdfasdflldjajshnaskdfajksdhfadfasdjj");
-		p.setName("edney roldao");
-		p.setEmail("edneyroldao@gmail.com");
-		p.setBirthDate("10/05/1982");
-		p.setCompany("Marisa");
-		p.setHorasPorMes(180);
-		p.setGender('M');
-		p.setMaxHorasPorMes(180);
-		p.setValorHora(new BigDecimal(56.88));
+	public static List<RegistroPonto> list(MongoOperations ops, String profileEmail, LocalDate init, LocalDate end) {
+		Query query = query(where("profileEmail").is(profileEmail).and("dataRegistro").gte(init).lte(end));
+		return ops.find(query, RegistroPonto.class);
+	}
+	
+	public static RegistroPonto find(MongoOperations ops, String profileEmail, LocalDate registro) {
+		Query query = query(where("profileEmail").is(profileEmail).and("dataRegistro").is(registro));
+		return ops.findOne(query, RegistroPonto.class);
+	}
 
-		return p;
-	}
-	
-	public static Profile createProfile() {
-		Profile p = new Profile();
-		p.setAddress(new Address());
-		p.setName("edney roldao");
-		p.setEmail("edneyroldao@gmail.com");
-		
-		return p;
-	}
+
 	
 }
