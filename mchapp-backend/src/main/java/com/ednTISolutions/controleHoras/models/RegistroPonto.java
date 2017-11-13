@@ -23,13 +23,19 @@ public class RegistroPonto {
 	private LocalDate dataRegistro;
 	private List<LocalTime> registros;
 
+	public RegistroPonto() {}
 	
 	public RegistroPonto(String profileEmail) {
 		this.profileEmail = profileEmail;
 		dataRegistro = LocalDate.now();
 		registros = new ArrayList<>();
 	}
-
+	
+	public RegistroPonto(String profileEmail, LocalDate dataRegistro, List<LocalTime> registros) {
+		this.profileEmail = profileEmail;
+		this.dataRegistro = dataRegistro;
+		this.registros = registros;
+	}
 	
 	@Override
 	public String toString() {
