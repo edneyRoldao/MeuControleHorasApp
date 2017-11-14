@@ -19,37 +19,40 @@ public class RegistroPonto {
 
 	@Id
 	private BigInteger id;
+	private String atividades;
 	private String profileEmail;
 	private LocalDate dataRegistro;
 	private List<LocalTime> registros;
 
-	public RegistroPonto() {}
-	
+	public RegistroPonto() {
+	}
+
 	public RegistroPonto(String profileEmail) {
 		this.profileEmail = profileEmail;
 		dataRegistro = LocalDate.now();
 		registros = new ArrayList<>();
 	}
-	
+
 	public RegistroPonto(String profileEmail, LocalDate dataRegistro, List<LocalTime> registros) {
 		this.profileEmail = profileEmail;
 		this.dataRegistro = dataRegistro;
 		this.registros = registros;
 	}
-	
-	@Override
-	public String toString() {
-		return "RegistroPonto [id=" + id + ", profileEmail=" + profileEmail + ", dataRegistro=" + dataRegistro
-				+ ", registros=" + registros + "]";
-	}
 
-	
 	public BigInteger getId() {
 		return id;
 	}
 
 	public void setId(BigInteger id) {
 		this.id = id;
+	}
+
+	public String getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(String atividades) {
+		this.atividades = atividades;
 	}
 
 	public String getProfileEmail() {
@@ -77,9 +80,16 @@ public class RegistroPonto {
 	}
 
 	@Override
+	public String toString() {
+		return "RegistroPonto [id=" + id + ", atividades=" + atividades + ", profileEmail=" + profileEmail
+				+ ", dataRegistro=" + dataRegistro + ", registros=" + registros + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((atividades == null) ? 0 : atividades.hashCode());
 		result = prime * result + ((dataRegistro == null) ? 0 : dataRegistro.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((profileEmail == null) ? 0 : profileEmail.hashCode());
@@ -96,6 +106,11 @@ public class RegistroPonto {
 		if (getClass() != obj.getClass())
 			return false;
 		RegistroPonto other = (RegistroPonto) obj;
+		if (atividades == null) {
+			if (other.atividades != null)
+				return false;
+		} else if (!atividades.equals(other.atividades))
+			return false;
 		if (dataRegistro == null) {
 			if (other.dataRegistro != null)
 				return false;

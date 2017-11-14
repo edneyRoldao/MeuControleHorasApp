@@ -33,6 +33,7 @@ public class RegistroPontoController {
 	public ResponseEntity<List<RegistroPonto>> registrosMesAtual(HttpServletRequest request) {
         String token = request.getHeader(JwtTokenUtil.TOKEN_HEADER);
         String email = jwtTokenUtil.getUsernameFromToken(token);
+        
 		List<RegistroPonto> registros = service.listarRegistros(email);
 		
 		if(registros == null)

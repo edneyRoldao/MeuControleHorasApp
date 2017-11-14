@@ -1,35 +1,26 @@
 // EdneyRoldao - 27/06/2017
-function DashboardController(profile, authenticationService, objectsFactory, registroService) {
+function DashboardController(profile, authenticationService, registroService) {
     var ctrl = this;
-    ctrl.profile = profile.data;
 
-    ctrl.init = function() {
-        registroService.listarRegistrosAtuais()
-            .success(function(data) {
-                console.log("Objeto:");
-                console.log(data);
-            }).error(function(error, status) {
-                console.log("status code: " + status);
-            });
-    };
-
-    ctrl.mes = objectsFactory.getMes();
-
-    ctrl.logout = function () {
-        authenticationService.logout();
-    };
-
-    ctrl.formatDate = "dd/MM/yyyy - EEEE";
-    ctrl.formatTime = "HH:mm:ss";
-
+    // Variables
+    ctrl.registros = [];
     ctrl.showText = false;
+    ctrl.profile = profile.data;
+    ctrl.formatTime = "HH:mm:ss";
+    ctrl.formatDate = "dd/MM/yyyy - EEEE";
 
+    // Objects
     ctrl.picker2 = {
         date: new Date('2015-03-01T12:30:00Z'),
         timepickerOptions: {
             readonlyInput: false,
             showMeridian: false
         }
+    };
+
+    // Functions
+    ctrl.logout = function () {
+        authenticationService.logout();
     };
 
     ctrl.changeText = function() {
@@ -40,12 +31,15 @@ function DashboardController(profile, authenticationService, objectsFactory, reg
         ctrl[picker].open = true;
     };
 
-    ctrl.init();
+    // Call functions
+    ctrl.registros = registroService.listarRegistrosMesAtual();
 }
 
+// imports
 DashboardController.$inject = [];
 DashboardController.$inject.push("userProfile");
 DashboardController.$inject.push("AuthenticationService");
-DashboardController.$inject.push("ObjectsFactory");
 DashboardController.$inject.push("RegistroPontoService");
+
+// Controller register
 angular.module("meuControleHorasApp").controller("DashboardController", DashboardController);
